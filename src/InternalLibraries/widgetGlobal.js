@@ -211,4 +211,7 @@ But idk I think I just panic over everything when people start talking to me ove
 Like even with the previous event. I pretty much have fully adjusted at this point it is a complete non-issue.
 And I can't just ignore things but in the end it's gonna be the same way where it just isn't an issue and
 I just was panic'ing over it all and I was the reason it was bad or something.
+
+It's the panic and the what if's, but in the end when it all settles it usually isn't a big
+deal so I just gotta go with the motions.
 */
