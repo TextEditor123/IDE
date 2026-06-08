@@ -280,8 +280,6 @@ EDITOR_byte_fields[1] = 1;
  * TODO: Long term this likely should be removed and all enter key logic reduced into an insertion but this will help in the time being.
  */
 
-// TODO: Share all the enum none cases to point to the same EDITOR_byte_fields index.
-
 /**
  * Do not change the order/values of these, they are used in equality comparisons, the larger the number says when double clicking between a character and a punctuation
  * whoever has larger number gets selected then the selection continues while the same kind is being read.
@@ -289,23 +287,6 @@ EDITOR_byte_fields[1] = 1;
  * TODO: Bug only 1 character selected when punctuation then letterOrDigit click between them the letterOrDigit is more than 1 contiguous only 1 selected.
  */
 
-/**
- * NOTE: By putting the ints like this, you are adding a "dereferencing" step...
- * ...this is a localized overhead per read versus the global overhead of the GC having to verify that each variable is a primitive...
- * ...all just things to consider.
- * 
- * TODO: I'm considering having more ints stored in this, including from other "features of the app"...
- * ...I think I'd want to consider "feature fragmentation" of this pseudo heap or some such that I'm making.
- * Because I would probably want the editor related ints to be close to one another, perhaps this could aid in caching.
- * 
- * But then I'm also wondering about global state vs having a class encapsulation for each feature.
- * And whether if I get away with sharing this array among globally stored features,
- * if I go on to change one of those features to be class encapsulated would I be moving the storage of the ints
- * further away in memory. (would having it be a field be more closely stored in memory near other members of a class.)
- * 
- * If what I described could be problematic, I'd likely want to reason about the frequency in which an int is being accessed.
- * And the infrequently accessed ints would be moved to this array.
- */
 const EDITOR_int_fields = new Uint32Array(32);
 EDITOR_int_fields[2] = 20;
 
@@ -4935,7 +4916,7 @@ function EDITOR_onResize() {
     update_verticalVirtualizationBoundary(EDITOR_lineEndPositionList.count + 1);
     EDITOR_onScroll();
     // # Redraw cursor selection virtualization
-    // Code Duplication: # Redraw cursor selection virtualization
+    // Code Duplication: # Redraw cursor selection virtualization... TODO: This is using 'EDITOR_primaryCursor' rather than 'EDITOR_cursorList[i]' so it is surely incorrect?
     for (let i = 0; i < EDITOR_cursorList.length; i++) {
       EDITOR_createStyleForSelection(EDITOR_primaryCursor);
     }
@@ -4985,7 +4966,7 @@ function EDITOR_onScroll_timeoutFunc() {
     EDITOR_timer = setTimeout(EDITOR_onScroll_timeoutFunc, 100);
   } else {
     EDITOR_timer = null;
-    // Code Duplication: # Redraw cursor selection virtualization
+    // Code Duplication: # Redraw cursor selection virtualization... TODO: This is using 'EDITOR_primaryCursor' rather than 'EDITOR_cursorList[i]' so it is surely incorrect?
     for (let i = 0; i < EDITOR_cursorList.length; i++) {
       EDITOR_createStyleForSelection(EDITOR_primaryCursor);
     }
@@ -6581,202 +6562,4 @@ Context Menu Options
 - [x] BUG: trying to collapse an empty directory is acting weird, I don't see an error.
 - [x] BUG: ArrowRight when directory is expanded but has 0 children.
 - [ ] Related to the tree view, the following exception consistently is thrown when scrolling: "ReferenceError: event_scroll_async_timeoutFunc is not defined".
-
-I have 4 todo items I think
-so maybe I need 4 hours to do this.
-
-by 11:00 AM - [ ] Make a directory
-by 12:00 PM - [ ] BUG: { file_cut -> directory_paste } this didn't draw the remove of the file child node from the containing directory even though it was removed from the filesystem
-by  1:00 PM - [ ] BUG: { directory_cut -> directory_paste } this successfully drew the remove of the directory child node from the containing directory, BUT it inserted the paste between InternalLibraries/ and its children (InternalLibraries/ was expanded at the time). So you need to find the index relative to the depth, and then furthermore check if the index you landed on, whether the (previous?) node is expanded and has children.
-by  2:00 PM - [ ] Related to the tree view, the following exception consistently is thrown when scrolling: "ReferenceError: event_scroll_async_timeoutFunc is not defined".
-
-I went to go do my shift, got back and showered and etc...
-I realize I checked whether the C++ thing was true but never if it applied for JavaScript
-
-Google AI Overview "javascript boolean size vs array of boolean size":
-#```paraphrase
-A primitive JavaScript boolean logically requires only 1 bit of information,
-but modern V8/JavaScript engines typically allocate 4 bytes (32 bits) or 8 bytes (64 bits) for a single standalone boolean variable.
-This occurs because engines wrap primitives into pointer-sized "tagged values" and CPUs require byte alignment to access data quickly.
-
-An array of booleans ([true, false, true]) is significantly heavier.
-Standard JavaScript arrays are objects.
-A standard array carries substantial object property overhead, plus individual pointer sizes (4 to 8 bytes) for each element slot.
-
-...
-#```
-
-The response "An array of booleans ([true, false, true]) is significantly heavier." makes sense
-because the question doesn't quite make sense I suppose since arrays don't take a generic type?
-Anyhow, what I meant was to figure out a way to store them as that 1 bit representation.
-
-The same question mentions 'TypedArray (Uint8Array)' and that this would be 1 byte per boolean.
-And then goes to on mention 'Bitmasking (Bitset)' to get exactly 1 bit per boolean.
-
-It's "npm start" what is going on with my readme...
-
-But umm... is "npm start" some special command all the other ones in package.json want me to say "npm run ...".
-
-Google AI Overview "I need to use babel, but this step is so I can explore customizing babel to only do exactly the changes that I want":
-#```paraphrase
-To use Babel but keep the output exactly identical to the source, you need to run Babel with zero presets and zero plugins.
-...
-#```
-
-Prior to the previous question I asked "I want the resulting build code to be exactly the same as the source" all stemming
-from a series of questions relating to babel. It told me to not use babel and just copy the file.
-That is quite nice because that is a reasonable response but just not what I'm looking for.
-I added the extra context and it told me what to do.
-
-another follow up question "specific change: remove a function definition by instead inlining every reference":
-#```paraphrase
-To achieve this, you need to write a custom Babel plugin that utilizes a two-pass AST (Abstract Syntax Tree) traversal.
-The first pass finds the function definition, extracts its body, and identifies its parameters.
-The second pass locates every place that function is called (referenced) and replaces the call with the inlined code.
-
-...
-
-module.exports = function (babel) {
-  const { types: t } = babel;
-
-  return {
-    name: "inline-specific-function",
-    visitor: {
-      Program(path) {
-        let functionToInline = null;
-
-        // Pass 1: Find the target function definition
-        path.traverse({
-          FunctionDeclaration(funPath) {
-            // Replace 'myFunction' with your specific function name
-            if (funPath.node.id && funPath.node.id.name === "myFunction") {
-              functionToInline = {
-                params: funPath.node.params,
-                body: funPath.node.body.body, // Array of statements inside {}
-              };
-              // Remove the original function definition from the source
-              funPath.remove();
-            }
-          }
-        });
-
-        // If the function wasn't found, stop here
-        if (!functionToInline) return;
-
-        // Pass 2: Find and replace all execution references
-        path.traverse({
-          CallExpression(callPath) {
-            if (
-              t.isIdentifier(callPath.node.callee) &&
-              callPath.node.callee.name === "myFunction"
-            ) {
-              const args = callPath.node.arguments;
-              
-              // Map arguments to parameter names via block variables
-              const variableDeclarations = functionToInline.params.map((param, index) => {
-                return t.variableDeclaration("const", [
-                  t.variableDeclarator(param, args[index])
-                ]);
-              });
-
-              // Clone the body statements to safely re-use them
-              const clonedBody = functionToInline.body.map(stmt => t.cloneNode(stmt));
-
-              // Wrap the inlined code in an IIFE block to prevent variable scope leaking
-              callPath.replaceWith(
-                t.blockStatement([
-                  ...variableDeclarations,
-                  ...clonedBody
-                ])
-              );
-            }
-          }
-        });
-      }
-    }
-  };
-};
-#```
-
-I googled what an IIFE block is:
-#```paraphrase
-An IIFE (pronounced "iffy"), which stands for Immediately Invoked Function Expression,
-is a JavaScript design pattern where a function runs as soon as it is defined.
-#```
-
-I followed up with this question "arrow function assigned to a variable"
-because it asked me if it was a function definition or "arrow function assigned to a variable":
-#```paraphrase
-module.exports = function (babel) {
-  const { types: t } = babel;
-
-  return {
-    name: "inline-arrow-function",
-    visitor: {
-      Program(path) {
-        let functionToInline = null;
-
-        // Pass 1: Find the target arrow function variable assignment
-        path.traverse({
-          VariableDeclarator(varPath) {
-            // Check if the variable name is 'myFunction' and it is assigned to an arrow function
-            if (
-              t.isIdentifier(varPath.node.id, { name: "myFunction" }) &&
-              t.isArrowFunctionExpression(varPath.node.init)
-            ) {
-              const arrowFn = varPath.node.init;
-
-              // Arrow functions can have a block body {} or an implicit return expression
-              let bodyStatements;
-              if (t.isBlockStatement(arrowFn.body)) {
-                bodyStatements = arrowFn.body.body;
-              } else {
-                // If it's a direct expression (e.g., x => x + 1), turn it into a statement
-                bodyStatements = [t.expressionStatement(arrowFn.body)];
-              }
-
-              functionToInline = {
-                params: arrowFn.params,
-                body: bodyStatements,
-              };
-
-              // Remove the entire variable declaration statement
-              varPath.parentPath.remove();
-            }
-          }
-        });
-
-        if (!functionToInline) return;
-
-        // Pass 2: Find and replace all calls
-        path.traverse({
-          CallExpression(callPath) {
-            if (
-              t.isIdentifier(callPath.node.callee, { name: "myFunction" })
-            ) {
-              const args = callPath.node.arguments;
-              
-              const variableDeclarations = functionToInline.params.map((param, index) => {
-                return t.variableDeclaration("const", [
-                  t.variableDeclarator(param, args[index])
-                ]);
-              });
-
-              const clonedBody = functionToInline.body.map(stmt => t.cloneNode(stmt));
-
-              callPath.replaceWith(
-                t.blockStatement([
-                  ...variableDeclarations,
-                  ...clonedBody
-                ])
-              );
-            }
-          }
-        });
-      }
-    }
-  };
-};
-#```
-
 */
