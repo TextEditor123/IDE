@@ -15,20 +15,6 @@ if (!app.isPackaged) {
 	app.setPath('userData', path.join(app.getPath('appData'), 'my-app-Debug'));
 }
 
-/*
-Inside of .gitignore:
-
-#```.gitignore
-# Dependency directories
-node_modules/
-...
-#```
-
-If I remove 'node_modules/',
-VSCode no longer shows the folder in the folder explorer with grayed out text.
-
-*/
-
 let database;
 
 /** openedDirectory | openedWorkspace; TODO: consider making single object with bool 'isWorkspace' */

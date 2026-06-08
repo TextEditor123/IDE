@@ -216,7 +216,6 @@ the class names that linearly scale in usage as you show more and more text.
   color: var(--editor-syntax-string-color);
 }
 
-/* 3:30 -> 4:30? */
 /* Backtick deliminated string that spans multiple lines */
 .eSM {
   color: var(--editor-syntax-string-color);
