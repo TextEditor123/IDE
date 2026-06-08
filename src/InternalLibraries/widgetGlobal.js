@@ -12,34 +12,6 @@ let WIDGET_restoreFocusToElement = null;
 let WIDGET_left = 0;
 let WIDGET_top = 0;
 
-/*
-In C++... something about boolean vs boolean in an array maybe something about smallest addressable space or something...
-is JavaScript the same?
-
-Google AI Overview "c++ boolean size vs vector size":
-```paraphrase
-In C++, a standalone bool typically occupies 1 byte (8 bits) of memory, whereas the elements inside a std::vector<bool> are specialized
-to occupy only 1 bit each through an internal optimization called bit-packing.
-
-...CPUs address memory at the byte level...
-```
-
-Primitives aren't stored on the heap? No issue of heap defragmentation is involved here?
-But still you're during the mark stage of a GC collection you have to check that the variable is a primitive boolean which has an
-extremely small but non-zero cost right?
-
-Actually I was thinking from the perspective of a global variable that the primitives wouldn't be stored on the heap.
-But, an object instance that has boolean fields.
-You'd probably have a stack stored reference that points to the heap wherein the boolean exists.
-
-A local variable would likely be a stack stored reference that is marked in such a way that the engine knows to read
-the pointer value as a primitive value. So local and globals are probably similar in behavior.
-It is particularly the boolean fields that could 8x contribute to heap defragmentation copying overhead.
-
-And for clarification yes the stack stored scenarios are 8x the storage but you aren't worrying about heap defragmentation is my point...
-but then again when it comes to allocating a stack frame you need to allocate 8x the memory for the local variable.
-*/
-
 // The variable 'WIDGET_element' is "implicitly" being accessed here.
 document.getElementById('WIDGET').style.visibility = 'hidden';
 
