@@ -468,7 +468,6 @@ functions: rgb(85, 193, 85)
   --editor-syntax-operator-color: rgb(70, 165, 215);
   --editor-syntax-operatorAssignment-color: rgb(70, 165, 215);
   --editor-syntax-member-access-color: rgb(0 180 255);
-  /*--editor-syntax-member-access-background-color: rgb(60, 60, 60);*/
   --editor-cursor-color-focused: rgb(6, 138, 255);
 }
 
@@ -493,6 +492,5 @@ functions: rgb(85, 193, 85)
   --editor-syntax-operator-color: rgb(70, 165, 215);
   --editor-syntax-operatorAssignment-color: rgb(70, 165, 215);
   --editor-syntax-member-access-color: rgb(70, 165, 215);
-  /*--editor-syntax-member-access-background-color: white;*/
   --editor-cursor-color-focused: rgb(0, 0, 255);
 }
