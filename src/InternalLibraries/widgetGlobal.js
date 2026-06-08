@@ -189,4 +189,6 @@ I'm extremely anxious. My parents are breathing down my neck again about
 health insurance.
 
 I can't speak
+
+Something about a big beautiful bill or something
 */
