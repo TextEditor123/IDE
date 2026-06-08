@@ -191,4 +191,8 @@ health insurance.
 I can't speak
 
 Something about a big beautiful bill or something
+
+My family worked very hard to stabilize everything.
+And once it stabilized this happens.
+There's a million what ifs going on in the house right now.
 */
