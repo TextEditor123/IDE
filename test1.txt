@@ -1,0 +1,20 @@
+2 cursors is working... but I do 3 and it is nonsense output
+
+```START_somewhatOfAMetaCase
+/*
+I'm trying to make a list of things that don't work so I can fix them.
+I want to make this list by surrounding each case in "```\n...\n```".
+
+I type the initial text by starting with just the "```\n\n```" no content yet.
+After typing the second line of "```" I hit ArrowUp to move my cursor to end of
+the first line of "```" but my "stored column index" is 0, because insertion of text doesn't update my stored column index.
+
+I could hit { 'Ctrl' + 'Enter' } to make an empty line between the first and second lines that contain the text "```".
+But regardless of that fact, the prior way ought to work as expected.
+*/
+```
+```
+```END_somewhatOfAMetaCase
+
+
+
