@@ -207,4 +207,8 @@ I think the anxiety of the previous time was the worst part and it is definitely
 
 My family words it like an emergency which it is an I just spend all panic'ing and I can't think straight.
 But idk I think I just panic over everything when people start talking to me over and over and over and over
+
+Like even with the previous event. I pretty much have fully adjusted at this point it is a complete non-issue.
+And I can't just ignore things but in the end it's gonna be the same way where it just isn't an issue and
+I just was panic'ing over it all and I was the reason it was bad or something.
 */
