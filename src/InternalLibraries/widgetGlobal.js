@@ -185,62 +185,8 @@ function WIDGET_CreateYesCancel(placeholder) {
 }
 
 /*
-2026-06-08:
+I'm extremely anxious. My parents are breathing down my neck again about
+health insurance.
 
-# Breakfast:
-1 fairlife elite milk
-3 everything bagels
-(I have 1 more since I purchased 4 in total but I'm not gonna eat the 4th one yet)
-
-# Lunch / Dinner
-98% lean ground chicken
-with sriracha sauce
-
-If I eat bagels in the future I need to cut it into smaller pieces.
-I was biting directly into the bagel.
-I was eating them plain without cutting it in half.
-What I was referring to was though not to cut it in half but to cut it
-into bite sized pieces.
-
-Because I was biting into the entire bagel each time and then ripping / pulling / biting through
-with my teeth
-but my teeth feel crooked now as though they've moved due to each bite so I need to cut it ahead of time
-so that my teeth to don't shift as I eat.
-
-I've been feeling like I am exhausted lately.
-So trying these bagels to see if I feel any diff.
-
-I been feeling exhausted lately and I need to
-just get 1 hour at least
-of something that is fatiguing to some measurable degree.
-
-Because I don't want to write code lately.
-But this happens constantly.
-And the way to get through it is to just daily
-do something
-and then eventually
-you'll enjoy it again.
-
-Maybe the menu needs a widget
-but then maybe the menu can be
-a null menu option list
-and I can populate it myself
-because the cost of it
-if too very high
-but also that I need
-to show a "menu" at various places
-but not use a simple "menu" but instead
-some kind of list because it will
-virtualize and or I can even show like a tree view or something.
-
-7:27 AM
-
-goto f needs to be a "select dropdown"
-where when I move cursor it updates to the encompassing definition/globalScope
-and then I click it and I get the definitions from the lsp
-and then I can click on one and goto it.
-
-As well every HTML element that you show you need to have the least necessary amount of HTML required to implement a feature otherwise
-you're allocating to the DOM and for no reason so it is gc expensive.
-
+I can't speak
 */
