@@ -214,4 +214,9 @@ I just was panic'ing over it all and I was the reason it was bad or something.
 
 It's the panic and the what if's, but in the end when it all settles it usually isn't a big
 deal so I just gotta go with the motions.
+
+And then I see my Mom's hair it is going gray a lot lately.
+It always has been but it is getting to be a lot and she was talking to me this morning so worried
+about everything and I was just staring at her gray hair having gotten much much worse lately
+and it just sends this complete sense of panic to everyone. It is all just mental.
 */
