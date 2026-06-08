@@ -195,4 +195,11 @@ Something about a big beautiful bill or something
 My family worked very hard to stabilize everything.
 And once it stabilized this happens.
 There's a million what ifs going on in the house right now.
+
+I think previously when I aged off my parents health insurance I talked too much about what was going on in my head.
+I have very weird mentalities and it just doesn't come off well, and I feel even further misunderstood than if I'd say nothing.
+
+I prefer this time just say nothing and keep it all to myself.
+Because this will settle out eventually somehow.
+But the confusion of my words would last forever.
 */
