@@ -202,4 +202,9 @@ I have very weird mentalities and it just doesn't come off well, and I feel even
 I prefer this time just say nothing and keep it all to myself.
 Because this will settle out eventually somehow.
 But the confusion of my words would last forever.
+
+I think the anxiety of the previous time was the worst part and it is definitely what I'm feeling build up.
+
+My family words it like an emergency which it is an I just spend all panic'ing and I can't think straight.
+But idk I think I just panic over everything when people start talking to me over and over and over and over
 */
