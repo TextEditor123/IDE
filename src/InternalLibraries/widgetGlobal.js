@@ -155,3 +155,18 @@ function WIDGET_CreateYesCancel(placeholder) {
     WIDGET_element.appendChild(bottomDivElement);
     yesButtonElement.focus();
 }
+
+/*
+What you don't understand is browser related details.
+So you know what to do next.
+
+Essentially the worst of it all is your virtualization logic.
+
+So, everyday you need to decide what it is you need to do so that you can in a reasonable time period learn that in particular.
+
+Layout shifting.
+
+you should include the other phrases that you commonly see.
+I don't want to type the wrong phrase from memory so I won't put them here
+right now cause I'm exhausted and I can't bear to look it up right now to check the phrasing.
+*/
