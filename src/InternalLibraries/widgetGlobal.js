@@ -306,11 +306,11 @@ browser environment and uses the Event Loop to coordinate when that code execute
 
 3. Step-by-Step of a Single Loop Iteration
 > Everytime the Event Loop ticks, it follows this exact order of operations.
-1. Check Call Stack: Wait until the call Stack is completely empty.
-2. Execute One Macro-task: Pull the oldest task from the Macro-task queue and run it until the stack clears.
-3. Flush All Micro-tasks: Check the Micro-task queue. Run every single micro-task in the queue until it is 100% empty.
-4. Render: Check if the screen needs a redraw (typically every 16.7ms). If yes, run 'requestAnimationFrame' and perform Layout and Paint.
-5. Repeat: Start back at step 1.
+    1. Check Call Stack: Wait until the call Stack is completely empty.
+    2. Execute One Macro-task: Pull the oldest task from the Macro-task queue and run it until the stack clears.
+    3. Flush All Micro-tasks: Check the Micro-task queue. Run every single micro-task in the queue until it is 100% empty.
+    4. Render: Check if the screen needs a redraw (typically every 16.7ms). If yes, run 'requestAnimationFrame' and perform Layout and Paint.
+    5. Repeat: Start back at step 1.
 
 
 
