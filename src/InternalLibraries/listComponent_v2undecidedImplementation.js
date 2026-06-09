@@ -642,3 +642,10 @@ class ListComponent_v2undecidedImplementation {
 // maybe because you might actually use top idk but it is a step in a direction in which
 // I can then cross off that direction because I've been there done that
 // but not actually fully cross it off because maybe I didn't investigate far enough.
+
+// Nostalgia and anxiety.
+//
+// I need to go cook and eat 1 lb of 98% lean ground chicken.
+// 
+// I think I made progress towards learning something too today so that helps aleviate some anxiety.
+//
