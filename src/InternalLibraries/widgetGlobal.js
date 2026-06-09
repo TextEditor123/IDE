@@ -188,7 +188,7 @@ I also have 1 lb of 98% lean ground chicken and sriracha.
 ======================
 
 Google AI Overview "web browsers: key lifecycle stages":
-############```startParaphrase
+########################```startParaphrase
 
 ...
 
@@ -211,10 +211,10 @@ Google AI Overview "web browsers: key lifecycle stages":
 
 ...
 
-############```endParaphrase
+########################```endParaphrase
 
 Continuing to question from the initial prompt "after a page is loaded, how are further 'Render & Layout' handled":
-############```startParaphrase
+########################```startParaphrase
 
 After the initial page load, any changes to the page style or structure trigger dynamic, partial lifecycle updates called
 - Reflows (Layout) and
@@ -267,10 +267,10 @@ To optimize performance, browsers process these changes using a highly structure
 
 ...
 
-############```endParaphrase
+########################```endParaphrase
 
 Continuing to question from the initial prompt "Tell me more about 'The Event Loop'":
-############```startParaphrase
+########################```startParaphrase
 
 The 'Event Loop' is the secret behind JavaScript's ability to handle
     - user clicks,
@@ -314,5 +314,5 @@ Instead of freezing your browser while waiting for a server or a timer, JavaScri
 
 
 
-############```endParaphrase
+########################```endParaphrase
 */
