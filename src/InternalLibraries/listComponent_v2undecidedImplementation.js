@@ -130,6 +130,9 @@ class ListComponent_v2undecidedImplementation {
 
         // From my understanding transform is GPU and top is main thread.
 
+        // If you wrap the lines in a div, and meanwhile the parent of the parent of the lines is the one that has overflow scroll.
+        // What kind of oddities are going in the browser calculation of the overflow of the parent of the lines.
+
         this.itemHeightTotal = 0;
 
         /** Consider the existence of such methods as 'state_cursor_setIndex' before mutating state directly */
