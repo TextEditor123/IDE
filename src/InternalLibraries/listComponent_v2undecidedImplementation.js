@@ -44,6 +44,15 @@ class ListComponent_v2undecidedImplementation {
         // TODO: You could separately store the sorted divs and use that separate store to map "virtual indices" to the content displayed on screen...
         // ...while being able to use any div at any position in the DOM itself and change the top CSS value to whatever you wanted.
 
+        // TODO: You are worried about a full screen render needing to calculate the top for every line of text being displayed...
+        // ...meanwhile you already are creating multiple strings of much longer lengths foreach span that provides syntax highlighting to the various chunks of text that exist on the div.
+        //
+        // TODO: Because of this worry you think you should be wrapping the lines in a parent div who's sole responsibility is to provide a relative...
+        // ...position for the children.
+        // ...this means you can on a full screen render calculate the top for the parent div, then have the child lines of text...
+        // ...be 'position: static' and just fall into place correctly relative to the parent without calculating an individual top foreach of them.
+
+
         this.itemHeightTotal = 0;
 
         /** Consider the existence of such methods as 'state_cursor_setIndex' before mutating state directly */
