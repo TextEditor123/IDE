@@ -443,6 +443,9 @@ class ListComponent_v2undecidedImplementation {
 
         For the few cases I just checked I didn't set the width of the container to the largest width element that could appear...
         maybe that is the missing key idk I just gotta keep trying things cause they all sound like a bad idea.
+
+        And I have yet to try transform, as I said I'm just going through the options and top already was being used
+        so I iterated through some of those first maybe I gotta just jump into transform.
         */
 
         this._ONSCROLLvirtualCount = this.virtualCount;
