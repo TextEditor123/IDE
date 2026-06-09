@@ -212,4 +212,17 @@ Google AI Overview "web browsers: key lifecycle stages":
 ...
 
 ###```paraphrase
+
+Continuing to question from the initial prompt "after a page is loaded, how are further 'Render & Layout' handled":
+###```paraphrase
+
+After the initial page load, any changes to the page style or structure trigger dynamic, partial lifecycle updates called
+- Reflows (Layout) and
+- Repaints (Painting).
+
+To optimize performance, browsers process these changes using a highly structured Event Loop and a dedicated asynchronous pipeline.
+
+...
+
+###```paraphrase
 */
