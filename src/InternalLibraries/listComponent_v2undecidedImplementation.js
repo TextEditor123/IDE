@@ -335,12 +335,18 @@ class ListComponent_v2undecidedImplementation {
 
                     let itemsCount = this.getItemsCountFunc();
 
+                    let topNumber = (prevVli + this._ONSCROLLvirtualCount) * this.itemHeightNumber;
+
+                    // TODO: Perhaps use a reference linked datastructure to avoid shifting elements?
+
                     for (var i = 0; i < diff; i++) {
                         let indexItem = prevVli + this._ONSCROLLvirtualCount + i;
             
-                        let divItem = this.itemListElement.children[0];
+                        let divItem = this.domNodesForLines.shift();
                         // TODO: Should this actually be setting innerHTML to an empty string?
-                        divItem.innerHTML = '';
+                        divItem.innerHTML = ''; // TODO: Don't set innerHTML to '', it triggers the HTML parser; use a different way?
+                        divItem.style.top = `${topNumber}px`;
+                        topNumber += this.itemHeightNumber;
 
                         if (indexItem >= itemsCount) {
                             this.drawItemAction(divItem, -1);
@@ -349,7 +355,7 @@ class ListComponent_v2undecidedImplementation {
                             this.drawItemAction(divItem, indexItem);
                         }
             
-                        this.itemListElement.appendChild(divItem);
+                        this.domNodesForLines.push(divItem);
                     }
                 }
                 else if (diff < 0 && (diff *= -1) < this.virtualCount) {
@@ -371,12 +377,16 @@ class ListComponent_v2undecidedImplementation {
                     // - Ensure you do the lower indices first, so that you can insert AFTER the previously moved divs rather than continually incurring the shift of every element in the list (or maybe every element except 1 cause it doesn't get shifted it moreso gets moved idk)
 
                     let itemsCount = this.getItemsCountFunc();
+
+                    let topNumber = currVli * this.itemHeightNumber;
                     
                     for (var i = 0; i < diff; i++) {
                         let indexItem = currVli + i;
 
-                        let divItem = this.itemListElement.children[this.itemListElement.children.length - 1];
-                        divItem.innerHTML = '';
+                        let divItem = this.domNodesForLines.pop();
+                        divItem.innerHTML = ''; // TODO: Don't set innerHTML to '', it triggers the HTML parser; use a different way?
+                        divItem.style.top = `${topNumber}px`;
+                        topNumber += this.itemHeightNumber;
 
                         if (indexItem >= itemsCount) {
                             this.drawItemAction(divItem, -1);
@@ -385,7 +395,7 @@ class ListComponent_v2undecidedImplementation {
                             this.drawItemAction(divItem, indexItem);
                         }
                         
-                        this.itemListElement.insertBefore(divItem, this.itemListElement.children[i]);
+                        this.domNodesForLines.unshift(divItem);
                     }
                 }
                 else {
@@ -398,7 +408,7 @@ class ListComponent_v2undecidedImplementation {
                     for (var i = 0; i < this.virtualCount; i++) {
                         let indexItem = i + this.virtualIndex;
 
-                        let divItem = this.itemListElement.children[i];
+                        let divItem = this.domNodesForLines[i];
                         divItem.innerHTML = ''; // TODO: Don't set innerHTML to '', it triggers the HTML parser; use a different way?
                         divItem.style.top = `${topNumber}px`;
                         topNumber += this.itemHeightNumber;
