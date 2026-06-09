@@ -567,6 +567,8 @@ class ListComponent_v2undecidedImplementation {
         //
         // Perhaps transform is used when throttling an occuring event.
         // And then on the trailing event if you wanted to have offsetHeight correct you'd finalize the top.
+        //
+        //     transform: translateY(1.16422e+06px);
     }
 
     /**
