@@ -106,6 +106,17 @@ class ListComponent_v2undecidedImplementation {
         and that both their side effects are visually similar to some degree.
         */
 
+
+        /*
+        So I can store my own sorted list of the lines of text.
+        Then use either transform or top.
+
+        The issue with wrapping them all in a div with a single top then transforming each line relative to one another is
+        1. the idea that a full screen render of 34 lines of text calculating 34 top css strings isn't nearly as big a deal as I give credit to it
+        2. the cost of item 1 exists but is far less than that of the thrashing that I introduce by trying to avoid item 1
+        3. I lost my train of thought
+        */
+
         this.itemHeightTotal = 0;
 
         /** Consider the existence of such methods as 'state_cursor_setIndex' before mutating state directly */
