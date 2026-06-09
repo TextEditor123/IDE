@@ -188,7 +188,7 @@ I also have 1 lb of 98% lean ground chicken and sriracha.
 ======================
 
 Google AI Overview "web browsers: key lifecycle stages":
-###```paraphrase
+############```startParaphrase
 
 ...
 
@@ -211,10 +211,10 @@ Google AI Overview "web browsers: key lifecycle stages":
 
 ...
 
-###```paraphrase
+############```endParaphrase
 
 Continuing to question from the initial prompt "after a page is loaded, how are further 'Render & Layout' handled":
-###```paraphrase
+############```startParaphrase
 
 After the initial page load, any changes to the page style or structure trigger dynamic, partial lifecycle updates called
 - Reflows (Layout) and
@@ -280,10 +280,10 @@ Modern browsers use two main techniques to keep pages smooth and responsive afte
 
 ...
 
-###```paraphrase
+############```endParaphrase
 
 Continuing to question from the initial prompt "Tell me more about 'The Event Loop'":
-###```paraphrase
+############```startParaphrase
 
-###```paraphrase
+############```endParaphrase
 */
