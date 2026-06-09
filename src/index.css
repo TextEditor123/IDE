@@ -76,23 +76,23 @@ body {
   white-space: nowrap;
 }
 
-.LIST {
+.LIST_moveChildNodes {
   position: relative;
   overflow: scroll;
 }
 
-  .LIST:focus .LIST_cursor {
+  .LIST_moveChildNodes:focus .LIST_moveChildNodes_cursor {
     background-color: var(--primary-active-with-focus-background-color);
   }
 
-.LIST_virtualization {
+.LIST_moveChildNodes_virtualization {
   position: absolute;
   left: 0;
   top: 0;
   width: 1px;
 }
 
-.LIST_cursor {
+.LIST_moveChildNodes_cursor {
   position: absolute;
   left: 0;
   top: 0;
@@ -101,7 +101,42 @@ body {
   width: 100%;
 }
 
-.LIST_itemList {
+.LIST_moveChildNodes_itemList {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+/*====================================================================================*/
+/* Help visually separate 'LIST_moveChildNodes' from 'LIST_v2undecidedImplementation' */
+/*====================================================================================*/
+
+.LIST_v2undecidedImplementation {
+  position: relative;
+  overflow: scroll;
+}
+
+  .LIST_v2undecidedImplementation:focus .LIST_v2undecidedImplementation_cursor {
+    background-color: var(--primary-active-with-focus-background-color);
+  }
+
+.LIST_v2undecidedImplementation_virtualization {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1px;
+}
+
+.LIST_v2undecidedImplementation_cursor {
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: var(--primary-active-no-focus-background-color);
+  position: absolute;
+  width: 100%;
+}
+
+.LIST_v2undecidedImplementation_itemList {
   position: absolute;
   left: 0;
   top: 0;

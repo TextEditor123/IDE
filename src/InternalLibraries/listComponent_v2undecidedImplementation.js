@@ -21,24 +21,24 @@ class ListComponent_v2undecidedImplementation {
          * @type {HTMLDivElement}
          */
         this.rootElement = document.createElement('div');
-        this.rootElement.className = 'LIST';
+        this.rootElement.className = 'LIST_v2undecidedImplementation';
         this.rootElement.tabIndex = 0;
         /** TODO: this isn't being used? */
         this.rootElementHeightNumber = 0;
         this.rootElement.style.height = '100%';
 
         this.virtualizationElement = document.createElement('div');
-        this.virtualizationElement.className = 'LIST_virtualization';
+        this.virtualizationElement.className = 'LIST_v2undecidedImplementation_virtualization';
         this.rootElement.appendChild(this.virtualizationElement);
 
         /** Consider the existence of such methods as 'state_cursor_setIndex' before mutating state directly */
         this.cursorElement = document.createElement('div');
-        this.cursorElement.className = 'LIST_cursor';
+        this.cursorElement.className = 'LIST_v2undecidedImplementation_cursor';
         this.rootElement.appendChild(this.cursorElement);
 
         // TODO: wrap the individual divs that represent lines in a parent element or not...
         this.itemListElement = document.createElement('div');
-        this.itemListElement.className = 'LIST_itemList';
+        this.itemListElement.className = 'LIST_v2undecidedImplementation_itemList';
         this.rootElement.appendChild(this.itemListElement);
 
         // TODO: You could separately store the sorted divs and use that separate store to map "virtual indices" to the content displayed on screen...
