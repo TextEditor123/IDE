@@ -193,5 +193,10 @@ function init() {
     //
     // I'm not sure if I fully understand that sentence.
     // "background Web API finishes"
-    DIALOG_show_async(DialogKind.Debug);
+    DIALOG_show_async(DialogKind.Debug, () => {
+        if (DEBUG_listComponent) {
+            DEBUG_listComponent.boundingClientRect = null;
+            DEBUG_listComponent.event_scroll();
+        }
+    });
 }

@@ -534,19 +534,71 @@ async function DIALOG_DocumentSymbol_Delete_async() {
     EDITOR_documentSymbolResult = null;
 }
 
+let DEBUG_listData = null;
+let DEBUG_listComponent = null;
+
 async function DIALOG_Debug_Create_async() {
     let dialogBody = document.getElementById('DIALOG_body');
     if (!dialogBody) return;
     
-    //EXPLORER_director.component.setItems(EXPLORER_director, APP_lineHeight, APP_lineHeight + 'px');
+    DEBUG_listData = new Uint16Array(65_536);
+    for (let i = 0; i < 65_536; i++) {
+        DEBUG_listData[i] = i;
+    }
+
+    if (!DEBUG_listComponent) {
+        DEBUG_listComponent = new ListComponent();
+    }
+    DEBUG_listComponent.setItems(APP_lineHeight, APP_lineHeight + 'px',
+        /*drawItemAction*/ (div, index) => {
+            if (index === -1) {
+                div.innerText = '';
+                div.title = '';
+                div.style.display = 'none';
+            }
+            else {
+                let item = DEBUG_listData[index];
+                div.innerText = item;
+                div.style.display = '';
+            }
+        },
+        /*onkeydownAction*/ (div, index) => {
+            //if (index === -1) {
+            //    // TODO: if (index === -1)
+            //}
+            //else {
+            //    // TODO: Ensure that json parsing the title like this is a safe way of doing things
+            //    const startPosition = JSON.parse(div.title);
+            //    EDITOR_moveCursor_lineIndex_columnIndex(startPosition.line, startPosition.character);
+            //}
+        },
+        /*getItemsCountFunc*/ () => {
+            if (DEBUG_listData) {
+                return DEBUG_listData.length;
+            }
+            else {
+                return 0;
+            }
+        });
     
-    // you were missing an await here the entire time?
-    // EXPLORER_director.component.draw_create_async(dialogBody, null);
+    if (DEBUG_listData) {
+        let div = document.createElement('div');
+        div.innerText = 'DEBUG_listData.length: ' + DEBUG_listData.length;
+        div.style.height = APP_lineHeight + 'px';
+        div.style.whiteSpace = 'nowrap';
+        dialogBody.appendChild(div);
+        DEBUG_listComponent.rootElement.style.height = `calc(100% - ${div.style.height})`;
+        DEBUG_listComponent.draw_create(dialogBody, null);
+    }
+    else {
+        dialogBody.innerText = 'DEBUG_listData is falsey';
+    }
 }
 
 async function DIALOG_Debug_Delete_async() {
     let dialogBody = document.getElementById('DIALOG_body');
     if (!dialogBody) return;
 
-    //EXPLORER_director.component.draw_delete();
+    DEBUG_listData = null;
+    DEBUG_listComponent = null;
 }
