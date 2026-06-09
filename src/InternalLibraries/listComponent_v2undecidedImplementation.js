@@ -36,14 +36,14 @@ class ListComponent_v2undecidedImplementation {
         this.cursorElement.className = 'LIST_v2undecidedImplementation_cursor';
         this.rootElement.appendChild(this.cursorElement);
 
-        this.countNonLineChildren = 2;
+        //this.countNonLineChildren = 2;
 
-        // Remove the wrapper goes from 0.15 to 0.27
+        // Remove the wrapper goes from 0.15 to 0.27 when using top
         //
-        //// TODO: wrap the individual divs that represent lines in a parent element or not...
-        //this.itemListElement = document.createElement('div');
-        //this.itemListElement.className = 'LIST_v2undecidedImplementation_itemList';
-        //this.rootElement.appendChild(this.itemListElement);
+        // TODO: wrap the individual divs that represent lines in a parent element or not...
+        this.itemListElement = document.createElement('div');
+        this.itemListElement.className = 'LIST_v2undecidedImplementation_itemList';
+        this.rootElement.appendChild(this.itemListElement);
 
         // TODO: You could separately store the sorted divs and use that separate store to map "virtual indices" to the content displayed on screen...
         // ...while being able to use any div at any position in the DOM itself and change the top CSS value to whatever you wanted.
@@ -219,10 +219,10 @@ class ListComponent_v2undecidedImplementation {
      */
     setItems(itemHeightNumber, itemHeightStyleAttributeValueString, drawItemAction, onkeydownAction, getItemsCountFunc) {
 
-        //this.itemListElement.innerHTML = '';
-        for (let i = this.rootElement.children.length - 1; i >= this.countNonLineChildren; i--) {
-            this.rootElement.removeChild(this.rootElement.children[i]);
-        }
+        this.itemListElement.innerHTML = '';
+        //for (let i = this.rootElement.children.length - 1; i >= this.countNonLineChildren; i--) {
+        //    this.rootElement.removeChild(this.rootElement.children[i]);
+        //}
 
 
         this.domNodesForLines.length = 0;
@@ -290,7 +290,7 @@ class ListComponent_v2undecidedImplementation {
             this.ensure_boundingClientRect();
         }
 
-        if ((this.rootElement.children.length - this.countNonLineChildren !== this.virtualCount) || (this.domNodesForLines.length !== this.virtualCount)) {
+        if ((this.itemListElement.children.length !== this.virtualCount) || (this.domNodesForLines.length !== this.virtualCount)) {
             this.draw_render_fullReset();
         }
         else {
@@ -313,7 +313,7 @@ class ListComponent_v2undecidedImplementation {
             this._ONSCROLLvirtualIndex = this.virtualIndex;
 
             if (this._ONSCROLLvirtualCount === this.virtualCount &&
-                (this.rootElement.children.length - this.countNonLineChildren === this.virtualCount) &&
+                (this.itemListElement.children.length === this.virtualCount) &&
                 (this.domNodesForLines.length === this.virtualCount)) {
 
                 // The same count of lines is on the UI so you can probably
@@ -450,10 +450,15 @@ class ListComponent_v2undecidedImplementation {
 
         this._ONSCROLLvirtualCount = this.virtualCount;
 
-        //this.itemListElement.innerHTML = '';
-        for (let i = this.rootElement.children.length - 1; i >= this.countNonLineChildren; i--) {
-            this.rootElement.removeChild(this.rootElement.children[i]);
-        }
+        // I just had an idea:
+        // In addition to trying transform
+        //
+        // if that gets me nowhere I could forgo moving the divs entirely and see if just swapping the content and order is enough to spike CLS
+
+        this.itemListElement.innerHTML = '';
+        //for (let i = this.rootElement.children.length - 1; i >= this.countNonLineChildren; i--) {
+        //    this.rootElement.removeChild(this.rootElement.children[i]);
+        //}
 
         this.domNodesForLines.length = 0;
         
