@@ -155,6 +155,11 @@ class ListComponent_v2undecidedImplementation {
         // ...
         // ############```paraphrase
 
+        // Document Fragment (Web APIs)
+        //     - Google AI paraphrased: "It lives entirely in memory. When you append a fragment to the actual DOM, the fragment itself disappears, and only its children are inserted."
+        //     - how does this differ from a for loop that adds child nodes to an HTML element GIVEN that this for loop occurs prior to the next render. (so it is all completed in time).
+        // Semantic Container
+
         this.itemHeightTotal = 0;
 
         /** Consider the existence of such methods as 'state_cursor_setIndex' before mutating state directly */
