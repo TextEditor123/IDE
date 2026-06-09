@@ -354,7 +354,8 @@ class ListComponent_v2undecidedImplementation {
                         let divItem = this.domNodesForLines.shift();
                         // TODO: Should this actually be setting innerHTML to an empty string?
                         divItem.innerHTML = ''; // TODO: Don't set innerHTML to '', it triggers the HTML parser; use a different way?
-                        divItem.style.top = `${topNumber}px`;
+                        divItem.style.transform = `translateY(${topNumber}px)`;
+                        //divItem.style.top = `${topNumber}px`;
                         topNumber += this.itemHeightNumber;
 
                         if (indexItem >= itemsCount) {
@@ -394,7 +395,8 @@ class ListComponent_v2undecidedImplementation {
 
                         let divItem = this.domNodesForLines.pop();
                         divItem.innerHTML = ''; // TODO: Don't set innerHTML to '', it triggers the HTML parser; use a different way?
-                        divItem.style.top = `${topNumber}px`;
+                        divItem.style.transform = `translateY(${topNumber}px)`;
+                        //divItem.style.top = `${topNumber}px`;
                         topNumber += this.itemHeightNumber;
 
                         if (indexItem >= itemsCount) {
@@ -419,7 +421,8 @@ class ListComponent_v2undecidedImplementation {
 
                         let divItem = this.domNodesForLines[i];
                         divItem.innerHTML = ''; // TODO: Don't set innerHTML to '', it triggers the HTML parser; use a different way?
-                        divItem.style.top = `${topNumber}px`;
+                        divItem.style.transform = `translateY(${topNumber}px)`;
+                        //divItem.style.top = `${topNumber}px`;
                         topNumber += this.itemHeightNumber;
 
                         if (indexItem >= itemsCount) {
@@ -480,7 +483,8 @@ class ListComponent_v2undecidedImplementation {
             // ^ uncomment the line without a wrappper goes from 0.27 to 5.85
             divItem.style.height = this.itemHeightStyleAttributeValueString;
             divItem.style.position = 'absolute';
-            divItem.style.top = `${topNumber}px`;
+            divItem.style.transform = `translateY(${topNumber}px)`;
+            //divItem.style.top = `${topNumber}px`;
             topNumber += this.itemHeightNumber;
             this.itemListElement.appendChild(divItem);
             //this.rootElement.appendChild(divItem);
@@ -563,6 +567,7 @@ class ListComponent_v2undecidedImplementation {
      * @param {*} index 
      */
     state_cursor_setIndex(index) {
+        // CLS of 0
         if (this.cursorIndex === index) return;
 
         this.cursorIndex = index;
