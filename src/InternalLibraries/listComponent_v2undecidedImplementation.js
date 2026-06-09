@@ -559,6 +559,9 @@ class ListComponent_v2undecidedImplementation {
             this.boundingClientRect = this.rootElement.getBoundingClientRect();
             this.virtualCount = Math.ceil(this.rootElement.offsetHeight / this.itemHeightNumber);
         }
+
+        // Something along the lines of "if transformY exists why would I ever use top"
+        // my prediction to this is whether you're positioning something vs animating a changing value...
     }
 
     /**
