@@ -63,6 +63,13 @@ class ListComponent_v2undecidedImplementation {
         // - full screen renders
         //     - set position to static and calculate a top only for the parent div.
 
+        // So then each time you draw the list there'd be a mixture of lines that are position static without a top value.
+        // Because they're in the same position as they were from the last full screen render.
+        //
+        // And mixed into that is the lines that given your current scroll position relative to the last full screen render
+        // you need to reposition those lines
+        // so you gave them position absolute and a top.
+
         this.itemHeightTotal = 0;
 
         /** Consider the existence of such methods as 'state_cursor_setIndex' before mutating state directly */
