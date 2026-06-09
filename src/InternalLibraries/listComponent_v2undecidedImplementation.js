@@ -630,3 +630,10 @@ class ListComponent_v2undecidedImplementation {
         return index;
     }
 }
+
+// Well that was a productive day...
+// A recap:
+// - [ ] Goal: achieve ego death
+//
+// I say I did a great job.
+// I feel completely incompetent at programming right now lol
