@@ -128,6 +128,8 @@ class ListComponent_v2undecidedImplementation {
         //
         // But even then I said I'd just store a separate list myself to sort them all so I can walk the references in my own list.
 
+        // From my understanding transform is GPU and top is main thread.
+
         this.itemHeightTotal = 0;
 
         /** Consider the existence of such methods as 'state_cursor_setIndex' before mutating state directly */
