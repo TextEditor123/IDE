@@ -446,7 +446,7 @@ class ListComponent_v2undecidedImplementation {
             }
             let divItem = document.createElement('div');
             this.domNodesForLines.push(divItem);
-            divItem.style.width = `100%`; // This goes > 4.0 CLS
+            //divItem.style.width = `100%`; // This goes from 0.21 to 4.9 CLS when I uncomment this line
             divItem.style.height = this.itemHeightStyleAttributeValueString;
             divItem.style.position = 'absolute';
             divItem.style.top = `${topNumber}px`;
