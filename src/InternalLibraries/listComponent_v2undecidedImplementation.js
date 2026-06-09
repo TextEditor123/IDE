@@ -52,6 +52,16 @@ class ListComponent_v2undecidedImplementation {
         // ...this means you can on a full screen render calculate the top for the parent div, then have the child lines of text...
         // ...be 'position: static' and just fall into place correctly relative to the parent without calculating an individual top foreach of them.
 
+        // NOTE: What I'm describing is the falacy that currently exists in my mind. And likely what I need to do is just not do what I thinking about...
+        // ...but I want to still describe my reasoning up until this point.
+
+        // Because of your worry about full screen renders, you would need to separate into 3 cases:
+        // - positive diffs
+        //     - set position to absolute and calculate a top foreach line that is being moved.
+        // - negative diffs
+        //     - set position to absolute and calculate a top foreach line that is being moved.
+        // - full screen renders
+        //     - set position to static and calculate a top only for the parent div.
 
         this.itemHeightTotal = 0;
 
