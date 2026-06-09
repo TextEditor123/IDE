@@ -75,6 +75,20 @@ class ListComponent_v2undecidedImplementation {
         // As well, given that I don't simply have "innerText" but instead have 1 or many spans.
         // I'd somehow have to move those span nodes around and I'm back where I started... i.e.: I'm moving nodes and possibly causing a layout shift again.
 
+        // So stop thinking about the full screen render because you need to just get this first step to work.
+        // First step being... not having a bad cumulative layout shift.
+
+        // The second concern is that I continually map from a line index to a virtual index to a DOM element so that
+        // I can draw the user's edits before they actually happen.
+        //
+        // If I do this oddity where child at index 0 isn't visually the 0th line then I have to
+        // track separately where the 0th visual element starts.
+        //
+        // Then as I draw lines I need to increment from there and wrap back around to 0 when I overflow into the count of total children.
+        // And all the while I keep updating where the next element is to pull from.
+        //
+        // OR I just track this zeroth element in a separate list of my own and say forget the list they appear in the DOM.
+
         this.itemHeightTotal = 0;
 
         /** Consider the existence of such methods as 'state_cursor_setIndex' before mutating state directly */
