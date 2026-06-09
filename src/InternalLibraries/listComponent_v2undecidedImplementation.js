@@ -482,8 +482,8 @@ class ListComponent_v2undecidedImplementation {
             divItem.style.position = 'absolute';
             divItem.style.top = `${topNumber}px`;
             topNumber += this.itemHeightNumber;
-            //this.itemListElement.appendChild(divItem);
-            this.rootElement.appendChild(divItem);
+            this.itemListElement.appendChild(divItem);
+            //this.rootElement.appendChild(divItem);
             this.drawItemAction(divItem, this.virtualIndex + i);
         }
     }
@@ -514,8 +514,8 @@ class ListComponent_v2undecidedImplementation {
                 this.state_cursor_setIndex(
                     this.state_cursor_validateIndex(this.cursorIndex));
                 let relativeIndex = this.cursorIndex - this.virtualIndex;
-                if (relativeIndex >= 0 && relativeIndex < this.rootElement.children.length - this.countNonLineChildren) {
-                    this.onkeydownAction(this.rootElement.children[relativeIndex + this.countNonLineChildren], this.cursorIndex);
+                if (relativeIndex >= 0 && relativeIndex < this.itemListElement.children.length) {
+                    this.onkeydownAction(this.itemListElement.children[relativeIndex], this.cursorIndex);
                 }
                 break;
         }
