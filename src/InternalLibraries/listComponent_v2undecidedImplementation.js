@@ -466,7 +466,14 @@ class ListComponent_v2undecidedImplementation {
         this.domNodesForLines.length = 0;
         
         this.virtualIndex = Math.floor(this.rootElement.scrollTop / this.itemHeightNumber);
+        //this.itemListElement.style.transform = this.virtualIndex * this.itemHeightNumber + 'px';
         //this.itemListElement.style.top = this.virtualIndex * this.itemHeightNumber + 'px';
+
+        // if you do that it messes it all up
+        // maybe you could transform because
+        // the transform
+        // you have to transform every other line because you moved 0 but the next line needs to transform 0 but it is transform 1 * lineHeight
+        // but you could for the diff size negatively transform the container and then transform the moved lines relative to the negative value.
 
         let itemsCount = this.getItemsCountFunc();
 
