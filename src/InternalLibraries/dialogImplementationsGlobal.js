@@ -547,7 +547,7 @@ async function DIALOG_Debug_Create_async() {
     }
 
     if (!DEBUG_listComponent) {
-        DEBUG_listComponent = new ListComponent();
+        DEBUG_listComponent = new ListComponent_moveChildNodes();
     }
     DEBUG_listComponent.setItems(APP_lineHeight, APP_lineHeight + 'px',
         /*drawItemAction*/ (div, index) => {

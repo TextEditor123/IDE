@@ -222,7 +222,7 @@ let EDITOR_extensionKind = 0;
 let EDITOR_lineEndString = null;
 let EDITOR_documentSymbolResult;
 /**
- * @type {ListComponent}
+ * @type {ListComponent_moveChildNodes}
  */
 let EDITOR_listComponent = null;
 let EDITOR_onMouseMove_timer = null;
