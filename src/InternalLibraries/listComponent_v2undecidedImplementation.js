@@ -96,6 +96,11 @@ class ListComponent_v2undecidedImplementation {
         And I think it is because I fail to understand how the browser renders content.
         And this failure to understand that results in the browser's rendering steps blowing up the GC
         unrelated to what I'm doing (enough to cause me confusion).
+
+        What I mean is, I'm not causing 0 gc overhead I definitely cause GC overhead.
+        But my failure to understand how the browser renders is probably
+        where MASSIVE amounts of GC overhead are occurring and then I'm sitting here everyday
+        thinking what am I doing in my code to cause so much GC overhead.
         */
 
         this.itemHeightTotal = 0;
