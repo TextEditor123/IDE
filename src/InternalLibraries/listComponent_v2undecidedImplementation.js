@@ -436,6 +436,15 @@ class ListComponent_v2undecidedImplementation {
 
     draw_render_fullReset() {
 
+        /*
+        It feels like every way of doing this has many reasons of its own for why it can't be the correct answer.
+        And that every case has a sense of "it can't be correct".
+        So then the only thing to do is to iterate through every possibility of implementing it and measuring the result.
+
+        For the few cases I just checked I didn't set the width of the container to the largest width element that could appear...
+        maybe that is the missing key idk I just gotta keep trying things cause they all sound like a bad idea.
+        */
+
         this._ONSCROLLvirtualCount = this.virtualCount;
 
         //this.itemListElement.innerHTML = '';
