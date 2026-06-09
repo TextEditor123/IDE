@@ -313,6 +313,7 @@ Instead of freezing your browser while waiting for a server or a timer, JavaScri
         5. Repeat: Start back at step 1.
 
 
+...
 
 ########################```endParaphrase
 */
