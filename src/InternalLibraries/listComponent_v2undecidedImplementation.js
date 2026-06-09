@@ -115,6 +115,9 @@ class ListComponent_v2undecidedImplementation {
         1. the idea that a full screen render of 34 lines of text calculating 34 top css strings isn't nearly as big a deal as I give credit to it
         2. the cost of item 1 exists but is far less than that of the thrashing that I introduce by trying to avoid item 1
         3. I lost my train of thought
+        4. Oh if I transform the lines relative to that parent element then I am furthermore transforming the lines relative to one another
+            and creating a log(n) shifting wherein everytime I shift 1 line visually every other line has to be transformed +- the amount of lines I shifted.
+        5. if I use transform from 0 or just top from 0 I probably am no longer doing this math relative to each other line and can change just the lines that move.
         */
 
         this.itemHeightTotal = 0;
