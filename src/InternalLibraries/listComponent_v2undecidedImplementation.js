@@ -89,6 +89,15 @@ class ListComponent_v2undecidedImplementation {
         //
         // OR I just track this zeroth element in a separate list of my own and say forget the list they appear in the DOM.
 
+        /*
+        There is a very large issue in my understanding of garbage collection.
+        I cannot fully pinpoint the cost of an allocation whether it be short term or long term.
+        
+        And I think it is because I fail to understand how the browser renders content.
+        And this failure to understand that results in the browser's rendering steps blowing up the GC
+        unrelated to what I'm doing (enough to cause me confusion).
+        */
+
         this.itemHeightTotal = 0;
 
         /** Consider the existence of such methods as 'state_cursor_setIndex' before mutating state directly */
