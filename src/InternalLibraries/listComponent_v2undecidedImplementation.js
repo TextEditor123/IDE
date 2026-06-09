@@ -184,6 +184,8 @@ class ListComponent_v2undecidedImplementation {
         this.bound_event_scroll_WRAPIT = this.event_scroll_WRAPIT.bind(this);
         this.bound_event_windowResize = this.event_windowResize.bind(this);
 
+        this.domNodesForLines = [];
+
         /**
          * It could be useful to inherit HTML element due to storage, you'd have to hold a null reference that you can set
          * or store a array of 'List' to somehow hold the reference.
@@ -214,6 +216,7 @@ class ListComponent_v2undecidedImplementation {
     setItems(itemHeightNumber, itemHeightStyleAttributeValueString, drawItemAction, onkeydownAction, getItemsCountFunc) {
 
         this.itemListElement.innerHTML = '';
+        this.domNodesForLines.length = 0;
         this.virtualizationElement.style.height = 1 + 'px';
         this.state_cursor_setIndex(0);
 
@@ -278,12 +281,12 @@ class ListComponent_v2undecidedImplementation {
             this.ensure_boundingClientRect();
         }
 
-        if (this.itemListElement.children.length !== this.virtualCount) {
+        if ((this.itemListElement.children.length !== this.virtualCount) || (this.domNodesForLines.length !== this.virtualCount)) {
             this.draw_render_fullReset();
         }
         else {
             this.virtualIndex = Math.floor(this.rootElement.scrollTop / this.itemHeightNumber);
-            this.itemListElement.style.top = this.virtualIndex * this.itemHeightNumber + 'px';
+            //this.itemListElement.style.top = this.virtualIndex * this.itemHeightNumber + 'px';
 
             if (this._ONSCROLLscrollTop === this.rootElement.scrollTop &&
                 this._ONSCROLLvirtualIndex === this.virtualIndex &&
@@ -301,7 +304,8 @@ class ListComponent_v2undecidedImplementation {
             this._ONSCROLLvirtualIndex = this.virtualIndex;
 
             if (this._ONSCROLLvirtualCount === this.virtualCount &&
-                this.itemListElement.children.length === this.virtualCount) {
+                (this.itemListElement.children.length === this.virtualCount) &&
+                (this.domNodesForLines.length === this.virtualCount)) {
 
                 // The same count of lines is on the UI so you can probably
                 // redraw them one by one and save "some" of the existing HTML.
@@ -412,11 +416,14 @@ class ListComponent_v2undecidedImplementation {
         this._ONSCROLLvirtualCount = this.virtualCount;
 
         this.itemListElement.innerHTML = '';
+        this.domNodesForLines.length = 0;
         
         this.virtualIndex = Math.floor(this.rootElement.scrollTop / this.itemHeightNumber);
-        this.itemListElement.style.top = this.virtualIndex * this.itemHeightNumber + 'px';
+        //this.itemListElement.style.top = this.virtualIndex * this.itemHeightNumber + 'px';
 
         let itemsCount = this.getItemsCountFunc();
+
+        let topNumber = this.virtualIndex * this.itemHeightNumber;
 
         for (let i = 0; i < this.virtualCount; i++) {
             // TODO: you don't break you still populate and then drawItemAction handles a null case?
@@ -424,7 +431,11 @@ class ListComponent_v2undecidedImplementation {
                 break;
             }
             let divItem = document.createElement('div');
+            this.domNodesForLines.push(divItem);
             divItem.style.height = this.itemHeightStyleAttributeValueString;
+            divItem.style.position = 'absolute';
+            divItem.style.top = `${topNumber}px`;
+            topNumber += this.itemHeightNumber;
             this.itemListElement.appendChild(divItem);
             this.drawItemAction(divItem, this.virtualIndex + i);
         }

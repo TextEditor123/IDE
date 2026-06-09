@@ -137,9 +137,7 @@ body {
 }
 
 .LIST_v2undecidedImplementation_itemList {
-  position: absolute;
-  left: 0;
-  top: 0;
+  position: static;
 }
 
 .TREEVIEW {
