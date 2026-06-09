@@ -169,4 +169,23 @@ Layout shifting.
 you should include the other phrases that you commonly see.
 I don't want to type the wrong phrase from memory so I won't put them here
 right now cause I'm exhausted and I can't bear to look it up right now to check the phrasing.
+
+======================
+
+7:43 AM
+
+I had 2x quickcheck breakfast burritos
+
+Then when I got home I set aside 4x cliff bars
+- 2x chocolate chip
+- 2x peanut butter
+
+When I eat those cliff bars I intend to eat them in the sequence
+chocolate chip, peanut butter, chocolate chip, peanut butter.
+
+I also have 1 lb of 98% lean ground chicken and sriracha.
+
+======================
+
+
 */
