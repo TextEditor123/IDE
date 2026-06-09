@@ -281,4 +281,9 @@ Modern browsers use two main techniques to keep pages smooth and responsive afte
 ...
 
 ###```paraphrase
+
+Continuing to question from the initial prompt "Tell me more about 'The Event Loop'":
+###```paraphrase
+
+###```paraphrase
 */
