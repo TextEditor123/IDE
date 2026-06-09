@@ -120,6 +120,14 @@ class ListComponent_v2undecidedImplementation {
         5. if I use transform from 0 or just top from 0 I probably am no longer doing this math relative to each other line and can change just the lines that move.
         */
 
+        // If you don't use a containing div specifically for the lines of text you could position them
+        // as the final childrenof the text editor's HTML element.
+        //
+        // You then have every child that comes prior be a constant count.
+        // Your lines of text are then located at (0 + countOfConstantChildrenThatComePrior).
+        //
+        // But even then I said I'd just store a separate list myself to sort them all so I can walk the references in my own list.
+
         this.itemHeightTotal = 0;
 
         /** Consider the existence of such methods as 'state_cursor_setIndex' before mutating state directly */
