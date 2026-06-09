@@ -187,5 +187,29 @@ I also have 1 lb of 98% lean ground chicken and sriracha.
 
 ======================
 
+Google AI Overview "web browsers: key lifecycle stages":
+###```paraphrase
 
+...
+
+1. Page Load Lifecycle (Populating a Web Page)
+- Navigation & Request
+- Response
+- Parsing & DOM Construction
+- Style & CSSOM Construction
+- Render & Layout
+- Painting
+- Interactivity
+
+2. Page Lifecycle API States
+- Active
+- Passive
+- Hidden
+- Frozen
+- Terminated
+- Discarded
+
+
+
+###```paraphrase
 */
