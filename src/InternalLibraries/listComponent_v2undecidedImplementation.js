@@ -18,12 +18,6 @@ class ListComponent_v2undecidedImplementation {
     constructor(itemHeight) {
         
         /**
-         * // height is 100% of container, or is set to a value?
-         * 
-         * TODO: this isn't being used?
-         * */
-        this.containerHeight = 0;
-        /**
          * @type {HTMLDivElement}
          */
         this.rootElement = document.createElement('div');
@@ -42,9 +36,13 @@ class ListComponent_v2undecidedImplementation {
         this.cursorElement.className = 'LIST_cursor';
         this.rootElement.appendChild(this.cursorElement);
 
+        // TODO: wrap the individual divs that represent lines in a parent element or not...
         this.itemListElement = document.createElement('div');
         this.itemListElement.className = 'LIST_itemList';
         this.rootElement.appendChild(this.itemListElement);
+
+        // TODO: You could separately store the sorted divs and use that separate store to map "virtual indices" to the content displayed on screen...
+        // ...while being able to use any div at any position in the DOM itself and change the top CSS value to whatever you wanted.
 
         this.itemHeightTotal = 0;
 
