@@ -564,6 +564,9 @@ class ListComponent_v2undecidedImplementation {
         // my prediction to this is whether you're positioning something vs animating a changing value...
         //
         // I actually wonder if transformY would effect the offsetHeight or not?
+        //
+        // Perhaps transform is used when throttling an occuring event.
+        // And then on the trailing event if you wanted to have offsetHeight correct you'd finalize the top.
     }
 
     /**
