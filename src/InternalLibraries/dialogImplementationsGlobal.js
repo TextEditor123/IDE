@@ -602,3 +602,8 @@ async function DIALOG_Debug_Delete_async() {
     DEBUG_listData = null;
     DEBUG_listComponent = null;
 }
+
+/*
+Cumulative Layout Shift (CLS) is 0.40
+when using the mouse wheel to scroll the list.
+*/
