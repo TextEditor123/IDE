@@ -144,6 +144,17 @@ class ListComponent_v2undecidedImplementation {
         // You then tell the rendering engine to ignore the existence of the parent of the lines of text
         // and presume that the lines of text were a child of the parent of the parent of the lines of text?
 
+        // Google AI overview
+        // "HTML wrap multiple divs in a div without the parent adding overhead to the rendering because the parent of the parent is position relative
+        // and every innermost div is position absolute therefore they bypass the immediate parent who is position static"
+        // ############```paraphrase
+        // To wrap multiple divs without adding layout overhead, use a document fragment or a semantic container with CSS display unset.
+        // Since your innermost elements are position: absolute and their positioning context (containing block) is a grandparent,
+        // intermediate static wrappers won't interfere with their positioning.
+        //
+        // ...
+        // ############```paraphrase
+
         this.itemHeightTotal = 0;
 
         /** Consider the existence of such methods as 'state_cursor_setIndex' before mutating state directly */
