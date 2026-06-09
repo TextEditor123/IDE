@@ -285,5 +285,59 @@ Modern browsers use two main techniques to keep pages smooth and responsive afte
 Continuing to question from the initial prompt "Tell me more about 'The Event Loop'":
 ############```startParaphrase
 
+The 'Event Loop' is the secret behind JavaScript's ability to handle
+- user clicks,
+- network requests,
+- and animations smoothly,
+despite being strictly single-threaded (meaning it can only run one piece of code at a time).
+
+Instead of freezing your browser while waiting for a server or a timer, JavaScript offloads heavy tasks to the
+browser environment and uses the Event Loop to coordinate when that code executes.
+
+1. The Code Architecture
+
+To understand the loop, you must understand the four distinct parts of the browser runtime working together:
+
+- The Call Stack: This tracks exactly where you are in your program. It executes code synchronously on a Last-In, First-Out (LIFO) basis.
+                  If a function is called, it pops onto the stack. When it finishes, it pops off.
+
+- Web APIs / Browser APIs: These are background environments provided by the browser (not JavaScript itself).
+                           They handle long-running operations like 'setTimeout', 'fetch()' network requests, and DOM event listeners.
+
+- The Task Queues: When a Web API finishes its background task, it drops a callback function into a queue, waiting for its turn to execute.
+
+- The Event Loop: A continuous, infinite loop that has one simple job: look at the Call Stack. If the Call Stack is completely empty,
+                  it takes the first task from the queue and pushes it onto the Call Stack to be executed.
+
+2. The Queue Hierarchy: Macro vs. Micro
+
+Not all asynchronous tasks are treated equally. The Event Loop prioritizes tasks using two different queues:
+
+# Macro-task Queue (Task Queue)
+- What it holds: Large, discrete pieces of asynchronous work.
+- Examples: 'setTimeout', 'setInterval', network request callbacks, user interactions (clicks, keypresses).
+- Processing Rule: The Event Loop processes exactly 'one' macro-task per loop iteration.
+
+# Micro-task Queue
+- What it holds: Smaller tasks that must happen immediately after the current script finishes, but before the browser moves on to rendering
+                or the next macro-task.
+- Examples: 'Promise.then()', 'async/await' continuations, 'MutationObserver'.
+- Processing Rule: The Event Loop will completely 'empty' the entire micro-task queue before moving on. If a micro-task creates anotehr micro-task,
+                   that new one is also run immediately.
+
+3. Step-by-Step of a Single Loop Iteration
+
+Everytime the Event Loop ticks, it follows this exact order of operations.
+
+1. Check Call Stack: Wait until the call Stack is completely empty.
+
+2. Execute One Macro-task: Pull the oldest task from the Macro-task queue and run it until the stack clears.
+
+3. Flush All Micro-tasks: Check the Micro-task queue. Run every single micro-task in the queue until it is 100% empty.
+
+4. Render: Check if the screen needs a redraw (typically every 16.7ms). If yes, run 'requestAnimationFrame' and perform Layout and Paint.
+
+5. Repeat: Start back at step 1.
+
 ############```endParaphrase
 */
