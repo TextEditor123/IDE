@@ -569,6 +569,16 @@ class ListComponent_v2undecidedImplementation {
         // And then on the trailing event if you wanted to have offsetHeight correct you'd finalize the top.
         //
         //     transform: translateY(1.16422e+06px);
+        //
+        // If you make the parent of the text absolute you can top a single element
+        //
+        // then every line of text inside of it is absolute to avoid drawing the transformY on each individual relative to a different starting position
+        // with absolute they'll all be at top 0 of the parent which is top of the batch of lines
+        //
+        // and then the transform is the relative Y position to the parent
+        // so then you re-use if oyu have 35 lines fo text you graphics re-use those 35 transform strings and move them around
+        // 
+        // and then just the top ofthe entire thingy has to move.
     }
 
     /**
