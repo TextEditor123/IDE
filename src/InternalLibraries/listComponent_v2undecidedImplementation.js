@@ -637,3 +637,8 @@ class ListComponent_v2undecidedImplementation {
 //
 // I say I did a great job.
 // I feel completely incompetent at programming right now lol
+//
+// But I typed the word 'transform' instead of top for once or whatever so it's a step in the right direction
+// maybe because you might actually use top idk but it is a step in a direction in which
+// I can then cross off that direction because I've been there done that
+// but not actually fully cross it off because maybe I didn't investigate far enough.
