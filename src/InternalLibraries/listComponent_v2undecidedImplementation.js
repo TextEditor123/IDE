@@ -44,6 +44,9 @@ class ListComponent_v2undecidedImplementation {
         // TODO: You could separately store the sorted divs and use that separate store to map "virtual indices" to the content displayed on screen...
         // ...while being able to use any div at any position in the DOM itself and change the top CSS value to whatever you wanted.
 
+        // NOTE: What I'm describing is the falacy that currently exists in my mind. And likely what I need to do is just not do what I thinking about...
+        // ...but I want to still describe my reasoning up until this point.
+        //
         // TODO: You are worried about a full screen render needing to calculate the top for every line of text being displayed...
         // ...meanwhile you already are creating multiple strings of much longer lengths foreach span that provides syntax highlighting to the various chunks of text that exist on the div.
         //
@@ -51,10 +54,7 @@ class ListComponent_v2undecidedImplementation {
         // ...position for the children.
         // ...this means you can on a full screen render calculate the top for the parent div, then have the child lines of text...
         // ...be 'position: static' and just fall into place correctly relative to the parent without calculating an individual top foreach of them.
-
-        // NOTE: What I'm describing is the falacy that currently exists in my mind. And likely what I need to do is just not do what I thinking about...
-        // ...but I want to still describe my reasoning up until this point.
-
+        //
         // Because of your worry about full screen renders, you would need to separate into 3 cases:
         // - positive diffs
         //     - set position to absolute and calculate a top foreach line that is being moved.
@@ -62,13 +62,18 @@ class ListComponent_v2undecidedImplementation {
         //     - set position to absolute and calculate a top foreach line that is being moved.
         // - full screen renders
         //     - set position to static and calculate a top only for the parent div.
-
+        //
         // So then each time you draw the list there'd be a mixture of lines that are position static without a top value.
         // Because they're in the same position as they were from the last full screen render.
         //
         // And mixed into that is the lines that given your current scroll position relative to the last full screen render
         // you need to reposition those lines
         // so you gave them position absolute and a top.
+
+        // The other concern is doing a for loop over every line of text in the virtualization result.
+        // This sounds extremely expensive.
+        // As well, given that I don't simply have "innerText" but instead have 1 or many spans.
+        // I'd somehow have to move those span nodes around and I'm back where I started... i.e.: I'm moving nodes and possibly causing a layout shift again.
 
         this.itemHeightTotal = 0;
 
