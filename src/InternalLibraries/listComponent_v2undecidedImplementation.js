@@ -133,6 +133,17 @@ class ListComponent_v2undecidedImplementation {
         // If you wrap the lines in a div, and meanwhile the parent of the parent of the lines is the one that has overflow scroll.
         // What kind of oddities are going in the browser calculation of the overflow of the parent of the lines.
 
+        // How do you have the parent of the lines be completely untracked by the rendering, such that it only serves to
+        // group the children.
+        //
+        // Because perhaps this would mean the parent of the parent of the lines of text is position: relative.
+        // and then the parent of the lines is position: static.
+        // And then each line is position: absolute.
+        //
+        // Each line then bypasses its immediate parent because position: absolute isn't relative to position: static.
+        // You then tell the rendering engine to ignore the existence of the parent of the lines of text
+        // and presume that the lines of text were a child of the parent of the parent of the lines of text?
+
         this.itemHeightTotal = 0;
 
         /** Consider the existence of such methods as 'state_cursor_setIndex' before mutating state directly */
