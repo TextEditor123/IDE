@@ -182,4 +182,16 @@ function init() {
     MENU_init();
     EXPLORER_init();
     EDITOR_init();
+
+    // callstack hits 'init();'
+    // ... await would schedule this as a micro-task
+    // .... but it doesn't have an await...
+    // ... synchronously executes the asynchronous function until an await
+    // ... then returns to the outer synchronous function and does a somewhat 'fire and forget' scenario.
+    //
+    // Goole AI says the following sentence: "after the synchronous function has fully cleared off the Call Stack—the background Web API finishes, dumps the async function's callback into the Micro-task Queue, and the remainder of the async function finally finishes executing."
+    //
+    // I'm not sure if I fully understand that sentence.
+    // "background Web API finishes"
+    DIALOG_show_async(DialogKind.Debug);
 }
