@@ -393,11 +393,15 @@ class ListComponent_v2undecidedImplementation {
 
                     let itemsCount = this.getItemsCountFunc();
 
+                    let topNumber = this.virtualIndex * this.itemHeightNumber;
+
                     for (var i = 0; i < this.virtualCount; i++) {
                         let indexItem = i + this.virtualIndex;
 
                         let divItem = this.itemListElement.children[i];
-                        divItem.innerHTML = '';
+                        divItem.innerHTML = ''; // TODO: Don't set innerHTML to '', it triggers the HTML parser; use a different way?
+                        divItem.style.top = `${topNumber}px`;
+                        topNumber += this.itemHeightNumber;
 
                         if (indexItem >= itemsCount) {
                             this.drawItemAction(divItem, -1);
