@@ -101,6 +101,9 @@ class ListComponent_v2undecidedImplementation {
         But my failure to understand how the browser renders is probably
         where MASSIVE amounts of GC overhead are occurring and then I'm sitting here everyday
         thinking what am I doing in my code to cause so much GC overhead.
+
+        Either that or I'm misattributing the thrashing of the layout to be a freeze of the app due to a GC collection
+        and that both their side effects are visually similar to some degree.
         */
 
         this.itemHeightTotal = 0;
