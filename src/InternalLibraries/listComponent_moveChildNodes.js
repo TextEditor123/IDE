@@ -447,3 +447,15 @@ You want to scroll and have the content change to be correct while always stayin
 So one of the goals is:
 - Without changing the content itself, while scrolling you need to successfully keep the content in view smoothly as you scroll.
 */
+
+/*
+... as you scroll content changes... so another goal is:
+- Keep the lines at the top of the container, and only swap out the content they display, and get good performant scores while doing this
+*/
+
+/*
+Smaller goals:
+==============
+- Without changing the content itself, while scrolling you need to successfully keep the content in view smoothly as you scroll.
+- Keep the lines at the top of the container, and only swap out the content they display, and get good performant scores while doing this
+*/
