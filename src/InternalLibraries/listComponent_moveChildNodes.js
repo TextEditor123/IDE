@@ -328,7 +328,6 @@ class ListComponent_moveChildNodes {
         this.itemListElement.innerHTML = '';
         
         this.virtualIndex = Math.floor(this.rootElement.scrollTop / this.itemHeightNumber);
-        //this.itemListElement.style.top = this.virtualIndex * this.itemHeightNumber + 'px';
 
         let itemsCount = this.getItemsCountFunc();
 
@@ -344,12 +343,11 @@ class ListComponent_moveChildNodes {
             let divItem = document.createElement('div');
             divItem.style.height = this.itemHeightStyleAttributeValueString;
             divItem.style.position = 'absolute';
-            //divItem.style.top = `${vertical}px`;
             divItem.style.transform = `translateY(${vertical}px)`;
             vertical += this.itemHeightNumber;
             divItem.innerText = i;
             this.itemListElement.appendChild(divItem);
-            //this.drawItemAction(divItem, this.virtualIndex + i);
+            this.drawItemAction(divItem, this.virtualIndex + i);
         }
     }
 
