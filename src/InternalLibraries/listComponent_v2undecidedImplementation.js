@@ -725,4 +725,7 @@ even if only for a little bit of time until the memory footprint is cleaned up.
 
 And of course I just had my parents talk to me about the big beautiful bill again.
 
+There's also a big note on the microwave about it.
+With lots of exclamation points at the bottom to denote its importance.
+
 */
