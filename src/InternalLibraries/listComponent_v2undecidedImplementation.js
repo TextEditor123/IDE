@@ -677,6 +677,7 @@ Then I can check off each possible permutation.
 - Throttling
     - Rate
     - ???
+    - I guess I'm presuming that I need to throttle... what if I don't throttle?
 - Container for the "component"
      - Then within a container that wraps the list of divs that relate to each line.
          - position:
