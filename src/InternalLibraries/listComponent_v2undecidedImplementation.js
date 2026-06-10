@@ -770,5 +770,7 @@ You're all a joke
 
 Once I meet the bare minimum financial state to live I'm satisfied.
 
+You're pursuing nothing.
+
 
 */
