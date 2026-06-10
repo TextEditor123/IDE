@@ -450,12 +450,25 @@ So one of the goals is:
 
 /*
 ... as you scroll content changes... so another goal is:
-- Keep the lines at the top of the container, and only swap out the content they display, and get good performant scores while doing this
+- Keep the lines at the top of the container, and only determine the content they display, and get good performant scores while doing this
+*/
+
+/*
+Part of the complexity involved with showing the correct content as you scroll is that you have to
+"move" the divs around.
+
+Such that the 0th line of text visually is not the 0th HTML element in the container.
+
+So another goal is to support this.
+But you might consider having the content you put as the innerText be extremely simple.
+This way you can isolate the cost of your logic that performs this swapping out without
+having to concern yourself with whether your determining of the content to show is optimized or not.
 */
 
 /*
 Smaller goals:
 ==============
 - Without changing the content itself, while scrolling you need to successfully keep the content in view smoothly as you scroll.
-- Keep the lines at the top of the container, and only swap out the content they display, and get good performant scores while doing this
+- Such that the 0th line of text visually is not the 0th HTML element in the container.
+- Keep the lines at the top of the container, and only determine the content they should display, and get good performant scores while doing this.
 */
