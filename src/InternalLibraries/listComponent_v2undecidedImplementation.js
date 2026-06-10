@@ -663,4 +663,7 @@ I need to make a non-zero amount of progress on virtual scrolling the simple lis
 So long as I manage a non-zero amount of progress that I can tell mentally fatigued me
 and was cumulative to something that I'd consider procrastinating then it will have been a good day.
 
+My thought is: if I can't get a list of numbers to virtual scroll with perfection
+then what hope is there to understand doing so with the text editor.
+
 */
