@@ -171,7 +171,7 @@ class ListComponent_moveChildNodes {
         }
         else {
             this.virtualIndex = Math.floor(this.rootElement.scrollTop / this.itemHeightNumber);
-            this.itemListElement.style.top = this.virtualIndex * this.itemHeightNumber + 'px';
+            //this.itemListElement.style.top = this.virtualIndex * this.itemHeightNumber + 'px';
 
             if (this._ONSCROLLscrollTop === this.rootElement.scrollTop &&
                 this._ONSCROLLvirtualIndex === this.virtualIndex &&
@@ -207,13 +207,17 @@ class ListComponent_moveChildNodes {
 
                     let itemsCount = this.getItemsCountFunc();
 
+                    let topNumber = (prevVli + this._ONSCROLLvirtualCount) * this.itemHeightNumber; // TODO: consider transform but that is equivalent it isn't this current problem that I'm solving relating to
+
                     for (var i = 0; i < diff; i++) {
                         let indexItem = prevVli + this._ONSCROLLvirtualCount + i;
             
                         let divItem = this.itemListElement.children[this.domLineNodesZerothIndex++];
                         if (this.domLineNodesZerothIndex >= this.itemListElement.children.length) {
-                            this.domLineNodesZerothIndex;
+                            this.domLineNodesZerothIndex = 0;
                         }
+                        divItem.style.top = `${topNumber}px`;
+                        topNumber += this.itemHeightNumber;
                         // TODO: Should this actually be setting innerHTML to an empty string?
                         //divItem.innerHTML = '';
 
@@ -346,7 +350,7 @@ class ListComponent_moveChildNodes {
         this.itemListElement.innerHTML = '';
         
         this.virtualIndex = Math.floor(this.rootElement.scrollTop / this.itemHeightNumber);
-        this.itemListElement.style.top = this.virtualIndex * this.itemHeightNumber + 'px';
+        //this.itemListElement.style.top = this.virtualIndex * this.itemHeightNumber + 'px';
 
         let itemsCount = this.getItemsCountFunc();
 
@@ -359,6 +363,7 @@ class ListComponent_moveChildNodes {
             }
             let divItem = document.createElement('div');
             divItem.style.height = this.itemHeightStyleAttributeValueString;
+            divItem.style.position = 'absolute';
             divItem.innerText = i;
             this.itemListElement.appendChild(divItem);
             //this.drawItemAction(divItem, this.virtualIndex + i);
