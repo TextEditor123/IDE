@@ -243,6 +243,27 @@ class ListComponent_moveChildNodes {
             
                         //this.itemListElement.appendChild(divItem);
                     }
+
+                    let smallestTopValue = 9999;
+                    let smallestTopSourceIndex = -1;
+                    let largestTopValue = -1;
+                    let largestTopSourceIndex = -1;
+
+                    for (let i = 0; i < this.itemListElement.children.length; i++) {
+                        let top = parseInt(this.itemListElement.children[i].style.top);
+                        if (top > largestTopValue) {
+                            largestTopValue = top;
+                            largestTopSourceIndex = i;
+                        }
+                        if (top < smallestTopValue) {
+                            smallestTopValue = top;
+                            smallestTopSourceIndex = i;
+                        }
+                    }
+
+                    if (smallestTopSourceIndex !== this.domLineNodesZerothIndex) {
+                        console.log(`c1 => ${smallestTopSourceIndex} !== this.${this.domLineNodesZerothIndex}`);
+                    }
                 }
                 else if (diff < 0 && (diff *= -1) < this.virtualCount) {
 
@@ -259,9 +280,9 @@ class ListComponent_moveChildNodes {
                     else {
                         lastIndex = this.domLineNodesZerothIndex - 1;
                     }
-                    this.domLineNodesZerothIndex = lastIndex;
+                    this.domLineNodesZerothIndex = lastIndex - diff;
 
-                    let topNumber = currVli * this.itemHeightNumber; // TODO: consider transform but that is equivalent it isn't this current problem that I'm solving relating to
+                    let topNumber = (currVli + diff) * this.itemHeightNumber; // TODO: consider transform but that is equivalent it isn't this current problem that I'm solving relating to
                     
                     // They're all actually on a belt that is cicular.
                     // and the belt spins in the opposite direction of the scroll dif.
@@ -276,7 +297,7 @@ class ListComponent_moveChildNodes {
                             
                         }
                         divItem.style.top = `${topNumber}px`;
-                        topNumber += this.itemHeightNumber;
+                        topNumber -= this.itemHeightNumber;
 
                         //divItem.innerHTML = ''; You can't be setting the innerHTML to ''.
 
@@ -289,6 +310,27 @@ class ListComponent_moveChildNodes {
                         
                         //this.itemListElement.insertBefore(divItem, this.itemListElement.children[i]);
                     }
+
+                    let smallestTopValue = 9999;
+                    let smallestTopSourceIndex = -1;
+                    let largestTopValue = -1;
+                    let largestTopSourceIndex = -1;
+
+                    for (let i = 0; i < this.itemListElement.children.length; i++) {
+                        let top = parseInt(this.itemListElement.children[i].style.top);
+                        if (top > largestTopValue) {
+                            largestTopValue = top;
+                            largestTopSourceIndex = i;
+                        }
+                        if (top < smallestTopValue) {
+                            smallestTopValue = top;
+                            smallestTopSourceIndex = i;
+                        }
+                    }
+
+                    if (smallestTopSourceIndex !== this.domLineNodesZerothIndex) {
+                        console.log(`c2 => ${smallestTopSourceIndex} !== this.${this.domLineNodesZerothIndex}`);
+                    }
                 }
                 else {
                     // re-use the divs, but keep them in place and redraw over them all
@@ -296,10 +338,19 @@ class ListComponent_moveChildNodes {
                     let itemsCount = this.getItemsCountFunc();
                     let topNumber = this.virtualIndex * this.itemHeightNumber; // TODO: consider transform but that is equivalent it isn't this current problem that I'm solving relating to
 
+                    let origin = this.domLineNodesZerothIndex;
+
+                    
                     for (var i = 0; i < this.virtualCount; i++) {
                         let indexItem = i + this.virtualIndex;
 
-                        let divItem = this.itemListElement.children[i];
+                        let aaa = origin + i;
+            
+                        if (aaa >= this.itemListElement.children.length) {
+                            aaa -= this.itemListElement.children.length;
+                        }
+
+                        let divItem = this.itemListElement.children[aaa];
 
                         divItem.style.top = `${topNumber}px`;
                         topNumber += this.itemHeightNumber;
@@ -312,6 +363,27 @@ class ListComponent_moveChildNodes {
                         else {
                             this.drawItemAction(divItem, indexItem);
                         }*/
+                    }
+
+                    let smallestTopValue = 9999;
+                    let smallestTopSourceIndex = -1;
+                    let largestTopValue = -1;
+                    let largestTopSourceIndex = -1;
+
+                    for (let i = 0; i < this.itemListElement.children.length; i++) {
+                        let top = parseInt(this.itemListElement.children[i].style.top);
+                        if (top > largestTopValue) {
+                            largestTopValue = top;
+                            largestTopSourceIndex = i;
+                        }
+                        if (top < smallestTopValue) {
+                            smallestTopValue = top;
+                            smallestTopSourceIndex = i;
+                        }
+                    }
+
+                    if (smallestTopSourceIndex !== this.domLineNodesZerothIndex) {
+                        console.log(`c3 => ${smallestTopSourceIndex} !== this.${this.domLineNodesZerothIndex}`);
                     }
                 }
             }
