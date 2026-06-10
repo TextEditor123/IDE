@@ -472,3 +472,13 @@ Smaller goals:
 - Such that the 0th line of text visually is not the 0th HTML element in the container.
 - Keep the lines at the top of the container, and only determine the content they should display, and get good performant scores while doing this.
 */
+
+/*
+try rewording the goals:
+==============
+- Calculate and update the { top, transform, or both } in order to keep the divs in view.
+    - Such that the 0th line of text visually is not the 0th HTML element in the container.
+- Keep the lines at the top of the container, and only determine the content they should display, and get good performant scores while doing this.
+
+flame graph
+*/
