@@ -203,11 +203,8 @@ class ListComponent_moveChildNodes {
                 if (diff > 0 && diff < this.virtualCount) {
                     
                     let firstIndexLineThatWasNotAlreadyRendered = prevVli + this._ONSCROLLvirtualCount;
-
                     let itemsCount = this.getItemsCountFunc();
-
-                    let vertical = (prevVli + this._ONSCROLLvirtualCount) * this.itemHeightNumber; // TODO: consider transform but that is equivalent it isn't this current problem that I'm solving relating to
-
+                    let vertical = (prevVli + this._ONSCROLLvirtualCount) * this.itemHeightNumber;
                     let origin = this.domLineNodesZerothIndex;
 
                     this.domLineNodesZerothIndex = origin + diff;
@@ -218,28 +215,20 @@ class ListComponent_moveChildNodes {
                     for (var i = 0; i < diff; i++) {
                         let indexItem = prevVli + this._ONSCROLLvirtualCount + i;
 
-                        let aaa = origin + i;
-            
+                        let aaa = origin + i;            
                         if (aaa >= this.itemListElement.children.length) {
                             aaa -= this.itemListElement.children.length;
                         }
 
                         let divItem = this.itemListElement.children[aaa];
                         
-                        //divItem.style.top = `${vertical}px`;
                         divItem.style.transform = `translateY(${vertical}px)`;
                         vertical += this.itemHeightNumber;
-                        // TODO: Should this actually be setting innerHTML to an empty string?
-                        //divItem.innerHTML = ''; You can't be setting the innerHTML to ''.
 
-                        if (indexItem >= itemsCount) {
+                        if (indexItem >= itemsCount)
                             this.drawItemAction(divItem, -1);
-                        }
-                        else {
+                        else
                             this.drawItemAction(divItem, indexItem);
-                        }
-            
-                        //this.itemListElement.appendChild(divItem);
                     }
                 }
                 else if (diff < 0 && (diff *= -1) < this.virtualCount) {
@@ -262,65 +251,49 @@ class ListComponent_moveChildNodes {
                         this.domLineNodesZerothIndex += this.itemListElement.children.length;
                     }
 
-                    let vertical = (currVli + (diff - 1)) * this.itemHeightNumber; // TODO: consider transform but that is equivalent it isn't this current problem that I'm solving relating to
+                    let vertical = (currVli + (diff - 1)) * this.itemHeightNumber;
                     
                     for (var i = 0; i < diff; i++) {
                         let indexItem = currVli + i;
-
                         
                         let divItem = this.itemListElement.children[lastIndex--];
                         if (lastIndex <= -1) {
                             lastIndex = this.itemListElement.children.length - 1;
-                            
                         }
-                        //divItem.style.top = `${vertical}px`;
+
                         divItem.style.transform = `translateY(${vertical}px)`;
                         vertical -= this.itemHeightNumber;
 
-                        //divItem.innerHTML = ''; You can't be setting the innerHTML to ''.
-
-                        if (indexItem >= itemsCount) {
+                        if (indexItem >= itemsCount)
                             this.drawItemAction(divItem, -1);
-                        }
-                        else {
+                        else
                             this.drawItemAction(divItem, indexItem);
-                        }
-                        
-                        //this.itemListElement.insertBefore(divItem, this.itemListElement.children[i]);
                     }
                 }
                 else {
                     // re-use the divs, but keep them in place and redraw over them all
 
                     let itemsCount = this.getItemsCountFunc();
-                    let vertical = this.virtualIndex * this.itemHeightNumber; // TODO: consider transform but that is equivalent it isn't this current problem that I'm solving relating to
-
+                    let vertical = this.virtualIndex * this.itemHeightNumber;
                     let origin = this.domLineNodesZerothIndex;
-
                     
                     for (var i = 0; i < this.virtualCount; i++) {
                         let indexItem = i + this.virtualIndex;
 
-                        let aaa = origin + i;
-            
+                        let aaa = origin + i;            
                         if (aaa >= this.itemListElement.children.length) {
                             aaa -= this.itemListElement.children.length;
                         }
 
                         let divItem = this.itemListElement.children[aaa];
 
-                        //divItem.style.top = `${vertical}px`;
                         divItem.style.transform = `translateY(${vertical}px)`;
                         vertical += this.itemHeightNumber;
 
-                        //divItem.innerHTML = ''; You can't be setting the innerHTML to ''.
-
-                        if (indexItem >= itemsCount) {
+                        if (indexItem >= itemsCount)
                             this.drawItemAction(divItem, -1);
-                        }
-                        else {
+                        else
                             this.drawItemAction(divItem, indexItem);
-                        }
                     }
                 }
 
@@ -349,8 +322,6 @@ class ListComponent_moveChildNodes {
     }
 
     draw_render_fullReset() {
-
-        console.log('fr');
 
         this._ONSCROLLvirtualCount = this.virtualCount;
 
