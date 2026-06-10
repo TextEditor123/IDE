@@ -679,4 +679,6 @@ You ...
 I'm scared that I'm gonna somehow destroy my brain from having done that
 
 That's the thought. And it probably is just ridiculous and in my head
+
+"the bleach is gonna get into my brain through my nose"
 */
