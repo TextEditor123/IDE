@@ -768,5 +768,7 @@ fancy cars, fancy furniture.
 
 You're all a joke
 
+Once I meet the bare minimum financial state to live I'm satisfied.
+
 
 */
