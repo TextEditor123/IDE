@@ -191,12 +191,14 @@ class ListComponent_moveChildNodes {
             if (this._ONSCROLLvirtualCount === this.virtualCount &&
                 this.itemListElement.children.length === this.virtualCount) {
 
-                console.log('c1');
+                //console.log('c1');
 
                 // The same count of lines is on the UI so you can probably
                 // redraw them one by one and save "some" of the existing HTML.
 
                 let diff = currVli - prevVli;
+
+                // CLS 0.10
 
                 // There are 3 cases:
                 // - move small lines to end of list with the content changed
@@ -246,7 +248,7 @@ class ListComponent_moveChildNodes {
                         //this.itemListElement.appendChild(divItem);
                     }
 
-                    let smallestTopValue = 9999;
+                    /*let smallestTopValue = 9999;
                     let smallestTopSourceIndex = -1;
                     let largestTopValue = -1;
                     let largestTopSourceIndex = -1;
@@ -265,11 +267,11 @@ class ListComponent_moveChildNodes {
 
                     if (smallestTopSourceIndex !== this.domLineNodesZerothIndex) {
                         console.log(`c1 => ${smallestTopSourceIndex} !== this.${this.domLineNodesZerothIndex}`);
-                    }
+                    }*/
                 }
                 else if (diff < 0 && (diff *= -1) < this.virtualCount) {
 
-                    console.log('c2');
+                    //console.log('c2');
 
                     // TODO: This case is wrong by 1?
 
@@ -321,7 +323,7 @@ class ListComponent_moveChildNodes {
                         //this.itemListElement.insertBefore(divItem, this.itemListElement.children[i]);
                     }
 
-                    let smallestTopValue = 9999;
+                    /*let smallestTopValue = 9999;
                     let smallestTopSourceIndex = -1;
                     let largestTopValue = -1;
                     let largestTopSourceIndex = -1;
@@ -340,11 +342,11 @@ class ListComponent_moveChildNodes {
 
                     if (smallestTopSourceIndex !== this.domLineNodesZerothIndex) {
                         console.log(`c2 => ${smallestTopSourceIndex} !== this.${this.domLineNodesZerothIndex}`);
-                    }
+                    }*/
                 }
                 else {
 
-                    console.log('c3');
+                    //console.log('c3');
 
                     // re-use the divs, but keep them in place and redraw over them all
 
@@ -378,7 +380,7 @@ class ListComponent_moveChildNodes {
                         }*/
                     }
 
-                    let smallestTopValue = 9999;
+                    /*let smallestTopValue = 9999;
                     let smallestTopSourceIndex = -1;
                     let largestTopValue = -1;
                     let largestTopSourceIndex = -1;
@@ -397,7 +399,7 @@ class ListComponent_moveChildNodes {
 
                     if (smallestTopSourceIndex !== this.domLineNodesZerothIndex) {
                         console.log(`c3 => ${smallestTopSourceIndex} !== this.${this.domLineNodesZerothIndex}`);
-                    }
+                    }*/
                 }
             }
         }
