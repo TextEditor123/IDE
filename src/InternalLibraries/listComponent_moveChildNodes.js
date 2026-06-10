@@ -222,14 +222,14 @@ class ListComponent_moveChildNodes {
             
                         let divItem = this.itemListElement.children[0];
                         // TODO: Should this actually be setting innerHTML to an empty string?
-                        divItem.innerHTML = '';
+                        //divItem.innerHTML = '';
 
-                        if (indexItem >= itemsCount) {
+                        /*if (indexItem >= itemsCount) {
                             this.drawItemAction(divItem, -1);
                         }
                         else {
                             this.drawItemAction(divItem, indexItem);
-                        }
+                        }*/
             
                         this.itemListElement.appendChild(divItem);
                     }
@@ -258,14 +258,14 @@ class ListComponent_moveChildNodes {
                         let indexItem = currVli + i;
 
                         let divItem = this.itemListElement.children[this.itemListElement.children.length - 1];
-                        divItem.innerHTML = '';
+                        //divItem.innerHTML = '';
 
-                        if (indexItem >= itemsCount) {
+                        /*if (indexItem >= itemsCount) {
                             this.drawItemAction(divItem, -1);
                         }
                         else {
                             this.drawItemAction(divItem, indexItem);
-                        }
+                        }*/
                         
                         this.itemListElement.insertBefore(divItem, this.itemListElement.children[i]);
                     }
@@ -279,14 +279,14 @@ class ListComponent_moveChildNodes {
                         let indexItem = i + this.virtualIndex;
 
                         let divItem = this.itemListElement.children[i];
-                        divItem.innerHTML = '';
+                        //divItem.innerHTML = '';
 
-                        if (indexItem >= itemsCount) {
+                        /*if (indexItem >= itemsCount) {
                             this.drawItemAction(divItem, -1);
                         }
                         else {
                             this.drawItemAction(divItem, indexItem);
-                        }
+                        }*/
                     }
                 }
             }
@@ -311,8 +311,9 @@ class ListComponent_moveChildNodes {
             }
             let divItem = document.createElement('div');
             divItem.style.height = this.itemHeightStyleAttributeValueString;
+            divItem.innerText = i;
             this.itemListElement.appendChild(divItem);
-            this.drawItemAction(divItem, this.virtualIndex + i);
+            //this.drawItemAction(divItem, this.virtualIndex + i);
         }
     }
 
@@ -481,4 +482,12 @@ try rewording the goals:
 - Keep the lines at the top of the container, and only determine the content they should display, and get good performant scores while doing this.
 
 flame graph
+*/
+
+/*
+CLS is 0.29 currently
+
+I want to avoid changing the innerText and see what happens.
+CLS is 0.19
+
 */
