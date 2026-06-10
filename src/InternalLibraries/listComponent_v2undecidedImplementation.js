@@ -652,4 +652,8 @@ My throat was extremely sore afterwards.
 
 And sore when I woke up this morning.
 
+I used to do that every night.
+
+I haven't done it in a very long time.
+
 */
