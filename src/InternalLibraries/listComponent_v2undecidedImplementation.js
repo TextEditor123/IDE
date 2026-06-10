@@ -674,4 +674,15 @@ as though I was mentioning them with some ulterior motive.
 I gotta make a list of the variables involved in the process.
 Then I can check off each possible permutation.
 
+- Throttling
+    - Rate
+    - ???
+- Container for the "component"
+     - Then within a container that wraps the list of divs that relate to each line.
+         - position:
+             - static?
+             - absolute?
+     - Or don't wrap?
+
+
 */
