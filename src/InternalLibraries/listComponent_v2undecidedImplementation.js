@@ -772,5 +772,9 @@ Once I meet the bare minimum financial state to live I'm satisfied.
 
 You're pursuing nothing.
 
+Then we go on to idolize violent acts.
+
+And anyone sitting silently just goes unnoticed into the wind.
+
 
 */
