@@ -218,8 +218,16 @@ class ListComponent_moveChildNodes {
 
                     for (var i = 0; i < diff; i++) {
                         let indexItem = prevVli + this._ONSCROLLvirtualCount + i;
+
+                        let aaa = origin + i;
             
-                        let divItem = this.itemListElement.children[origin + i];
+                        if (aaa >= this.itemListElement.children.length) {
+                            aaa -= this.itemListElement.children.length;
+                        }
+
+                        let divItem = this.itemListElement.children[aaa];
+
+                        
                         
                         divItem.style.top = `${topNumber}px`;
                         topNumber += this.itemHeightNumber;
