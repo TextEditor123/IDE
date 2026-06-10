@@ -211,7 +211,7 @@ class ListComponent_moveChildNodes {
 
                     let itemsCount = this.getItemsCountFunc();
 
-                    let topNumber = (prevVli + this._ONSCROLLvirtualCount) * this.itemHeightNumber; // TODO: consider transform but that is equivalent it isn't this current problem that I'm solving relating to
+                    let vertical = (prevVli + this._ONSCROLLvirtualCount) * this.itemHeightNumber; // TODO: consider transform but that is equivalent it isn't this current problem that I'm solving relating to
 
                     let origin = this.domLineNodesZerothIndex;
 
@@ -233,8 +233,9 @@ class ListComponent_moveChildNodes {
 
                         
                         
-                        divItem.style.top = `${topNumber}px`;
-                        topNumber += this.itemHeightNumber;
+                        //divItem.style.top = `${vertical}px`;
+                        divItem.style.transform = `translateY(${vertical}px)`;
+                        vertical += this.itemHeightNumber;
                         // TODO: Should this actually be setting innerHTML to an empty string?
                         //divItem.innerHTML = ''; You can't be setting the innerHTML to ''.
 
@@ -294,7 +295,7 @@ class ListComponent_moveChildNodes {
                         this.domLineNodesZerothIndex += this.itemListElement.children.length;
                     }
 
-                    let topNumber = (currVli + (diff - 1)) * this.itemHeightNumber; // TODO: consider transform but that is equivalent it isn't this current problem that I'm solving relating to
+                    let vertical = (currVli + (diff - 1)) * this.itemHeightNumber; // TODO: consider transform but that is equivalent it isn't this current problem that I'm solving relating to
                     
                     // They're all actually on a belt that is cicular.
                     // and the belt spins in the opposite direction of the scroll dif.
@@ -308,8 +309,9 @@ class ListComponent_moveChildNodes {
                             lastIndex = this.itemListElement.children.length - 1;
                             
                         }
-                        divItem.style.top = `${topNumber}px`;
-                        topNumber -= this.itemHeightNumber;
+                        //divItem.style.top = `${vertical}px`;
+                        divItem.style.transform = `translateY(${vertical}px)`;
+                        vertical -= this.itemHeightNumber;
 
                         //divItem.innerHTML = ''; You can't be setting the innerHTML to ''.
 
@@ -351,7 +353,7 @@ class ListComponent_moveChildNodes {
                     // re-use the divs, but keep them in place and redraw over them all
 
                     let itemsCount = this.getItemsCountFunc();
-                    let topNumber = this.virtualIndex * this.itemHeightNumber; // TODO: consider transform but that is equivalent it isn't this current problem that I'm solving relating to
+                    let vertical = this.virtualIndex * this.itemHeightNumber; // TODO: consider transform but that is equivalent it isn't this current problem that I'm solving relating to
 
                     let origin = this.domLineNodesZerothIndex;
 
@@ -367,8 +369,9 @@ class ListComponent_moveChildNodes {
 
                         let divItem = this.itemListElement.children[aaa];
 
-                        divItem.style.top = `${topNumber}px`;
-                        topNumber += this.itemHeightNumber;
+                        //divItem.style.top = `${vertical}px`;
+                        divItem.style.transform = `translateY(${vertical}px)`;
+                        vertical += this.itemHeightNumber;
 
                         //divItem.innerHTML = ''; You can't be setting the innerHTML to ''.
 
@@ -420,7 +423,7 @@ class ListComponent_moveChildNodes {
 
         this.domLineNodesZerothIndex = 0;
 
-        let top = this.virtualIndex * this.itemHeightNumber;
+        let vertical = this.virtualIndex * this.itemHeightNumber;
 
         for (let i = 0; i < this.virtualCount; i++) {
             // TODO: you don't break you still populate and then drawItemAction handles a null case?
@@ -430,8 +433,9 @@ class ListComponent_moveChildNodes {
             let divItem = document.createElement('div');
             divItem.style.height = this.itemHeightStyleAttributeValueString;
             divItem.style.position = 'absolute';
-            divItem.style.top = `${top}px`;
-            top += this.itemHeightNumber;
+            //divItem.style.top = `${vertical}px`;
+            divItem.style.transform = `translateY(${vertical}px)`;
+            vertical += this.itemHeightNumber;
             divItem.innerText = i;
             this.itemListElement.appendChild(divItem);
             //this.drawItemAction(divItem, this.virtualIndex + i);
