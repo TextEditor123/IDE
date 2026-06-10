@@ -730,4 +730,9 @@ With lots of exclamation points at the bottom to denote its importance.
 
 It doesn't matter I'm numb.
 
+The norepinephrine released from all of this going on helps me feel pushed to make progress.
+But at the same time.
+I'm coming to realize more and more that I am delusional.
+And that I have no idea what I'm doing.
+
 */
