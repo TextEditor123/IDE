@@ -249,6 +249,9 @@ class ListComponent_moveChildNodes {
 
                     let topNumber = currVli * this.itemHeightNumber; // TODO: consider transform but that is equivalent it isn't this current problem that I'm solving relating to
                     
+                    // They're all actually on a belt that is cicular.
+                    // and the belt spins in the opposite direction of the scroll dif.
+
                     for (var i = 0; i < diff; i++) {
                         let indexItem = currVli + i;
 
@@ -260,7 +263,7 @@ class ListComponent_moveChildNodes {
                         }
                         divItem.style.top = `${topNumber}px`;
                         topNumber += this.itemHeightNumber;
-                        
+
                         //divItem.innerHTML = ''; You can't be setting the innerHTML to ''.
 
                         /*if (indexItem >= itemsCount) {
