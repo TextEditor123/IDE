@@ -280,7 +280,11 @@ class ListComponent_moveChildNodes {
                     else {
                         lastIndex = this.domLineNodesZerothIndex - 1;
                     }
-                    this.domLineNodesZerothIndex = lastIndex - diff;
+                    this.domLineNodesZerothIndex = lastIndex - diff - 1;
+
+                    if (this.domLineNodesZerothIndex < 0) {
+                        this.domLineNodesZerothIndex += this.itemListElement.children.length;
+                    }
 
                     let topNumber = (currVli + diff) * this.itemHeightNumber; // TODO: consider transform but that is equivalent it isn't this current problem that I'm solving relating to
                     
