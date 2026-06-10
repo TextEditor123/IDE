@@ -749,4 +749,13 @@ Not even that but I GOT A JOB
 
 AND IT IS HAPPENING AGAIN
 
+Your big fucking house is pointless.
+Your big backyard is pointless.
+
+Everything you care about is shit and you piss money away on it.
+
+I want to save every penny I don't care about any of this.
+
+Fuck off
+
 */
