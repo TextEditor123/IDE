@@ -659,4 +659,8 @@ I haven't done it in a very long time.
 I'm watching Stephen King's Sometimes They Come Back right now.
 44:24 seconds in and I'm enjoying it so far.
 
+I need to make a non-zero amount of progress on virtual scrolling the simple list of numbers today.
+So long as I manage a non-zero amount of progress that I can tell mentally fatigued me
+and was cumulative to something that I'd consider procrastinating then it will have been a good day.
+
 */
