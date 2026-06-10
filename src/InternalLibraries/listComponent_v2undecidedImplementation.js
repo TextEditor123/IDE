@@ -630,8 +630,4 @@ class ListComponent_v2undecidedImplementation {
         return index;
     }
 }
-// I adapted to the previous change
-// GOD FUCKING DAMNIT I can adapt to this change
-// but they won't shut the fuck up about it
-// and they're giving me a panic attack everytime they fucking mention it
-// JUST SHUT THE FUCK UP
+
