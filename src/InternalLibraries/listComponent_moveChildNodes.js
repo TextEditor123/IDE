@@ -259,7 +259,8 @@ class ListComponent_moveChildNodes {
                             
                         }
                         divItem.style.top = `${topNumber}px`;
-                        topNumber -= this.itemHeightNumber;
+                        topNumber += this.itemHeightNumber;
+                        
                         //divItem.innerHTML = ''; You can't be setting the innerHTML to ''.
 
                         /*if (indexItem >= itemsCount) {
@@ -276,11 +277,16 @@ class ListComponent_moveChildNodes {
                     // re-use the divs, but keep them in place and redraw over them all
 
                     let itemsCount = this.getItemsCountFunc();
+                    let topNumber = this.virtualIndex * this.itemHeightNumber; // TODO: consider transform but that is equivalent it isn't this current problem that I'm solving relating to
 
                     for (var i = 0; i < this.virtualCount; i++) {
                         let indexItem = i + this.virtualIndex;
 
                         let divItem = this.itemListElement.children[i];
+
+                        divItem.style.top = `${topNumber}px`;
+                        topNumber += this.itemHeightNumber;
+
                         //divItem.innerHTML = ''; You can't be setting the innerHTML to ''.
 
                         /*if (indexItem >= itemsCount) {
