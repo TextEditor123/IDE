@@ -280,7 +280,7 @@ class ListComponent_moveChildNodes {
                     else {
                         lastIndex = this.domLineNodesZerothIndex - 1;
                     }
-                    this.domLineNodesZerothIndex = lastIndex - diff - 1;
+                    this.domLineNodesZerothIndex = lastIndex - (diff - 1);
 
                     if (this.domLineNodesZerothIndex < 0) {
                         this.domLineNodesZerothIndex += this.itemListElement.children.length;
