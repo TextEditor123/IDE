@@ -631,65 +631,12 @@ class ListComponent_v2undecidedImplementation {
     }
 }
 
-// Well that was a productive day...
-// A recap:
-// - [ ] Goal: achieve ego death
-//
-// I say I did a great job.
-// I feel completely incompetent at programming right now lol
-//
-// But I typed the word 'transform' instead of top for once or whatever so it's a step in the right direction
-// maybe because you might actually use top idk but it is a step in a direction in which
-// I can then cross off that direction because I've been there done that
-// but not actually fully cross it off because maybe I didn't investigate far enough.
-
-// Nostalgia and anxiety.
-//
-// I need to go cook and eat 1 lb of 98% lean ground chicken.
-// 
-// I think I made progress towards learning something too today so that helps aleviate some anxiety.
-//
-
-// Google AI Overview "is it possible for tiny amounts of bleach to be on my finger coincidentally and then I pick my nose and the bleach":
-// ############```paraphraseStart
-// Yes, it is entirely possible to have residual bleach on your fingertips from everyday activities like handling laundry or cleaning surfaces,
-// and then transfer it to your nose. However, because the amount is coincidental and tiny, it is highly unlikely to cause lasting harm,
-// though it can cause temporary irritation
-// ############```paraphraseEnd
-
 /*
-I need to communicate this so the thought gets out of my head.
+breakfast:
+1 elite fairlife milk
+4 everything bagels
 
-I don't sit here picking my nose all day or anything.
-
-But I took a shower, and then I poured out from a laundry basket cleaned clothes into my laundry basket
-and then I couldn't breathe and I felt like I have having a panic attack
-and I convinced myself that something was wrong and I furiously started picking my nose convinced that there was an issue.
-
-And then I remembered that I had touched a laundry basket prior.
-
-I am just extremely anxious right now.
-
-My thought is that when you clean white laundry you use bleach.
-
-The cleaned white laundry goes in the same laundry basket when done as colored.
-
-You ...
-
-I'm scared that I'm gonna somehow destroy my brain from having done that
-
-That's the thought. And it probably is just ridiculous and in my head
-
-"the bleach is gonna get into my brain through my nose"
-
-No and then I went for a walk and the moment I get home my mom
-starts questioning me one thing after another nonstop
-and about when my next psychiatrist appointment is and whether I wanted her to be there during it
-to talk about the health insurance changes
-
-and THEN I took a shower.
-
-And it is just like you're driving me insane
-
-It feels like non stop they just talk about it
+lunch/dinner
+1 lb of 98% lean ground chicken
+with sriracha sauce
 */
