@@ -377,8 +377,8 @@ class ListComponent_moveChildNodes {
                 this.state_cursor_setIndex(
                     this.state_cursor_validateIndex(this.cursorIndex));
                 let relativeIndex = this.cursorIndex - this.virtualIndex;
-                if (relativeIndex >= 0 && relativeIndex < this.itemListElement.children.length) {
-                    relativeIndex += this.domLineNodesZerothIndex;
+                if (relativeIndex >= 0 && relativeIndex < this.itemListElement.children.length) { // check if is in virtualization space
+                    relativeIndex += this.domLineNodesZerothIndex; // then map the "relativeIndex" by the origin aka:'this.domLineNodesZerothIndex'... i.e.: which line in the dom is the first line from the top of the screen down.
                     if (relativeIndex >= this.itemListElement.children.length) {
                         relativeIndex -= this.itemListElement.children.length;
                     }
