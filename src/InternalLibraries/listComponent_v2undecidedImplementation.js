@@ -699,4 +699,8 @@ I tend to notice on the days that I drink the milk drink
 that I have a harder time feeling pleasure.
 I'm wondering whether I'm allergic or something.
 
+But then, maybe it is electrolyte related.
+Because when I don't get the milk drink I get two breakfast burritos
+and those probably have much much more sodium.
+
 */
