@@ -683,6 +683,8 @@ Then I can check off each possible permutation.
              - static?
              - absolute?
      - Or don't wrap?
-
+- Each line needs to not change in:
+    - width
+    - height
 
 */
