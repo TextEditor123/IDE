@@ -431,3 +431,19 @@ class ListComponent_moveChildNodes {
 Without changing the content itself,
 while scrolling you need to successfully keep the content in view smoothly as you scroll.
 */
+
+/*
+Smoothly scrolling and having the correct content show is a cumulation
+of individual goals.
+*/
+
+/*
+So you need to target the individual goals,
+and then start combining them to see what happens and go from there.
+*/
+
+/*
+You want to scroll and have the content change to be correct while always staying in view.
+So one of the goals is:
+- Without changing the content itself, while scrolling you need to successfully keep the content in view smoothly as you scroll.
+*/
