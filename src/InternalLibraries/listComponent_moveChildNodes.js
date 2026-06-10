@@ -191,6 +191,8 @@ class ListComponent_moveChildNodes {
             if (this._ONSCROLLvirtualCount === this.virtualCount &&
                 this.itemListElement.children.length === this.virtualCount) {
 
+                console.log('c1');
+
                 // The same count of lines is on the UI so you can probably
                 // redraw them one by one and save "some" of the existing HTML.
 
@@ -267,6 +269,10 @@ class ListComponent_moveChildNodes {
                 }
                 else if (diff < 0 && (diff *= -1) < this.virtualCount) {
 
+                    console.log('c2');
+
+                    // TODO: This case is wrong by 1?
+
                     // move the final lines to the start
 
                     // move large lines to start of list with the content changed
@@ -286,7 +292,7 @@ class ListComponent_moveChildNodes {
                         this.domLineNodesZerothIndex += this.itemListElement.children.length;
                     }
 
-                    let topNumber = (currVli + diff) * this.itemHeightNumber; // TODO: consider transform but that is equivalent it isn't this current problem that I'm solving relating to
+                    let topNumber = (currVli + (diff - 1)) * this.itemHeightNumber; // TODO: consider transform but that is equivalent it isn't this current problem that I'm solving relating to
                     
                     // They're all actually on a belt that is cicular.
                     // and the belt spins in the opposite direction of the scroll dif.
@@ -337,6 +343,9 @@ class ListComponent_moveChildNodes {
                     }
                 }
                 else {
+
+                    console.log('c3');
+
                     // re-use the divs, but keep them in place and redraw over them all
 
                     let itemsCount = this.getItemsCountFunc();
@@ -395,6 +404,8 @@ class ListComponent_moveChildNodes {
     }
 
     draw_render_fullReset() {
+
+        console.log('fr');
 
         this._ONSCROLLvirtualCount = this.virtualCount;
 
