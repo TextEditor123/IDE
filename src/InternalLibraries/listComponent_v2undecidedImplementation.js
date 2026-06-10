@@ -703,4 +703,9 @@ But then, maybe it is electrolyte related.
 Because when I don't get the milk drink I get two breakfast burritos
 and those probably have much much more sodium.
 
+I also saw in the list component itself that I'm caching the boundingClientRect rather
+than the subset of properties that I actually use.
+So worst case scenario I have a guaranteed amount of progress by
+fixing that in particular.
+
 */
