@@ -205,3 +205,16 @@ function init() {
 
 // CLS of editor I just saw 8.0 so I'm gonna look at it.
 // CLS of editor 0.7
+
+/*
+List of 'get_EDITOR_virtualLineIndex' of interest:
+==================================================
+- [ ] EDITOR_duplicateSelection_drawUi
+- [ ] EDITOR_indentMore
+- [ ] EDITOR_indentLess
+- [ ] EDITOR_paste
+- [ ] EDITOR_EnterKey
+- [ ] EDITOR_REMOVE_line_drawGutter
+- [ ] EDITOR_deleteDo
+- [ ] EDITOR_backspaceDo
+*/
