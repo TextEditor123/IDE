@@ -690,4 +690,6 @@ to talk about the health insurance changes
 and THEN I took a shower.
 
 And it is just like you're driving me insane
+
+It feels like non stop they just talk about it
 */
