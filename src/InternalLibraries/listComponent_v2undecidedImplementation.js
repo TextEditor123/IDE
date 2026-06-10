@@ -630,10 +630,3 @@ class ListComponent_v2undecidedImplementation {
         return index;
     }
 }
-
-/*
-
-I can't take this shit no more
-
-
-*/
