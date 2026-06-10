@@ -70,6 +70,8 @@ class ListComponent_moveChildNodes {
         this.bound_event_scroll_WRAPIT = this.event_scroll_WRAPIT.bind(this);
         this.bound_event_windowResize = this.event_windowResize.bind(this);
 
+        this.domLineNodesZerothIndex = 0;
+
         /**
          * It could be useful to inherit HTML element due to storage, you'd have to hold a null reference that you can set
          * or store a array of 'List' to somehow hold the reference.
@@ -201,18 +203,6 @@ class ListComponent_moveChildNodes {
 
                 if (diff > 0 && diff < this.virtualCount) {
                     
-                    // move small lines to end of list with the content changed
-
-                    // scrolled down and a non-zero amount of the content is re-useable
-                    // thus, draw the larger index item into the smallest index div of the previous render
-                    // then append that same smalled div so that it now is being used to show a larger
-
-                    // I don't want to get caught up in any unnecessary complexity so I'm gonna isolate a single case
-                    // by duplicating the code and only my singular case hits the new code that I'm adding.
-                    //
-                    // It's possible the single case is the solution to every case.
-                    // But moreso mentally the problem is easier to approach from an anxiety/procrastination perspective.
-
                     let firstIndexLineThatWasNotAlreadyRendered = prevVli + this._ONSCROLLvirtualCount;
 
                     let itemsCount = this.getItemsCountFunc();
@@ -220,7 +210,10 @@ class ListComponent_moveChildNodes {
                     for (var i = 0; i < diff; i++) {
                         let indexItem = prevVli + this._ONSCROLLvirtualCount + i;
             
-                        let divItem = this.itemListElement.children[0];
+                        let divItem = this.itemListElement.children[this.domLineNodesZerothIndex++];
+                        if (this.domLineNodesZerothIndex >= this.itemListElement.children.length) {
+                            this.domLineNodesZerothIndex;
+                        }
                         // TODO: Should this actually be setting innerHTML to an empty string?
                         //divItem.innerHTML = '';
 
@@ -231,7 +224,7 @@ class ListComponent_moveChildNodes {
                             this.drawItemAction(divItem, indexItem);
                         }*/
             
-                        this.itemListElement.appendChild(divItem);
+                        //this.itemListElement.appendChild(divItem);
                     }
                 }
                 else if (diff < 0 && (diff *= -1) < this.virtualCount) {
@@ -257,7 +250,60 @@ class ListComponent_moveChildNodes {
                     for (var i = 0; i < diff; i++) {
                         let indexItem = currVli + i;
 
-                        let divItem = this.itemListElement.children[this.itemListElement.children.length - 1];
+                        /*
+                        If you have 10 lines
+
+                        and the zerothIndex is index 9
+
+                        The final index is (9 + childrenLength - 1) => 18
+
+                        this is wrong so what is the actual answer and then try to reverse it
+
+                        DOM = [
+                            0,
+                            1,
+                            2,
+                            3,
+                            4,
+                            5,
+                            6,
+                            7,
+                            8,
+                            9,
+                        ]
+
+                        Visually = [
+                            9,
+                            0,
+                            1,
+                            2,
+                            3,
+                            4,
+                            5,
+                            6,
+                            7,
+                            8,
+                        ]
+
+                        (9 + childrenLength - 1) => 8
+
+                        The final index is zeroth - 1 unless you're 0 in which case it is childrenLength - 1
+
+                        ==========
+
+                        If you have 10 lines and the zeroth is index 0
+                        The final index is (0 + childrenLength - 1) => 9
+                        */
+
+                        let lastIndex;
+                        if (this.domLineNodesZerothIndex === 0) {
+                            lastIndex = this.itemListElement.children.length;
+                        }
+                        else {
+                            lastIndex = this.domLineNodesZerothIndex - 1;
+                        }
+
+                        let divItem = this.itemListElement.children[lastIndex];
                         //divItem.innerHTML = '';
 
                         /*if (indexItem >= itemsCount) {
@@ -267,7 +313,7 @@ class ListComponent_moveChildNodes {
                             this.drawItemAction(divItem, indexItem);
                         }*/
                         
-                        this.itemListElement.insertBefore(divItem, this.itemListElement.children[i]);
+                        //this.itemListElement.insertBefore(divItem, this.itemListElement.children[i]);
                     }
                 }
                 else {
@@ -303,6 +349,8 @@ class ListComponent_moveChildNodes {
         this.itemListElement.style.top = this.virtualIndex * this.itemHeightNumber + 'px';
 
         let itemsCount = this.getItemsCountFunc();
+
+        this.domLineNodesZerothIndex = 0;
 
         for (let i = 0; i < this.virtualCount; i++) {
             // TODO: you don't break you still populate and then drawItemAction handles a null case?
