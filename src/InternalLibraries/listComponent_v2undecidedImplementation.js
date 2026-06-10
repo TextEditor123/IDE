@@ -695,4 +695,8 @@ Then I can check off each possible permutation.
     - top
 - Flame graph the scrolling?
 
+I tend to notice on the days that I drink the milk drink
+that I have a harder time feeling pleasure.
+I'm wondering whether I'm allergic or something.
+
 */
