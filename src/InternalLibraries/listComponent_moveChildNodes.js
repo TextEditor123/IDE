@@ -171,7 +171,6 @@ class ListComponent_moveChildNodes {
         }
         else {
             this.virtualIndex = Math.floor(this.rootElement.scrollTop / this.itemHeightNumber);
-            //this.itemListElement.style.top = this.virtualIndex * this.itemHeightNumber + 'px';
 
             if (this._ONSCROLLscrollTop === this.rootElement.scrollTop &&
                 this._ONSCROLLvirtualIndex === this.virtualIndex &&
@@ -233,12 +232,12 @@ class ListComponent_moveChildNodes {
                         // TODO: Should this actually be setting innerHTML to an empty string?
                         //divItem.innerHTML = ''; You can't be setting the innerHTML to ''.
 
-                        /*if (indexItem >= itemsCount) {
+                        if (indexItem >= itemsCount) {
                             this.drawItemAction(divItem, -1);
                         }
                         else {
                             this.drawItemAction(divItem, indexItem);
-                        }*/
+                        }
             
                         //this.itemListElement.appendChild(divItem);
                     }
@@ -280,12 +279,12 @@ class ListComponent_moveChildNodes {
 
                         //divItem.innerHTML = ''; You can't be setting the innerHTML to ''.
 
-                        /*if (indexItem >= itemsCount) {
+                        if (indexItem >= itemsCount) {
                             this.drawItemAction(divItem, -1);
                         }
                         else {
                             this.drawItemAction(divItem, indexItem);
-                        }*/
+                        }
                         
                         //this.itemListElement.insertBefore(divItem, this.itemListElement.children[i]);
                     }
@@ -316,12 +315,12 @@ class ListComponent_moveChildNodes {
 
                         //divItem.innerHTML = ''; You can't be setting the innerHTML to ''.
 
-                        /*if (indexItem >= itemsCount) {
+                        if (indexItem >= itemsCount) {
                             this.drawItemAction(divItem, -1);
                         }
                         else {
                             this.drawItemAction(divItem, indexItem);
-                        }*/
+                        }
                     }
                 }
 
