@@ -191,14 +191,10 @@ class ListComponent_moveChildNodes {
             if (this._ONSCROLLvirtualCount === this.virtualCount &&
                 this.itemListElement.children.length === this.virtualCount) {
 
-                //console.log('c1');
-
                 // The same count of lines is on the UI so you can probably
                 // redraw them one by one and save "some" of the existing HTML.
 
                 let diff = currVli - prevVli;
-
-                // CLS 0.10
 
                 // There are 3 cases:
                 // - move small lines to end of list with the content changed
@@ -230,8 +226,6 @@ class ListComponent_moveChildNodes {
                         }
 
                         let divItem = this.itemListElement.children[aaa];
-
-                        
                         
                         //divItem.style.top = `${vertical}px`;
                         divItem.style.transform = `translateY(${vertical}px)`;
@@ -248,36 +242,10 @@ class ListComponent_moveChildNodes {
             
                         //this.itemListElement.appendChild(divItem);
                     }
-
-                    /*let smallestTopValue = 9999;
-                    let smallestTopSourceIndex = -1;
-                    let largestTopValue = -1;
-                    let largestTopSourceIndex = -1;
-
-                    for (let i = 0; i < this.itemListElement.children.length; i++) {
-                        let top = parseInt(this.itemListElement.children[i].style.top);
-                        if (top > largestTopValue) {
-                            largestTopValue = top;
-                            largestTopSourceIndex = i;
-                        }
-                        if (top < smallestTopValue) {
-                            smallestTopValue = top;
-                            smallestTopSourceIndex = i;
-                        }
-                    }
-
-                    if (smallestTopSourceIndex !== this.domLineNodesZerothIndex) {
-                        console.log(`c1 => ${smallestTopSourceIndex} !== this.${this.domLineNodesZerothIndex}`);
-                    }*/
                 }
                 else if (diff < 0 && (diff *= -1) < this.virtualCount) {
 
-                    //console.log('c2');
-
-                    // TODO: This case is wrong by 1?
-
                     // move the final lines to the start
-
                     // move large lines to start of list with the content changed
 
                     let itemsCount = this.getItemsCountFunc();
@@ -297,9 +265,6 @@ class ListComponent_moveChildNodes {
 
                     let vertical = (currVli + (diff - 1)) * this.itemHeightNumber; // TODO: consider transform but that is equivalent it isn't this current problem that I'm solving relating to
                     
-                    // They're all actually on a belt that is cicular.
-                    // and the belt spins in the opposite direction of the scroll dif.
-
                     for (var i = 0; i < diff; i++) {
                         let indexItem = currVli + i;
 
@@ -324,32 +289,8 @@ class ListComponent_moveChildNodes {
                         
                         //this.itemListElement.insertBefore(divItem, this.itemListElement.children[i]);
                     }
-
-                    /*let smallestTopValue = 9999;
-                    let smallestTopSourceIndex = -1;
-                    let largestTopValue = -1;
-                    let largestTopSourceIndex = -1;
-
-                    for (let i = 0; i < this.itemListElement.children.length; i++) {
-                        let top = parseInt(this.itemListElement.children[i].style.top);
-                        if (top > largestTopValue) {
-                            largestTopValue = top;
-                            largestTopSourceIndex = i;
-                        }
-                        if (top < smallestTopValue) {
-                            smallestTopValue = top;
-                            smallestTopSourceIndex = i;
-                        }
-                    }
-
-                    if (smallestTopSourceIndex !== this.domLineNodesZerothIndex) {
-                        console.log(`c2 => ${smallestTopSourceIndex} !== this.${this.domLineNodesZerothIndex}`);
-                    }*/
                 }
                 else {
-
-                    //console.log('c3');
-
                     // re-use the divs, but keep them in place and redraw over them all
 
                     let itemsCount = this.getItemsCountFunc();
@@ -382,8 +323,9 @@ class ListComponent_moveChildNodes {
                             this.drawItemAction(divItem, indexItem);
                         }*/
                     }
+                }
 
-                    /*let smallestTopValue = 9999;
+                /*let smallestTopValue = 9999;
                     let smallestTopSourceIndex = -1;
                     let largestTopValue = -1;
                     let largestTopSourceIndex = -1;
@@ -401,9 +343,8 @@ class ListComponent_moveChildNodes {
                     }
 
                     if (smallestTopSourceIndex !== this.domLineNodesZerothIndex) {
-                        console.log(`c3 => ${smallestTopSourceIndex} !== this.${this.domLineNodesZerothIndex}`);
+                        console.log(`c2 => ${smallestTopSourceIndex} !== this.${this.domLineNodesZerothIndex}`);
                     }*/
-                }
             }
         }
     }
