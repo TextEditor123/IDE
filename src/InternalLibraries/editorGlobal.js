@@ -198,7 +198,7 @@ const EDITOR_baseElement = document.getElementById('EDITOR');
 
 const get_EDITOR_virtualization_horizontal = () => EDITOR_baseElement.children[0];
 const get_EDITOR_virtualization_vertical = () => EDITOR_baseElement.children[1];
-const get_EDITOR_gutter = () => EDITOR_baseElement.children[3].children[0];
+const get_EDITOR_gutter = () => EDITOR_baseElement.children[3].children[1];
 const get_EDITOR_horizontal_scrollbar = () => EDITOR_baseElement.children[2].children[0];
 const get_EDITOR_horizontal_scrollbar_virtualization_boundary = () => EDITOR_baseElement.children[2].children[0].children[0];
 const get_EDITOR_body = () => EDITOR_baseElement.children[4];
@@ -209,6 +209,8 @@ const get_EDITOR_textElement = () => EDITOR_baseElement.children[4].children[2];
 const EDITOR_debug = document.getElementById('EDITOR_debug');
 const EDITOR_findOverlay = document.getElementById('EDITOR_findOverlay');
 EDITOR_findOverlay.style.visibility = 'hidden';
+
+const EDITOR_gutterBackgroundColor = document.getElementById('EDITOR_gutter_background_color');
 
 const EDITOR_tab_tabsbytes = new Uint8Array(4);
 EDITOR_tab_tabsbytes[0] = ASCII_TAB;
@@ -508,12 +510,22 @@ const EDITOR_gutterPaddingRight = 6;
 let EDITOR_characterWidth = 8;
 let EDITOR_horizontal_scrollbar_widthValue = 0;
 
+let EDITOR_domLineNodesZerothIndex = 0;
+
 function EDITOR_init() {
     EDITOR_measureLineHeightAndCharacterWidth();
 
-    get_EDITOR_gutter().style.paddingLeft = EDITOR_gutterPaddingLeft + 'px';
-    get_EDITOR_gutter().style.paddingRight = EDITOR_gutterPaddingRight + 'px';
-    get_EDITOR_gutter().style.width = EDITOR_characterWidth + 'px';
+    let gutterPaddingLeft = EDITOR_gutterPaddingLeft + 'px';
+    let gutterPaddingRight = EDITOR_gutterPaddingRight + 'px';
+    let gutterWidth = EDITOR_characterWidth + 'px';
+
+    get_EDITOR_gutter().style.paddingLeft = gutterPaddingLeft;
+    get_EDITOR_gutter().style.paddingRight = gutterPaddingRight; 
+    get_EDITOR_gutter().style.width = gutterWidth;
+
+    EDITOR_gutterBackgroundColor.style.paddingLeft = gutterPaddingLeft;
+    EDITOR_gutterBackgroundColor.style.paddingRight = gutterPaddingRight; 
+    EDITOR_gutterBackgroundColor.style.width = gutterWidth;
 
     let left = (EDITOR_gutterPaddingLeft + EDITOR_gutterPaddingRight + EDITOR_characterWidth) + 'px';
     let width = 'calc(100% - ' + left + ')';
@@ -771,8 +783,8 @@ function update_verticalVirtualizationBoundary(lineCount) {
 function update_VirtualLineIndex() {
     set_EDITOR_virtualLineIndex(Math.floor(EDITOR_baseElement.scrollTop / get_EDITOR_lineHeight()));
     let top = (get_EDITOR_virtualLineIndex() * get_EDITOR_lineHeight()) + 'px';
-    get_EDITOR_gutter().style.top = top;
-    get_EDITOR_textElement().style.top = top;
+    EDITOR_gutterBackgroundColor.style.top = top;
+    //get_EDITOR_textElement().style.top = top;
 }
 
 function update_virtualCount() {
@@ -793,7 +805,10 @@ function EDITOR_drawGutter_Width() {
 
     set_EDITOR_gutterWidthStyleValue(Math.ceil(digitCountOfLargestLineNumber * EDITOR_characterWidth));
     set_EDITOR_gutterWidthTotal(get_EDITOR_gutterWidthStyleValue() + EDITOR_gutterPaddingLeft + EDITOR_gutterPaddingRight);
-    get_EDITOR_gutter().style.width = get_EDITOR_gutterWidthStyleValue() + 'px';
+
+    let gutterWidth = get_EDITOR_gutterWidthStyleValue() + 'px';
+    get_EDITOR_gutter().style.width = gutterWidth;
+    EDITOR_gutterBackgroundColor.style.width = gutterWidth;
     
     let left = get_EDITOR_gutterWidthTotal() + 'px';
     let width = 'calc(100% - ' + left + ')';
@@ -5867,6 +5882,9 @@ function EDITOR_onScroll() {
         let upperBound;
         let loopCounter = 0;
         let baseIndex;
+        let vertical;
+        let origin;
+        let lastIndex; // TODO: lastIndex can probably be origin?
 
         if (diff > 0 && diff < get_EDITOR_virtualCount()) {
             onePositiveDiff_twoNegativeDiff_orThreeFullScreen = 1;
@@ -5875,6 +5893,14 @@ function EDITOR_onScroll() {
             lowerBound = prevVli + get_EDITOR_ONSCROLLvirtualCount();
             upperBound = lowerBound + diff;
             baseIndex = 0;
+
+            vertical = (prevVli + get_EDITOR_virtualCount()) * get_EDITOR_lineHeight();
+            origin = EDITOR_domLineNodesZerothIndex;
+
+            EDITOR_domLineNodesZerothIndex = origin + diff;
+            if (EDITOR_domLineNodesZerothIndex >= get_EDITOR_textElement().children.length) {
+                EDITOR_domLineNodesZerothIndex -= get_EDITOR_textElement().children.length;
+            }
         }
         else if (diff < 0 && (diff *= -1) < get_EDITOR_virtualCount()) {
             onePositiveDiff_twoNegativeDiff_orThreeFullScreen = 2;
@@ -5882,6 +5908,20 @@ function EDITOR_onScroll() {
             lowerBound = currVli;
             upperBound = lowerBound + diff;
             baseIndex = get_EDITOR_gutter().children.length - 1;
+
+            vertical = (currVli + (diff - 1)) * get_EDITOR_lineHeight();
+            
+            if (EDITOR_domLineNodesZerothIndex === 0) {
+                lastIndex = get_EDITOR_textElement().children.length - 1;
+            }
+            else {
+                lastIndex = EDITOR_domLineNodesZerothIndex - 1;
+            }
+            EDITOR_domLineNodesZerothIndex = lastIndex - (diff - 1);
+
+            if (EDITOR_domLineNodesZerothIndex < 0) {
+                EDITOR_domLineNodesZerothIndex += get_EDITOR_textElement().children.length;
+            }
         }
         else {
             onePositiveDiff_twoNegativeDiff_orThreeFullScreen = 3;
@@ -5890,6 +5930,9 @@ function EDITOR_onScroll() {
             upperBound = lowerBound + get_EDITOR_virtualCount();
             // case 3 sets baseIndex each loop but this is useful so the variable is initialized.
             baseIndex = 0;
+
+            vertical = get_EDITOR_virtualLineIndex() * get_EDITOR_lineHeight();
+            origin = EDITOR_domLineNodesZerothIndex;
         }
 
         if (trackedSyntax_I === NaN || trackedSyntax_I === -1) {
@@ -5898,57 +5941,56 @@ function EDITOR_onScroll() {
 
         for (var indexLine = lowerBound; indexLine < upperBound; indexLine++) {
 
+            let transform = `translateY(${vertical}px)`;
+
             let div;
+            let gutter;
 
             switch (onePositiveDiff_twoNegativeDiff_orThreeFullScreen) {
                 case 1:
-                    // EDITOR_drawGutter_Content()
-                    if (indexLine >= EDITOR_lineEndPositionList.count) {
-                        get_EDITOR_gutter().children[baseIndex].innerText = '~';
-                    }
-                    else {
-                        get_EDITOR_gutter().children[baseIndex].innerText = indexLine + 1;
-                    }
-                    get_EDITOR_gutter().appendChild(get_EDITOR_gutter().children[baseIndex]);
+                    vertical += get_EDITOR_lineHeight();
 
-                    div = get_EDITOR_textElement().children[baseIndex];
-                    get_EDITOR_textElement().appendChild(div);
+                    let aaa1 = origin + loopCounter;
+                    if (aaa1 >= get_EDITOR_textElement().children.length) {
+                        aaa1 -= get_EDITOR_textElement().children.length;
+                    }
 
-                    // case 1 doesn't use 'loopCounter'
+                    gutter = get_EDITOR_gutter().children[aaa1];
+                    div = get_EDITOR_textElement().children[aaa1];
+                    loopCounter++;
                     break;
                 case 2:
-                    // EDITOR_drawGutter_Content()
-                    if (indexLine >= EDITOR_lineEndPositionList.count) {
-                        get_EDITOR_gutter().children[baseIndex].innerText = '~';
+                    vertical -= get_EDITOR_lineHeight();
+
+                    gutter = get_EDITOR_gutter().children[lastIndex];
+                    div = get_EDITOR_textElement().children[lastIndex];
+                    lastIndex--;
+                    if (lastIndex <= -1) {
+                        lastIndex = get_EDITOR_textElement().children.length - 1;
                     }
-                    else {
-                        get_EDITOR_gutter().children[baseIndex].innerText = indexLine + 1;
-                    }
-                    get_EDITOR_gutter().insertBefore(get_EDITOR_gutter().children[baseIndex], get_EDITOR_gutter().children[loopCounter]);
-                    
-                    div = get_EDITOR_textElement().children[baseIndex];
-                    get_EDITOR_textElement().insertBefore(div, get_EDITOR_textElement().children[loopCounter]);
-                    
                     loopCounter++;
                     break;
                 case 3:
+                    vertical += get_EDITOR_lineHeight();
+
+                    let aaa2 = origin + loopCounter;
+                    if (aaa2 >= get_EDITOR_textElement().children.length) {
+                        aaa2 -= get_EDITOR_textElement().children.length;
+                    }
+
                     baseIndex = loopCounter;
-
-                    // EDITOR_drawGutter_Content()
-                    if (indexLine >= EDITOR_lineEndPositionList.count) {
-                        get_EDITOR_gutter().children[baseIndex].innerText = '~';
-                    }
-                    else {
-                        get_EDITOR_gutter().children[baseIndex].innerText = indexLine + 1;
-                    }
-                    // case 3 doesn't have a step here
-
-                    div = get_EDITOR_textElement().children[baseIndex];
-                    // case 3 doesn't have a step here
-                    
+                    gutter = get_EDITOR_gutter().children[aaa2];
+                    div = get_EDITOR_textElement().children[aaa2];
                     loopCounter++;
                     break;
             }
+
+            gutter.innerText = indexLine >= EDITOR_lineEndPositionList.count
+                ? '~'
+                : indexLine + 1;
+
+            gutter.style.transform = transform;
+            div.style.transform = transform;
 
             let lineStart;
             let lineEnd;
@@ -5986,7 +6028,14 @@ function EDITOR_createViewport() {
 
     let trackedSyntax_I = trackedSyntax_StartingIndex;
 
+    EDITOR_domLineNodesZerothIndex = 0;
+
+    let top = get_EDITOR_virtualLineIndex();
+
     for (var i = 0; i < get_EDITOR_virtualCount(); i++) {
+
+        let transform = `translateY(${top}px)`;
+
         let indexLine = i + get_EDITOR_virtualLineIndex();
 
         // EDITOR_drawGutter_Content()
@@ -5999,12 +6048,16 @@ function EDITOR_createViewport() {
         }
         gutterLineElement.className = 'eG';
         get_EDITOR_gutter().appendChild(gutterLineElement);
+        gutterLineElement.style.transform = transform;
 
         // EDITOR_drawText()
         let line = EDITOR_getLineBoundaryPositions(indexLine);
         let div = document.createElement('div');
         div.className = 'eT';
         get_EDITOR_textElement().appendChild(div);
+        div.style.transform = transform;
+
+        top += get_EDITOR_lineHeight();
     }
     EDITOR_drawHorizontalScrollbar();
 }

@@ -333,14 +333,22 @@ TODO: Is it better to have one virtualization element that has both the width an
   height: 1px;
 }
 
-/* can the gutter be used as vertical virtualization boundary? */
 #EDITOR_gutter_container {
+  position: absolute;
+  /*left: 0;*/
+  /*cursor: default;*/
+  /*min-height: 100%;*/
+  /*background-color: var(--gutter-background-color);*/
+  text-align: end;
+}
+
+/* can the gutter be used as vertical virtualization boundary? */
+#EDITOR_gutter_background_color {
   position: absolute;
   left: 0;
   cursor: default;
   min-height: 100%;
   background-color: var(--gutter-background-color);
-  text-align: end;
 }
 
 #EDITOR_gutter_sticky {
@@ -351,6 +359,8 @@ TODO: Is it better to have one virtualization element that has both the width an
 /* .EDITOR_gutterLine is being renamed to .eG (i.e.: Editor Gutter line) */
 .eG {
   height: var(--EDITOR-line-height);
+  position: absolute;
+  /*background-color: var(--gutter-background-color);*/
 }
 
 #EDITOR_body {
@@ -396,6 +406,7 @@ TODO: Is it better to have one virtualization element that has both the width an
 /* .EDITOR_line is being renamed to .eT (i.e.: Editor Text line) */
 .eT {
   height: var(--EDITOR-line-height);
+  position: absolute;
 }
 
 .EDITOR_selection {

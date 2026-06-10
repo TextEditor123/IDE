@@ -185,6 +185,7 @@ const EDITOR_baseElement = document.getElementById('EDITOR');
 const EDITOR_debug = document.getElementById('EDITOR_debug');
 const EDITOR_findOverlay = document.getElementById('EDITOR_findOverlay');
 EDITOR_findOverlay.style.visibility = 'hidden';
+const EDITOR_gutterBackgroundColor = document.getElementById('EDITOR_gutter_background_color');
 const EDITOR_tab_tabsbytes = new Uint8Array(4);
 EDITOR_tab_tabsbytes[0] = ASCII_TAB;
 EDITOR_tab_tabsbytes[1] = 0;
@@ -349,11 +350,18 @@ const EDITOR_gutterPaddingLeft = 3;
 const EDITOR_gutterPaddingRight = 6;
 let EDITOR_characterWidth = 8;
 let EDITOR_horizontal_scrollbar_widthValue = 0;
+let EDITOR_domLineNodesZerothIndex = 0;
 function EDITOR_init() {
   EDITOR_measureLineHeightAndCharacterWidth();
-  EDITOR_baseElement.children[3].children[0].style.paddingLeft = EDITOR_gutterPaddingLeft + 'px';
-  EDITOR_baseElement.children[3].children[0].style.paddingRight = EDITOR_gutterPaddingRight + 'px';
-  EDITOR_baseElement.children[3].children[0].style.width = EDITOR_characterWidth + 'px';
+  let gutterPaddingLeft = EDITOR_gutterPaddingLeft + 'px';
+  let gutterPaddingRight = EDITOR_gutterPaddingRight + 'px';
+  let gutterWidth = EDITOR_characterWidth + 'px';
+  EDITOR_baseElement.children[3].children[1].style.paddingLeft = gutterPaddingLeft;
+  EDITOR_baseElement.children[3].children[1].style.paddingRight = gutterPaddingRight;
+  EDITOR_baseElement.children[3].children[1].style.width = gutterWidth;
+  EDITOR_gutterBackgroundColor.style.paddingLeft = gutterPaddingLeft;
+  EDITOR_gutterBackgroundColor.style.paddingRight = gutterPaddingRight;
+  EDITOR_gutterBackgroundColor.style.width = gutterWidth;
   let left = EDITOR_gutterPaddingLeft + EDITOR_gutterPaddingRight + EDITOR_characterWidth + 'px';
   let width = 'calc(100% - ' + left + ')';
   EDITOR_baseElement.children[4].style.marginLeft = left;
@@ -399,7 +407,7 @@ function EDITOR_clear() {
   EDITOR_lineEndString = null;
   EDITOR_baseElement.children[4].children[2].innerHTML = '';
   EDITOR_lineEndPositionList.clear();
-  EDITOR_baseElement.children[3].children[0].innerHTML = '';
+  EDITOR_baseElement.children[3].children[1].innerHTML = '';
   EDITOR_textByteList.clear();
   EDITOR_int_fields[21] = 0;
   EDITOR_int_fields[22] = 0;
@@ -593,8 +601,8 @@ function update_verticalVirtualizationBoundary(lineCount) {
 function update_VirtualLineIndex() {
   EDITOR_int_fields[8] = Math.floor(EDITOR_baseElement.scrollTop / EDITOR_int_fields[2]);
   let top = EDITOR_int_fields[8] * EDITOR_int_fields[2] + 'px';
-  EDITOR_baseElement.children[3].children[0].style.top = top;
-  EDITOR_baseElement.children[4].children[2].style.top = top;
+  EDITOR_gutterBackgroundColor.style.top = top;
+  //get_EDITOR_textElement().style.top = top;
 }
 function update_virtualCount() {
   EDITOR_int_fields[9] = Math.ceil(EDITOR_baseElement.offsetHeight / EDITOR_int_fields[2]);
@@ -612,7 +620,9 @@ function EDITOR_drawGutter_Width() {
   EDITOR_int_fields[1] = digitCountOfLargestLineNumber;
   EDITOR_int_fields[6] = Math.ceil(digitCountOfLargestLineNumber * EDITOR_characterWidth);
   EDITOR_int_fields[7] = EDITOR_int_fields[6] + EDITOR_gutterPaddingLeft + EDITOR_gutterPaddingRight;
-  EDITOR_baseElement.children[3].children[0].style.width = EDITOR_int_fields[6] + 'px';
+  let gutterWidth = EDITOR_int_fields[6] + 'px';
+  EDITOR_baseElement.children[3].children[1].style.width = gutterWidth;
+  EDITOR_gutterBackgroundColor.style.width = gutterWidth;
   let left = EDITOR_int_fields[7] + 'px';
   let width = 'calc(100% - ' + left + ')';
   EDITOR_baseElement.children[4].style.marginLeft = left;
@@ -2234,10 +2244,10 @@ function EDITOR_finalizeEdit(cursor) {
   // 
   if (EDITOR_cursorList.length === 1) {
     if (lineIndex_editOccurredOn >= 0 && lineIndex_editOccurredOn < EDITOR_lineEndPositionList.count) {
-      if (EDITOR_baseElement.children[3].children[0].children.length === EDITOR_int_fields[9] && EDITOR_baseElement.children[4].children[2].children.length === EDITOR_int_fields[9]) {
+      if (EDITOR_baseElement.children[3].children[1].children.length === EDITOR_int_fields[9] && EDITOR_baseElement.children[4].children[2].children.length === EDITOR_int_fields[9]) {
         if (lineIndex_editOccurredOn >= EDITOR_int_fields[8] && lineIndex_editOccurredOn < EDITOR_int_fields[8] + EDITOR_int_fields[9]) {
           let relativeIndex = lineIndex_editOccurredOn - EDITOR_int_fields[8];
-          let gutterLineElement = EDITOR_baseElement.children[3].children[0].children[relativeIndex];
+          let gutterLineElement = EDITOR_baseElement.children[3].children[1].children[relativeIndex];
           gutterLineElement.innerHTML = '';
           let textLineElement = EDITOR_baseElement.children[4].children[2].children[relativeIndex];
           textLineElement.innerHTML = '';
@@ -4648,11 +4658,11 @@ function EDITOR_cacheIndentation(cursor) {
   cursor.cached_indentation_string = indentationBuilder.join('');
 }
 function EDITOR_lineWasInsertedValidateGutter() {
-  if (EDITOR_baseElement.children[3].children[0].children.length > 0 && EDITOR_baseElement.children[3].children[0].children.length === EDITOR_int_fields[9]) {
-    if (EDITOR_baseElement.children[3].children[0].children[EDITOR_baseElement.children[3].children[0].children.length - 1].innerText === '~') {
-      let successFoundTildeAtIndex = EDITOR_baseElement.children[3].children[0].children.length - 1;
-      for (let i = EDITOR_baseElement.children[3].children[0].children.length - 2; i >= 0; i--) {
-        if (EDITOR_baseElement.children[3].children[0].children[i].innerText === '~') {
+  if (EDITOR_baseElement.children[3].children[1].children.length > 0 && EDITOR_baseElement.children[3].children[1].children.length === EDITOR_int_fields[9]) {
+    if (EDITOR_baseElement.children[3].children[1].children[EDITOR_baseElement.children[3].children[1].children.length - 1].innerText === '~') {
+      let successFoundTildeAtIndex = EDITOR_baseElement.children[3].children[1].children.length - 1;
+      for (let i = EDITOR_baseElement.children[3].children[1].children.length - 2; i >= 0; i--) {
+        if (EDITOR_baseElement.children[3].children[1].children[i].innerText === '~') {
           successFoundTildeAtIndex = i;
         } else {
           successFoundTildeAtIndex = i + 1;
@@ -4660,8 +4670,8 @@ function EDITOR_lineWasInsertedValidateGutter() {
         }
       }
       if (successFoundTildeAtIndex > 0) {
-        let number = parseInt(EDITOR_baseElement.children[3].children[0].children[successFoundTildeAtIndex - 1].innerText);
-        EDITOR_baseElement.children[3].children[0].children[successFoundTildeAtIndex].innerText = number + 1;
+        let number = parseInt(EDITOR_baseElement.children[3].children[1].children[successFoundTildeAtIndex - 1].innerText);
+        EDITOR_baseElement.children[3].children[1].children[successFoundTildeAtIndex].innerText = number + 1;
       }
     }
   }
@@ -4994,13 +5004,13 @@ function EDITOR_onScroll() {
   let prevVli = EDITOR_int_fields[18];
   let currVli = EDITOR_int_fields[8];
   EDITOR_int_fields[18] = EDITOR_int_fields[8];
-  if (EDITOR_int_fields[19] !== EDITOR_int_fields[9] || EDITOR_baseElement.children[3].children[0].children.length !== EDITOR_int_fields[9] || EDITOR_baseElement.children[4].children[2].children.length !== EDITOR_int_fields[9]) {
+  if (EDITOR_int_fields[19] !== EDITOR_int_fields[9] || EDITOR_baseElement.children[3].children[1].children.length !== EDITOR_int_fields[9] || EDITOR_baseElement.children[4].children[2].children.length !== EDITOR_int_fields[9]) {
     // Force case 3
     prevVli = 0;
     currVli = EDITOR_int_fields[9];
     EDITOR_createViewport();
   }
-  if (EDITOR_int_fields[19] === EDITOR_int_fields[9] && EDITOR_baseElement.children[3].children[0].children.length === EDITOR_int_fields[9] && EDITOR_baseElement.children[4].children[2].children.length === EDITOR_int_fields[9]) {
+  if (EDITOR_int_fields[19] === EDITOR_int_fields[9] && EDITOR_baseElement.children[3].children[1].children.length === EDITOR_int_fields[9] && EDITOR_baseElement.children[4].children[2].children.length === EDITOR_int_fields[9]) {
     // The same count of lines is on the UI so you can probably
     // redraw them one by one and save "some" of the existing HTML.
 
@@ -5011,6 +5021,10 @@ function EDITOR_onScroll() {
     let upperBound;
     let loopCounter = 0;
     let baseIndex;
+    let vertical;
+    let origin;
+    let lastIndex; // TODO: lastIndex can probably be origin?
+
     if (diff > 0 && diff < EDITOR_int_fields[9]) {
       onePositiveDiff_twoNegativeDiff_orThreeFullScreen = 1;
       // firstIndexLineThatWasNotAlreadyRendered
@@ -5018,12 +5032,28 @@ function EDITOR_onScroll() {
       lowerBound = prevVli + EDITOR_int_fields[19];
       upperBound = lowerBound + diff;
       baseIndex = 0;
+      vertical = (prevVli + EDITOR_int_fields[9]) * EDITOR_int_fields[2];
+      origin = EDITOR_domLineNodesZerothIndex;
+      EDITOR_domLineNodesZerothIndex = origin + diff;
+      if (EDITOR_domLineNodesZerothIndex >= EDITOR_baseElement.children[4].children[2].children.length) {
+        EDITOR_domLineNodesZerothIndex -= EDITOR_baseElement.children[4].children[2].children.length;
+      }
     } else if (diff < 0 && (diff *= -1) < EDITOR_int_fields[9]) {
       onePositiveDiff_twoNegativeDiff_orThreeFullScreen = 2;
       trackedSyntax_I = EDITOR_drawViewPort_FindTrackedSyntax_StartingIndex(currVli);
       lowerBound = currVli;
       upperBound = lowerBound + diff;
-      baseIndex = EDITOR_baseElement.children[3].children[0].children.length - 1;
+      baseIndex = EDITOR_baseElement.children[3].children[1].children.length - 1;
+      vertical = (currVli + (diff - 1)) * EDITOR_int_fields[2];
+      if (EDITOR_domLineNodesZerothIndex === 0) {
+        lastIndex = EDITOR_baseElement.children[4].children[2].children.length - 1;
+      } else {
+        lastIndex = EDITOR_domLineNodesZerothIndex - 1;
+      }
+      EDITOR_domLineNodesZerothIndex = lastIndex - (diff - 1);
+      if (EDITOR_domLineNodesZerothIndex < 0) {
+        EDITOR_domLineNodesZerothIndex += EDITOR_baseElement.children[4].children[2].children.length;
+      }
     } else {
       onePositiveDiff_twoNegativeDiff_orThreeFullScreen = 3;
       trackedSyntax_I = EDITOR_drawViewPort_FindTrackedSyntax_StartingIndex(EDITOR_int_fields[8]);
@@ -5031,55 +5061,52 @@ function EDITOR_onScroll() {
       upperBound = lowerBound + EDITOR_int_fields[9];
       // case 3 sets baseIndex each loop but this is useful so the variable is initialized.
       baseIndex = 0;
+      vertical = EDITOR_int_fields[8] * EDITOR_int_fields[2];
+      origin = EDITOR_domLineNodesZerothIndex;
     }
     if (trackedSyntax_I === NaN || trackedSyntax_I === -1) {
       trackedSyntax_I = EDITOR_trackedSyntaxList.count_abstract;
     }
     for (var indexLine = lowerBound; indexLine < upperBound; indexLine++) {
+      let transform = `translateY(${vertical}px)`;
       let div;
+      let gutter;
       switch (onePositiveDiff_twoNegativeDiff_orThreeFullScreen) {
         case 1:
-          // EDITOR_drawGutter_Content()
-          if (indexLine >= EDITOR_lineEndPositionList.count) {
-            EDITOR_baseElement.children[3].children[0].children[baseIndex].innerText = '~';
-          } else {
-            EDITOR_baseElement.children[3].children[0].children[baseIndex].innerText = indexLine + 1;
+          vertical += EDITOR_int_fields[2];
+          let aaa1 = origin + loopCounter;
+          if (aaa1 >= EDITOR_baseElement.children[4].children[2].children.length) {
+            aaa1 -= EDITOR_baseElement.children[4].children[2].children.length;
           }
-          EDITOR_baseElement.children[3].children[0].appendChild(EDITOR_baseElement.children[3].children[0].children[baseIndex]);
-          div = EDITOR_baseElement.children[4].children[2].children[baseIndex];
-          EDITOR_baseElement.children[4].children[2].appendChild(div);
-
-          // case 1 doesn't use 'loopCounter'
+          gutter = EDITOR_baseElement.children[3].children[1].children[aaa1];
+          div = EDITOR_baseElement.children[4].children[2].children[aaa1];
+          loopCounter++;
           break;
         case 2:
-          // EDITOR_drawGutter_Content()
-          if (indexLine >= EDITOR_lineEndPositionList.count) {
-            EDITOR_baseElement.children[3].children[0].children[baseIndex].innerText = '~';
-          } else {
-            EDITOR_baseElement.children[3].children[0].children[baseIndex].innerText = indexLine + 1;
+          vertical -= EDITOR_int_fields[2];
+          gutter = EDITOR_baseElement.children[3].children[1].children[lastIndex];
+          div = EDITOR_baseElement.children[4].children[2].children[lastIndex];
+          lastIndex--;
+          if (lastIndex <= -1) {
+            lastIndex = EDITOR_baseElement.children[4].children[2].children.length - 1;
           }
-          EDITOR_baseElement.children[3].children[0].insertBefore(EDITOR_baseElement.children[3].children[0].children[baseIndex], EDITOR_baseElement.children[3].children[0].children[loopCounter]);
-          div = EDITOR_baseElement.children[4].children[2].children[baseIndex];
-          EDITOR_baseElement.children[4].children[2].insertBefore(div, EDITOR_baseElement.children[4].children[2].children[loopCounter]);
           loopCounter++;
           break;
         case 3:
-          baseIndex = loopCounter;
-
-          // EDITOR_drawGutter_Content()
-          if (indexLine >= EDITOR_lineEndPositionList.count) {
-            EDITOR_baseElement.children[3].children[0].children[baseIndex].innerText = '~';
-          } else {
-            EDITOR_baseElement.children[3].children[0].children[baseIndex].innerText = indexLine + 1;
+          vertical += EDITOR_int_fields[2];
+          let aaa2 = origin + loopCounter;
+          if (aaa2 >= EDITOR_baseElement.children[4].children[2].children.length) {
+            aaa2 -= EDITOR_baseElement.children[4].children[2].children.length;
           }
-          // case 3 doesn't have a step here
-
-          div = EDITOR_baseElement.children[4].children[2].children[baseIndex];
-          // case 3 doesn't have a step here
-
+          baseIndex = loopCounter;
+          gutter = EDITOR_baseElement.children[3].children[1].children[aaa2];
+          div = EDITOR_baseElement.children[4].children[2].children[aaa2];
           loopCounter++;
           break;
       }
+      gutter.innerText = indexLine >= EDITOR_lineEndPositionList.count ? '~' : indexLine + 1;
+      gutter.style.transform = transform;
+      div.style.transform = transform;
       let lineStart;
       let lineEnd;
       if (indexLine < EDITOR_lineEndPositionList.count) {
@@ -5101,14 +5128,17 @@ function EDITOR_onScroll() {
 }
 function EDITOR_createViewport() {
   EDITOR_int_fields[19] = EDITOR_int_fields[9];
-  EDITOR_baseElement.children[3].children[0].innerHTML = '';
+  EDITOR_baseElement.children[3].children[1].innerHTML = '';
   EDITOR_baseElement.children[4].children[2].innerHTML = '';
   let trackedSyntax_StartingIndex = EDITOR_drawViewPort_FindTrackedSyntax_StartingIndex(0 + EDITOR_int_fields[8]);
   if (trackedSyntax_StartingIndex === NaN || trackedSyntax_StartingIndex === -1) {
     trackedSyntax_StartingIndex = EDITOR_trackedSyntaxList.count_abstract;
   }
   let trackedSyntax_I = trackedSyntax_StartingIndex;
+  EDITOR_domLineNodesZerothIndex = 0;
+  let top = EDITOR_int_fields[8];
   for (var i = 0; i < EDITOR_int_fields[9]; i++) {
+    let transform = `translateY(${top}px)`;
     let indexLine = i + EDITOR_int_fields[8];
 
     // EDITOR_drawGutter_Content()
@@ -5119,13 +5149,16 @@ function EDITOR_createViewport() {
       gutterLineElement.innerText = indexLine + 1;
     }
     gutterLineElement.className = 'eG';
-    EDITOR_baseElement.children[3].children[0].appendChild(gutterLineElement);
+    EDITOR_baseElement.children[3].children[1].appendChild(gutterLineElement);
+    gutterLineElement.style.transform = transform;
 
     // EDITOR_drawText()
     let line = EDITOR_getLineBoundaryPositions(indexLine);
     let div = document.createElement('div');
     div.className = 'eT';
     EDITOR_baseElement.children[4].children[2].appendChild(div);
+    div.style.transform = transform;
+    top += EDITOR_int_fields[2];
   }
   EDITOR_drawHorizontalScrollbar();
 }
@@ -5221,11 +5254,11 @@ function EDITOR_REMOVE_line_drawGutter(linesRemovedCount) {
   // todo remove this confusing and misleading commented dead code that has the or maybe I idk
   // largestDrawnIndexLine + linesRemovedCount ? EDITOR_lineEndPositionList.count
 
-  if (EDITOR_baseElement.children[3].children[0].children.length > 0 && EDITOR_baseElement.children[3].children[0].children.length === EDITOR_int_fields[9]) {
-    if (EDITOR_baseElement.children[3].children[0].children[EDITOR_baseElement.children[3].children[0].children.length - 1].innerText === '~') {
-      let successFoundTildeAtIndex = EDITOR_baseElement.children[3].children[0].children.length - 1;
-      for (let i = EDITOR_baseElement.children[3].children[0].children.length - 2; i >= 0; i--) {
-        if (EDITOR_baseElement.children[3].children[0].children[i].innerText === '~') {
+  if (EDITOR_baseElement.children[3].children[1].children.length > 0 && EDITOR_baseElement.children[3].children[1].children.length === EDITOR_int_fields[9]) {
+    if (EDITOR_baseElement.children[3].children[1].children[EDITOR_baseElement.children[3].children[1].children.length - 1].innerText === '~') {
+      let successFoundTildeAtIndex = EDITOR_baseElement.children[3].children[1].children.length - 1;
+      for (let i = EDITOR_baseElement.children[3].children[1].children.length - 2; i >= 0; i--) {
+        if (EDITOR_baseElement.children[3].children[1].children[i].innerText === '~') {
           successFoundTildeAtIndex = i;
         } else {
           successFoundTildeAtIndex = i + 1;
@@ -5234,7 +5267,7 @@ function EDITOR_REMOVE_line_drawGutter(linesRemovedCount) {
       }
       for (var i = 0; i < linesRemovedCount; i++) {
         if (successFoundTildeAtIndex > i) {
-          EDITOR_baseElement.children[3].children[0].children[successFoundTildeAtIndex - (i + 1)].innerText = '~';
+          EDITOR_baseElement.children[3].children[1].children[successFoundTildeAtIndex - (i + 1)].innerText = '~';
         }
       }
     } else {
@@ -5567,9 +5600,9 @@ function EDITOR_removeSelection(cursor) {
     //
     // Each case might be the same solution I don't know I just need time to think I'm completely exhausted but ima figure it out by just typing everything out and overtime it will happen
     // 
-    if (EDITOR_baseElement.children[4].children[2].children.length === EDITOR_baseElement.children[3].children[0].children.length) {
+    if (EDITOR_baseElement.children[4].children[2].children.length === EDITOR_baseElement.children[3].children[1].children.length) {
       for (let i = 0; i < visibleLinesRemovedCount; i++) {
-        let gutterLineElement = EDITOR_baseElement.children[3].children[0].children[EDITOR_baseElement.children[4].children[2].children.length - 1 - i];
+        let gutterLineElement = EDITOR_baseElement.children[3].children[1].children[EDITOR_baseElement.children[4].children[2].children.length - 1 - i];
         gutterLineElement.innerHTML = ''; // I don't believe this will have already been cleared.
         let textLineElement = EDITOR_baseElement.children[4].children[2].children[EDITOR_baseElement.children[4].children[2].children.length - 1 - i];
         textLineElement.innerHTML = ''; // Might already be cleared, furthermore might ALWAYS be cleared.

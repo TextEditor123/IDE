@@ -183,6 +183,7 @@ function init() {
     EXPLORER_init();
     EDITOR_init();
 
+    /*
     // callstack hits 'init();'
     // ... await would schedule this as a micro-task
     // .... but it doesn't have an await...
@@ -199,6 +200,8 @@ function init() {
             DEBUG_listComponent.event_scroll();
         }
     });
+    */
 }
 
 // CLS of editor I just saw 8.0 so I'm gonna look at it.
+// CLS of editor 0.7
