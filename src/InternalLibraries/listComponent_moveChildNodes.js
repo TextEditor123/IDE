@@ -378,6 +378,10 @@ class ListComponent_moveChildNodes {
                     this.state_cursor_validateIndex(this.cursorIndex));
                 let relativeIndex = this.cursorIndex - this.virtualIndex;
                 if (relativeIndex >= 0 && relativeIndex < this.itemListElement.children.length) {
+                    relativeIndex += this.domLineNodesZerothIndex;
+                    if (relativeIndex >= this.itemListElement.children.length) {
+                        relativeIndex -= this.itemListElement.children.length;
+                    }
                     this.onkeydownAction(this.itemListElement.children[relativeIndex], this.cursorIndex);
                 }
                 break;
