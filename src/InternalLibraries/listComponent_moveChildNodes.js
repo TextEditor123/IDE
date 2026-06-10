@@ -219,7 +219,7 @@ class ListComponent_moveChildNodes {
                         divItem.style.top = `${topNumber}px`;
                         topNumber += this.itemHeightNumber;
                         // TODO: Should this actually be setting innerHTML to an empty string?
-                        //divItem.innerHTML = '';
+                        //divItem.innerHTML = ''; You can't be setting the innerHTML to ''.
 
                         /*if (indexItem >= itemsCount) {
                             this.drawItemAction(divItem, -1);
@@ -260,7 +260,7 @@ class ListComponent_moveChildNodes {
                         }
                         divItem.style.top = `${topNumber}px`;
                         topNumber -= this.itemHeightNumber;
-                        //divItem.innerHTML = '';
+                        //divItem.innerHTML = ''; You can't be setting the innerHTML to ''.
 
                         /*if (indexItem >= itemsCount) {
                             this.drawItemAction(divItem, -1);
@@ -281,7 +281,7 @@ class ListComponent_moveChildNodes {
                         let indexItem = i + this.virtualIndex;
 
                         let divItem = this.itemListElement.children[i];
-                        //divItem.innerHTML = '';
+                        //divItem.innerHTML = ''; You can't be setting the innerHTML to ''.
 
                         /*if (indexItem >= itemsCount) {
                             this.drawItemAction(divItem, -1);
