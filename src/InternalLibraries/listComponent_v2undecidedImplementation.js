@@ -633,9 +633,7 @@ class ListComponent_v2undecidedImplementation {
 
 /*
 
-I'm working up the courage to commit suicide.
-
-Right fucking now.
+I can't take this shit no more
 
 
 */
