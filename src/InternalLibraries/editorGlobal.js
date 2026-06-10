@@ -848,6 +848,11 @@ function walkLineUntilColumnIndex(cursor) {
             div: null,
         };
     }
+
+    indexLine_VirtualRelative += EDITOR_domLineNodesZerothIndex;
+    if (indexLine_VirtualRelative > get_EDITOR_virtualCount()) {
+        indexLine_VirtualRelative -= get_EDITOR_virtualCount();
+    }
     
     let div = get_EDITOR_textElement().children[indexLine_VirtualRelative];
     let indexColumn_Goal = cursor.indexColumn + get_EDITOR_offsetColumn();

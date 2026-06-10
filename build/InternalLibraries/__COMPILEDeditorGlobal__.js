@@ -656,6 +656,10 @@ function walkLineUntilColumnIndex(cursor) {
       div: null
     };
   }
+  indexLine_VirtualRelative += EDITOR_domLineNodesZerothIndex;
+  if (indexLine_VirtualRelative > EDITOR_int_fields[9]) {
+    indexLine_VirtualRelative -= EDITOR_int_fields[9];
+  }
   let div = EDITOR_baseElement.children[4].children[2].children[indexLine_VirtualRelative];
   let indexColumn_Goal = cursor.indexColumn + EDITOR_int_fields[15];
   let indexColumn_Sum = 0;
