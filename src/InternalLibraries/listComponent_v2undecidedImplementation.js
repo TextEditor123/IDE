@@ -675,4 +675,8 @@ My thought is that when you clean white laundry you use bleach.
 The cleaned white laundry goes in the same laundry basket when done as colored.
 
 You ...
+
+I'm scared that I'm gonna somehow destroy my brain from having done that
+
+That's the thought. And it probably is just ridiculous and in my head
 */
