@@ -543,7 +543,7 @@ class ListComponent_v2undecidedImplementation {
         this.event_scroll_bool = true;
 	    if (!this.event_scroll_timer) {
 	    	this.event_scroll();
-	        this.event_scroll_timer = setTimeout(this.event_scroll_timeoutFunc, 100, this);
+	        this.event_scroll_timer = setTimeout(this.event_scroll_timeoutFunc, 200, this);
 	    }
     }
     
@@ -551,7 +551,7 @@ class ListComponent_v2undecidedImplementation {
         if (/*trailing && lastArgs*/ context.event_scroll_bool) {
             context.event_scroll_bool = false;
             context.event_scroll();
-            context.event_scroll_timer = setTimeout(context.event_scroll_timeoutFunc, 100, context);
+            context.event_scroll_timer = setTimeout(context.event_scroll_timeoutFunc, 200, context);
         } else {
             context.event_scroll_timer = null;
         }
@@ -671,6 +671,7 @@ I make sure not to mention any of that because both times I originally did it
 those videos went on to have content that was confusing and
 as though I was mentioning them with some ulterior motive.
 
-
+I gotta make a list of the variables involved in the process.
+Then I can check off each possible permutation.
 
 */
