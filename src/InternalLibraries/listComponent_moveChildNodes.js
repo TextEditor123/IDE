@@ -532,4 +532,12 @@ CLS is 0.29 currently
 I want to avoid changing the innerText and see what happens.
 CLS is 0.19
 
+I'm noticing that as I click and drag the slider it doesn't continually update the UI
+it seems to only update the UI if I let go or something?
+
+I thought that was because of unresponsiveness or something?
+Maybe it is?
+or maybe it literally isn't running the code?
+Have to confirm one way or the other what is going on.
+
 */
