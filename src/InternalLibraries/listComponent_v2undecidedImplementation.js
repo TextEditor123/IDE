@@ -649,3 +649,24 @@ class ListComponent_v2undecidedImplementation {
 // 
 // I think I made progress towards learning something too today so that helps aleviate some anxiety.
 //
+
+// Google AI Overview "is it possible for tiny amounts of bleach to be on my finger coincidentally and then I pick my nose and the bleach":
+// ############```paraphraseStart
+// Yes, it is entirely possible to have residual bleach on your fingertips from everyday activities like handling laundry or cleaning surfaces,
+// and then transfer it to your nose. However, because the amount is coincidental and tiny, it is highly unlikely to cause lasting harm,
+// though it can cause temporary irritation
+// ############```paraphraseEnd
+
+/*
+I need to communicate this so the thought gets out of my head.
+
+I don't sit here picking my nose all day or anything.
+
+But I took a shower, and then I poured out from a laundry basket cleaned clothes into my laundry basket
+and then I couldn't breathe and I felt like I have having a panic attack
+and I convinced myself that something was wrong and I furiously started picking my nose convinced that there was an issue.
+
+And then I remembered that I had touched a laundry basket prior.
+
+I am just extremely anxious right now.
+*/
