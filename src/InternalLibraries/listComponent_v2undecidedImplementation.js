@@ -735,4 +735,18 @@ But at the same time.
 I'm coming to realize more and more that I am delusional.
 And that I have no idea what I'm doing.
 
+The cost of living per person can drastically differ.
+My dad has this massive inground pool in the backyard.
+I can't stand it what a waste of money he just pisses away on that.
+
+Everyone talks about having a job.
+I don't want all this crap that you care about.
+My cost of living is next to nothing.
+I have no cares.
+
+I want to be alone.
+Not even that but I GOT A JOB
+
+AND IT IS HAPPENING AGAIN
+
 */
