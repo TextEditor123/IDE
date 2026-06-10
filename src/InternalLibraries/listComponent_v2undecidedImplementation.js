@@ -666,4 +666,11 @@ and was cumulative to something that I'd consider procrastinating then it will h
 My thought is: if I can't get a list of numbers to virtual scroll with perfection
 then what hope is there to understand doing so with the text editor.
 
+I've in the past mentioned that I was watching youtube videos that were randomly recommended to me by youtube.
+I make sure not to mention any of that because both times I originally did it
+those videos went on to have content that was confusing and
+as though I was mentioning them with some ulterior motive.
+
+
+
 */
