@@ -308,6 +308,8 @@ class ListComponent_moveChildNodes {
 
         this.domLineNodesZerothIndex = 0;
 
+        let top = this.virtualIndex * this.itemHeightNumber;
+
         for (let i = 0; i < this.virtualCount; i++) {
             // TODO: you don't break you still populate and then drawItemAction handles a null case?
             if (this.virtualIndex + i >= itemsCount) {
@@ -316,6 +318,8 @@ class ListComponent_moveChildNodes {
             let divItem = document.createElement('div');
             divItem.style.height = this.itemHeightStyleAttributeValueString;
             divItem.style.position = 'absolute';
+            divItem.style.top = `${top}px`;
+            top += this.itemHeightNumber;
             divItem.innerText = i;
             this.itemListElement.appendChild(divItem);
             //this.drawItemAction(divItem, this.virtualIndex + i);
