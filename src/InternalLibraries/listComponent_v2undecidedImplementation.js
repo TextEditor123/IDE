@@ -776,5 +776,7 @@ Then we go on to idolize violent acts.
 
 And anyone sitting silently just goes unnoticed into the wind.
 
+It's all one big joke.
+
 
 */
