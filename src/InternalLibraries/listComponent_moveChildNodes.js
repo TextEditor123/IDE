@@ -237,77 +237,29 @@ class ListComponent_moveChildNodes {
 
                     // move large lines to start of list with the content changed
 
-                    // TODO: You might want to have the cutoff be earlier than count, the shifting of the children might be more expensive then the previous way of things at a point earlier than count...
-                    // ...in fact since this scroll up case has to insert and shift, it is more expensive than the append.
-                    // and an in bulk function is probably highly valuable here.
-                    //
-                    // It might faster to copy the content around to each existing node.
-                    // 
-                    // Although I'm not even sure if it does shift internally or not I'm only presuming that.
-
-                    // To reduce shifting you could either:
-                    // - Get a reference to all the divs you'll re-use then remove them in bulk
-                    // - Ensure you do the lower indices first, so that you can insert AFTER the previously moved divs rather than continually incurring the shift of every element in the list (or maybe every element except 1 cause it doesn't get shifted it moreso gets moved idk)
-
                     let itemsCount = this.getItemsCountFunc();
+
+                    let lastIndex;
+                    if (this.domLineNodesZerothIndex === 0) {
+                        lastIndex = this.itemListElement.children.length - 1;
+                    }
+                    else {
+                        lastIndex = this.domLineNodesZerothIndex - 1;
+                    }
+
+                    let topNumber = currVli * this.itemHeightNumber; // TODO: consider transform but that is equivalent it isn't this current problem that I'm solving relating to
                     
                     for (var i = 0; i < diff; i++) {
                         let indexItem = currVli + i;
 
-                        /*
-                        If you have 10 lines
-
-                        and the zerothIndex is index 9
-
-                        The final index is (9 + childrenLength - 1) => 18
-
-                        this is wrong so what is the actual answer and then try to reverse it
-
-                        DOM = [
-                            0,
-                            1,
-                            2,
-                            3,
-                            4,
-                            5,
-                            6,
-                            7,
-                            8,
-                            9,
-                        ]
-
-                        Visually = [
-                            9,
-                            0,
-                            1,
-                            2,
-                            3,
-                            4,
-                            5,
-                            6,
-                            7,
-                            8,
-                        ]
-
-                        (9 + childrenLength - 1) => 8
-
-                        The final index is zeroth - 1 unless you're 0 in which case it is childrenLength - 1
-
-                        ==========
-
-                        If you have 10 lines and the zeroth is index 0
-                        The final index is (0 + childrenLength - 1) => 9
-                        */
-
-                        let lastIndex;
-                        if (this.domLineNodesZerothIndex === 0) {
-                            lastIndex = this.itemListElement.children.length;
+                        this.domLineNodesZerothIndex = lastIndex;
+                        let divItem = this.itemListElement.children[lastIndex--];
+                        if (lastIndex <= -1) {
+                            lastIndex = this.itemListElement.children.length - 1;
+                            
                         }
-                        else {
-                            lastIndex = this.domLineNodesZerothIndex - 1;
-                        }
-
-                        let divItem = this.itemListElement.children[lastIndex];
+                        divItem.style.top = `${topNumber}px`;
+                        topNumber -= this.itemHeightNumber;
                         //divItem.innerHTML = '';
 
                         /*if (indexItem >= itemsCount) {
