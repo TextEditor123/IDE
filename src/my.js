@@ -217,4 +217,25 @@ List of 'get_EDITOR_virtualLineIndex' of interest:
 - [ ] EDITOR_REMOVE_line_drawGutter
 - [ ] EDITOR_deleteDo
 - [ ] EDITOR_backspaceDo
+
+
+~~~~~~~~~~~~~~~~~~~~~~
+
+
+List of 'get_EDITOR_textElement()' of interest:
+==================================================
+- [x] walkLineUntilColumnIndex
+- [ ] EDITOR_appendSimpleLine
+- [ ] EDITOR_measureLineHeightAndCharacterWidth
+- [ ] EDITOR_finalizeEdit
+- [ ] EDITOR_duplicateSelection_drawUi
+- [ ] EDITOR_indentMore
+- [ ] EDITOR_indentLess
+- [ ] EDITOR_paste
+- [ ] EDITOR_EnterKey
+- [ ] EDITOR_onScroll
+- [ ] EDITOR_createViewport
+- [ ] EDITOR_removeSelection
+- [ ] EDITOR_deleteDo
+- [ ] EDITOR_backspaceDo
 */
