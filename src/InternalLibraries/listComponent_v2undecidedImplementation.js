@@ -708,4 +708,19 @@ than the subset of properties that I actually use.
 So worst case scenario I have a guaranteed amount of progress by
 fixing that in particular.
 
+I notice with the transform logic that I occassionally have a line not display.
+It is just an empty line where there ought to be number.
+I don't know if I did something wrong on my end.
+Or if transform has a rounding scenario because I noticed it is written in I think scientific notation could that possibly cause a different outcome?
+
+And I suppose I don't need perfectly smooth scrolling yet.
+
+But instead what I need is for the scrolling to not be extremely unoptimized is the main goal.
+I'm presumming all these layout shifts are extremely computationally expensive.
+Perhaps they have some kind of long living overhead.
+For example if you have a feature of your own code
+that has a high garbage collection overhead.
+Could my layout shifting carry a large overhead that lasts beyond the isolated case of scsrolling
+even if only for a little bit of time until the memory footprint is cleaned up.
+
 */
