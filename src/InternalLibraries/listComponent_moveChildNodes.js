@@ -246,6 +246,7 @@ class ListComponent_moveChildNodes {
                     else {
                         lastIndex = this.domLineNodesZerothIndex - 1;
                     }
+                    this.domLineNodesZerothIndex = lastIndex;
 
                     let topNumber = currVli * this.itemHeightNumber; // TODO: consider transform but that is equivalent it isn't this current problem that I'm solving relating to
                     
@@ -255,7 +256,7 @@ class ListComponent_moveChildNodes {
                     for (var i = 0; i < diff; i++) {
                         let indexItem = currVli + i;
 
-                        this.domLineNodesZerothIndex = lastIndex;
+                        
                         let divItem = this.itemListElement.children[lastIndex--];
                         if (lastIndex <= -1) {
                             lastIndex = this.itemListElement.children.length - 1;
