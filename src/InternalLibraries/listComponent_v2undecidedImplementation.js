@@ -639,4 +639,17 @@ breakfast:
 lunch/dinner
 1 lb of 98% lean ground chicken
 with sriracha sauce
+
+Last night I had a nightmare.
+I forgot what it was about.
+
+But at around 2 AM I was uncontrollably screaming as though I was being murdered and I was making a last ditch effort to get help.
+I recall letting out two screams.
+
+Then I came to realize what was happening.
+
+My throat was extremely sore afterwards.
+
+And sore when I woke up this morning.
+
 */
