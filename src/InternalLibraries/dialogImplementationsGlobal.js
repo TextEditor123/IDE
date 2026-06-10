@@ -607,4 +607,3 @@ async function DIALOG_Debug_Delete_async() {
 Cumulative Layout Shift (CLS) is 0.40
 when using the mouse wheel to scroll the list.
 */
-// please don't I'm just panic and anxiety I deleted the file that I said those things in
