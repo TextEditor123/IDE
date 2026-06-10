@@ -720,7 +720,9 @@ I'm presumming all these layout shifts are extremely computationally expensive.
 Perhaps they have some kind of long living overhead.
 For example if you have a feature of your own code
 that has a high garbage collection overhead.
-Could my layout shifting carry a large overhead that lasts beyond the isolated case of scsrolling
+Could my layout shifting carry a large overhead that lasts beyond the isolated case of scrolling
 even if only for a little bit of time until the memory footprint is cleaned up.
+
+And of course I just had my parents talk to me about the big beautiful bill again.
 
 */
