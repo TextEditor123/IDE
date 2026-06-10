@@ -209,13 +209,18 @@ class ListComponent_moveChildNodes {
 
                     let topNumber = (prevVli + this._ONSCROLLvirtualCount) * this.itemHeightNumber; // TODO: consider transform but that is equivalent it isn't this current problem that I'm solving relating to
 
+                    let origin = this.domLineNodesZerothIndex;
+
+                    this.domLineNodesZerothIndex = origin + diff;
+                    if (this.domLineNodesZerothIndex >= this.itemListElement.children.length) {
+                        this.domLineNodesZerothIndex -= this.itemListElement.children.length;
+                    }
+
                     for (var i = 0; i < diff; i++) {
                         let indexItem = prevVli + this._ONSCROLLvirtualCount + i;
             
-                        let divItem = this.itemListElement.children[this.domLineNodesZerothIndex++];
-                        if (this.domLineNodesZerothIndex >= this.itemListElement.children.length) {
-                            this.domLineNodesZerothIndex = 0;
-                        }
+                        let divItem = this.itemListElement.children[origin + i];
+                        
                         divItem.style.top = `${topNumber}px`;
                         topNumber += this.itemHeightNumber;
                         // TODO: Should this actually be setting innerHTML to an empty string?
