@@ -669,4 +669,10 @@ and I convinced myself that something was wrong and I furiously started picking 
 And then I remembered that I had touched a laundry basket prior.
 
 I am just extremely anxious right now.
+
+My thought is that when you clean white laundry you use bleach.
+
+The cleaned white laundry goes in the same laundry basket when done as colored.
+
+You ...
 */
