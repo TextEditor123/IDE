@@ -764,4 +764,9 @@ Disgust me.
 
 The worlds greed for more and more and more and more and more
 
+fancy cars, fancy furniture.
+
+You're all a joke
+
+
 */
