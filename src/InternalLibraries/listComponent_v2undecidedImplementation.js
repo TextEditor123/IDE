@@ -681,4 +681,13 @@ I'm scared that I'm gonna somehow destroy my brain from having done that
 That's the thought. And it probably is just ridiculous and in my head
 
 "the bleach is gonna get into my brain through my nose"
+
+No and then I went for a walk and the moment I get home my mom
+starts questioning me one thing after another nonstop
+and about when my next psychiatrist appointment is and whether I wanted her to be there during it
+to talk about the health insurance changes
+
+and THEN I took a shower.
+
+And it is just like you're driving me insane
 */
