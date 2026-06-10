@@ -689,4 +689,9 @@ Then I can check off each possible permutation.
     - Presumably the explanation is that a cascading layout occurs.
     - Where the line shows and then cascades a layout to the parent element,
         then that parent element to the next parent element and etc...?
+- In terms of changing the vertical position of the text you have the options of:
+    - transform
+    - top
+
+
 */
