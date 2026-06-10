@@ -799,14 +799,6 @@ function EDITOR_getNewAndEmptyLineElement() {
   div.appendChild(span);
   return div;
 }
-function EDITOR_appendSimpleLine(string) {
-  let div = document.createElement('div');
-  div.className = 'eT';
-  let span = document.createElement('span');
-  span.innerText = string;
-  div.appendChild(span);
-  EDITOR_baseElement.children[4].children[2].appendChild(div);
-}
 
 /**
  * This method will NOT "put a cursor on screen". You need to ensure

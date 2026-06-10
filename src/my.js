@@ -225,8 +225,8 @@ List of 'get_EDITOR_virtualLineIndex' of interest:
 List of 'get_EDITOR_textElement()' of interest:
 ===============================================
 - [x] walkLineUntilColumnIndex
-- [ ] EDITOR_appendSimpleLine
-- [ ] EDITOR_measureLineHeightAndCharacterWidth
+- [x] EDITOR_appendSimpleLine
+- [x] EDITOR_measureLineHeightAndCharacterWidth
 - [ ] EDITOR_finalizeEdit
 - [ ] EDITOR_duplicateSelection_drawUi
 - [ ] EDITOR_indentMore
@@ -246,8 +246,8 @@ List of 'get_EDITOR_textElement()' of interest:
 List of combined and unique interests:
 ======================================
 - [x] walkLineUntilColumnIndex
-- [ ] EDITOR_appendSimpleLine
-- [ ] EDITOR_measureLineHeightAndCharacterWidth
+- [x] EDITOR_appendSimpleLine
+- [x] EDITOR_measureLineHeightAndCharacterWidth
 - [ ] EDITOR_finalizeEdit
 - [ ] EDITOR_duplicateSelection_drawUi
 - [ ] EDITOR_indentMore
