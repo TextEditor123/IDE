@@ -261,5 +261,29 @@ List of combined and unique interests:
 - [ ] EDITOR_deleteDo
 - [ ] EDITOR_backspaceDo
 
+I am very glad to have finally began to understand "cumulative layout shift".
+
+Stress levels are extremely high.
+
+And so I need to slow down the pacing while I get stress levels back under control.
+
+I was thinking today:
+- [ ] EDITOR_deleteDo
+- [ ] EDITOR_backspaceDo
+- [ ] get oil change
+- [ ] do my shift at work
+
+I want to acknowledge that 
+- [ ] EDITOR_deleteDo or EDITOR_backspaceDo; but not both
+- [ ] get oil change
+- [ ] do my shift at work
+
+might be the smarter option
+
+And furthermore if all I do is:
+- [ ] get oil change
+- [ ] do my shift at work
+
+That would be okay.
 
 */
