@@ -4652,10 +4652,8 @@ function EDITOR_indentMore(cursor) {
         incrementBy -= 4;
 
         // Draw the line to reflect the edit, if it is being currently shown on screen.
-        let indexLine_VirtualRelative = (lineI + get_EDITOR_offsetLine()) - get_EDITOR_virtualLineIndex();
-        if (lineI < EDITOR_lineEndPositionList.count &&
-            indexLine_VirtualRelative < get_EDITOR_textElement().children.length &&
-            indexLine_VirtualRelative >= 0) {
+        let indexLine_VirtualRelative = EDITOR_getIndexLineToHtml_Correctly(lineI);
+        if (indexLine_VirtualRelative !== -1) {
                 let div = get_EDITOR_textElement().children[indexLine_VirtualRelative];
                 let span;
                 if (div.children[0].className === '') {
