@@ -250,7 +250,7 @@ List of combined and unique interests:
 - [x] EDITOR_measureLineHeightAndCharacterWidth
 - [x] EDITOR_finalizeEdit
 - [ ] EDITOR_duplicateSelection_drawUi
-- [ ] EDITOR_indentMore
+- [x] EDITOR_indentMore
 - [ ] EDITOR_indentLess
 - [ ] EDITOR_paste
 - [ ] EDITOR_EnterKey
