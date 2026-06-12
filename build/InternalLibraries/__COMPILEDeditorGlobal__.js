@@ -5662,9 +5662,11 @@ function EDITOR_deleteDo(cursor, event) {
 
       // NOT start of file, remove the line ending and join the lines
 
-      if (cursor.indexLine - EDITOR_int_fields[8] < EDITOR_baseElement.children[4].children[2].children.length && cursor.indexLine - EDITOR_int_fields[8] >= 0 && cursor.indexLine - EDITOR_int_fields[8] + 1 < EDITOR_baseElement.children[4].children[2].children.length && cursor.indexLine - EDITOR_int_fields[8] + 1 >= 0) {
-        let keepingDiv = EDITOR_baseElement.children[4].children[2].children[cursor.indexLine - EDITOR_int_fields[8]];
-        let removingDiv = EDITOR_baseElement.children[4].children[2].children[cursor.indexLine - EDITOR_int_fields[8] + 1];
+      // Visually, immediately merge the lines if both are visible.
+      let matched_PREVIOUS_indexLine = EDITOR_getIndexLineToHtml_Correctly(cursor.indexLine + 1);
+      if (matched_PREVIOUS_indexLine !== -1) {
+        let keepingDiv = w.div;
+        let removingDiv = EDITOR_baseElement.children[4].children[2].children[matched_PREVIOUS_indexLine];
         let rememberRemovingDivLength = removingDiv.children.length;
         for (var i = 0; i < rememberRemovingDivLength; i++) {
           if (removingDiv.children[0].innerText.length > 0) {
