@@ -259,7 +259,7 @@ List of combined and unique interests:
 - [ ] EDITOR_REMOVE_line_drawGutter
 - [ ] EDITOR_removeSelection
 - [ ] EDITOR_deleteDo
-- [ ] EDITOR_backspaceDo
+- [x] EDITOR_backspaceDo
 
 I am very glad to have finally began to understand "cumulative layout shift".
 

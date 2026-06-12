@@ -185,7 +185,9 @@ const EDITOR_baseElement = document.getElementById('EDITOR');
 //                                                                (indexLine + get_EDITOR_offsetLine()) - get_EDITOR_virtualLineIndex()
 /** SEE 'EDITOR_getIndexLineToHtml_Correctly'; code duplication: this is explicitly inlined in the uncompiled source of editorGlobal.js within 'EDITOR_getIndexLineToHtml_Correctly' */
 const EDITOR_indexLine_VirtualRelative_Unmatched = indexLine => indexLine + EDITOR_int_fields[13] - EDITOR_int_fields[8];
-// 
+
+// scroll up logic is wrong consistently.
+
 /**
  * TODO: It should be >= ?
  * 
@@ -195,6 +197,16 @@ const EDITOR_indexLine_VirtualRelative_Unmatched = indexLine => indexLine + EDIT
 function EDITOR_getIndexLineToHtml_Correctly(indexLine) {
   let unmatchedIndexLine = indexLine + EDITOR_int_fields[13] - EDITOR_int_fields[8];
   return unmatchedIndexLine >= EDITOR_lineEndPositionList.count || unmatchedIndexLine >= EDITOR_baseElement.children[4].children[2].children.length || unmatchedIndexLine < 0 ? -1 : (unmatchedIndexLine = unmatchedIndexLine + EDITOR_domLineNodesZerothIndex) > EDITOR_int_fields[9] ? unmatchedIndexLine - EDITOR_int_fields[9] : unmatchedIndexLine;
+}
+
+/** The argument is a matchedIndexLine i.e.: the result of 'EDITOR_getIndexLineToHtml_Correctly' (no validation is performed on the argument, it is presumed to be the index of a valid text editor line div dom element). This returns -1 if you go out of viewport. It will wrap around if you go too large because 'EDITOR_domLineNodesZerothIndex' isn't 0. */
+function EDITOR_getIndexLineToHtml_Correctly_NEXT(matchedIndexLine) {
+  // TODO
+}
+
+/** The argument is a matchedIndexLine i.e.: the result of 'EDITOR_getIndexLineToHtml_Correctly' (no validation is performed on the argument, it is presumed to be the index of a valid text editor line div dom element). This returns -1 if you go out of viewport. It will wrap around if you go too small because 'EDITOR_domLineNodesZerothIndex' isn't 0. */
+function EDITOR_getIndexLineToHtml_Correctly_PREVIOUS(matchedIndexLine) {
+  // TODO
 }
 
 //const EDITOR_isVisible_indexLine = (indexLine) => EDITOR_baseElement.children[4].children[2];
@@ -5764,10 +5776,12 @@ function EDITOR_backspaceDo(cursor, event) {
       if (w.span.className === 'eCM') {
         EDITOR_stopTrackingIfTrackedSyntaxMadeToSpanSingleLine(cursor);
       }
-      if (rememberLineIndex - EDITOR_int_fields[8] - 1 < EDITOR_baseElement.children[4].children[2].children.length && rememberLineIndex - EDITOR_int_fields[8] - 1 >= 0 && rememberLineIndex - EDITOR_int_fields[8] < EDITOR_baseElement.children[4].children[2].children.length && rememberLineIndex - EDITOR_int_fields[8] >= 0) {
-        // NOT start of file, backspace the line ending and join the lines
-        let keepingDiv = EDITOR_baseElement.children[4].children[2].children[rememberLineIndex - EDITOR_int_fields[8] - 1];
-        let removingDiv = EDITOR_baseElement.children[4].children[2].children[rememberLineIndex - EDITOR_int_fields[8]];
+
+      // Visually, immediately merge the lines if both are visible.
+      let matched_PREVIOUS_indexLine = EDITOR_getIndexLineToHtml_Correctly(rememberLineIndex - 1);
+      if (matched_PREVIOUS_indexLine !== -1) {
+        let keepingDiv = EDITOR_baseElement.children[4].children[2].children[matched_PREVIOUS_indexLine];
+        let removingDiv = w.div;
         let rememberRemovingDivLength = removingDiv.children.length;
         for (var i = 0; i < rememberRemovingDivLength; i++) {
           if (removingDiv.children[0].innerText.length > 0) {
