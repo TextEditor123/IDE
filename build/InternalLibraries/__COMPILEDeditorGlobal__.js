@@ -5125,8 +5125,8 @@ function EDITOR_onScroll() {
           if (aaa2 >= EDITOR_baseElement.children[4].children[2].children.length) {
             aaa2 -= EDITOR_baseElement.children[4].children[2].children.length;
           }
-          gutter = EDITOR_baseElement.children[3].children[1].children[lastIndex];
-          div = EDITOR_baseElement.children[4].children[2].children[lastIndex];
+          gutter = EDITOR_baseElement.children[3].children[1].children[aaa2];
+          div = EDITOR_baseElement.children[4].children[2].children[aaa2];
           loopCounter++;
           break;
         case 3:
