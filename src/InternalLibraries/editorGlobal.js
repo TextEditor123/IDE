@@ -223,12 +223,12 @@ function EDITOR_getIndexLineToHtml_Correctly(indexLine) {
     return unmatchedIndexLine >= EDITOR_lineEndPositionList.count || unmatchedIndexLine >= get_EDITOR_textElement().children.length || unmatchedIndexLine < 0 ? -1 : ((unmatchedIndexLine = (unmatchedIndexLine + EDITOR_domLineNodesZerothIndex)) > get_EDITOR_virtualCount() ? unmatchedIndexLine - get_EDITOR_virtualCount() : unmatchedIndexLine);
 }
 
-/** The argument is a matchedIndexLine i.e.: the result of 'EDITOR_getIndexLineToHtml_Correctly'. This returns -1 if you go out of viewport. It will wrap around if you go too large because 0th isn't 0. */
+/** The argument is a matchedIndexLine i.e.: the result of 'EDITOR_getIndexLineToHtml_Correctly'. This returns -1 if you go out of viewport. It will wrap around if you go too large because 'EDITOR_domLineNodesZerothIndex' isn't 0. */
 function EDITOR_getIndexLineToHtml_Correctly_NEXT(matchedIndexLine) {
     // TODO
 }
 
-/** The argument is a matchedIndexLine i.e.: the result of 'EDITOR_getIndexLineToHtml_Correctly'. This returns -1 if you go out of viewport. It will wrap around if you go too small because 0th isn't 0. */
+/** The argument is a matchedIndexLine i.e.: the result of 'EDITOR_getIndexLineToHtml_Correctly'. This returns -1 if you go out of viewport. It will wrap around if you go too small because 'EDITOR_domLineNodesZerothIndex' isn't 0. */
 function EDITOR_getIndexLineToHtml_Correctly_PREVIOUS(matchedIndexLine) {
     // TODO
 }
