@@ -4772,8 +4772,8 @@ function EDITOR_EnterKey(cursor, ctrlKey, shiftKey) {
       removingVisuallyDiv = EDITOR_baseElement.children[4].children[2].children[matched_indexLine_last];
     }
     if (lineDiv) {
-      EDITOR_baseElement.children[4].children[2].removeChild(removingVisuallyDiv);
       EDITOR_baseElement.children[4].children[2].insertBefore(lineDiv, EDITOR_baseElement.children[4].children[2].children[relativeIndexLine]);
+      EDITOR_baseElement.children[4].children[2].removeChild(removingVisuallyDiv);
     }
     if (cursor.cached_indentation_byteList) {
       insertionCount += cursor.cached_indentation_byteList.count;
@@ -4812,8 +4812,9 @@ function EDITOR_EnterKey(cursor, ctrlKey, shiftKey) {
         }
         if (lineDiv) {
           lineDiv.children[0].innerText = cursor.cached_indentation_string;
+          // TODO: wrap around suspect?
+          EDITOR_baseElement.children[4].children[2].insertBefore(lineDiv, EDITOR_baseElement.children[4].children[2].children[relativeIndexLine + 1]);
           EDITOR_baseElement.children[4].children[2].removeChild(removingVisuallyDiv);
-          EDITOR_baseElement.children[4].children[2].insertBefore(lineDiv, EDITOR_baseElement.children[4].children[2].children[relativeIndexLine]);
         }
         if (cursor.cached_indentation_byteList) {
           insertionCount += cursor.cached_indentation_byteList.count;
@@ -4892,8 +4893,9 @@ function EDITOR_EnterKey(cursor, ctrlKey, shiftKey) {
               lineDiv.appendChild(w.div.children[rememberIndex]);
             }
           }
+          // TODO: wrap around suspect?
+          EDITOR_baseElement.children[4].children[2].insertBefore(lineDiv, EDITOR_baseElement.children[4].children[2].children[relativeIndexLine + 1]);
           EDITOR_baseElement.children[4].children[2].removeChild(removingVisuallyDiv);
-          EDITOR_baseElement.children[4].children[2].insertBefore(lineDiv, EDITOR_baseElement.children[4].children[2].children[relativeIndexLine]);
         }
         if (cursor.cached_indentation_byteList) {
           insertionCount += cursor.cached_indentation_byteList.count;

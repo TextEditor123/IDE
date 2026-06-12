@@ -5561,8 +5561,8 @@ function EDITOR_EnterKey(cursor, ctrlKey, shiftKey) {
         }
 
         if (lineDiv) {
-            get_EDITOR_textElement().removeChild(removingVisuallyDiv);
             get_EDITOR_textElement().insertBefore(lineDiv, get_EDITOR_textElement().children[relativeIndexLine]);
+            get_EDITOR_textElement().removeChild(removingVisuallyDiv);
         }
 
         if (cursor.cached_indentation_byteList) {
@@ -5612,8 +5612,9 @@ function EDITOR_EnterKey(cursor, ctrlKey, shiftKey) {
 
                 if (lineDiv) {
                     lineDiv.children[0].innerText = cursor.cached_indentation_string;
+                    // TODO: wrap around suspect?
+                    get_EDITOR_textElement().insertBefore(lineDiv, get_EDITOR_textElement().children[relativeIndexLine + 1]);
                     get_EDITOR_textElement().removeChild(removingVisuallyDiv);
-                    get_EDITOR_textElement().insertBefore(lineDiv, get_EDITOR_textElement().children[relativeIndexLine]);
                 }
                 
                 if (cursor.cached_indentation_byteList) {
@@ -5713,8 +5714,9 @@ function EDITOR_EnterKey(cursor, ctrlKey, shiftKey) {
                             lineDiv.appendChild(w.div.children[rememberIndex]);
                         }
                     }
+                    // TODO: wrap around suspect?
+                    get_EDITOR_textElement().insertBefore(lineDiv, get_EDITOR_textElement().children[relativeIndexLine + 1]);
                     get_EDITOR_textElement().removeChild(removingVisuallyDiv);
-                    get_EDITOR_textElement().insertBefore(lineDiv, get_EDITOR_textElement().children[relativeIndexLine]);
                 }
                 
                 if (cursor.cached_indentation_byteList) {
