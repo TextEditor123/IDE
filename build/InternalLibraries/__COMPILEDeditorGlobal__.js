@@ -192,7 +192,7 @@ const EDITOR_indexLine_VirtualRelative_Unmatched = indexLine => indexLine + EDIT
  * TODO: It should be >= ?
  * 
  * @example EDITOR_getIndexLineToHtml_Correctly(EDITOR_indexLine_VirtualRelative_Unmatched(cursor.indexLine));
- * @returns you capture the variable then check it for < 0 i.e. => if (indexLine_VirtualRelative < 0) { return bad_state; } else { return good_state; }
+ * @returns you capture the variable then check it for < 0 (or the opposite '>=') i.e. => if (indexLine_VirtualRelative < 0) { return bad_state; } else { return good_state; }
  */
 function EDITOR_getIndexLineToHtml_Correctly(indexLine) {
   let unmatchedIndexLine = indexLine + EDITOR_int_fields[13] - EDITOR_int_fields[8];
@@ -2268,7 +2268,7 @@ function EDITOR_finalizeEdit(cursor) {
       if (EDITOR_baseElement.children[3].children[1].children.length === EDITOR_int_fields[9] && EDITOR_baseElement.children[4].children[2].children.length === EDITOR_int_fields[9]) {
         // TODO: Am I missing this 'lineIndex_editOccurredOn < get_EDITOR_virtualLineIndex() + get_EDITOR_virtualCount()' in the 'EDITOR_getIndexLineToHtml_Correctly' function??
         let relativeIndex = EDITOR_getIndexLineToHtml_Correctly(lineIndex_editOccurredOn);
-        if (relativeIndex !== -1) {
+        if (relativeIndex >= 0) {
           let gutterLineElement = EDITOR_baseElement.children[3].children[1].children[relativeIndex];
           gutterLineElement.innerHTML = '';
           let textLineElement = EDITOR_baseElement.children[4].children[2].children[relativeIndex];
@@ -3969,7 +3969,7 @@ function EDITOR_indentMore(cursor) {
 
     // Draw the line to reflect the edit, if it is being currently shown on screen.
     let indexLine_VirtualRelative = EDITOR_getIndexLineToHtml_Correctly(lineI);
-    if (indexLine_VirtualRelative !== -1) {
+    if (indexLine_VirtualRelative >= 0) {
       let div = EDITOR_baseElement.children[4].children[2].children[indexLine_VirtualRelative];
       let span;
       if (div.children[0].className === '') {
@@ -4266,7 +4266,7 @@ function EDITOR_indentLess(cursor) {
 
     // Draw the line to reflect the edit, if it is being currently shown on screen.
     let indexLine_VirtualRelative = EDITOR_getIndexLineToHtml_Correctly(lineI);
-    if (indexLine_VirtualRelative !== -1) {
+    if (indexLine_VirtualRelative >= 0) {
       let div = EDITOR_baseElement.children[4].children[2].children[indexLine_VirtualRelative];
       let span = div.children[0];
       span.innerText = span.innerText.slice(innerRemoveCount);
@@ -4731,10 +4731,10 @@ function EDITOR_EnterKey(cursor, ctrlKey, shiftKey) {
   cursor.editPosition = indexPosition;
   cursor.editIndexLine = cursor.indexLine;
   cursor.editIndexColumn = cursor.indexColumn;
-  let relativeIndexLine = cursor.indexLine + EDITOR_int_fields[13] - EDITOR_int_fields[8];
   let insertionCount = 1;
   let shouldRenderEntireViewport = false;
-  if (relativeIndexLine >= EDITOR_baseElement.children[4].children[2].children.length || relativeIndexLine < 0) shouldRenderEntireViewport = true;
+  let relativeIndexLine = EDITOR_getIndexLineToHtml_Correctly(cursor.indexLine);
+  if (relativeIndexLine < 0) shouldRenderEntireViewport = true;
 
   // There are some cases that I don't feel like thinking about at the moment, this if statement singles them out.
   if (EDITOR_int_fields[9] <= 1 || EDITOR_baseElement.children[4].children[2].children.length !== EDITOR_int_fields[9]) shouldRenderEntireViewport = true;
@@ -5665,7 +5665,7 @@ function EDITOR_deleteDo(cursor, event) {
 
       // Visually, immediately merge the lines if both are visible.
       let matched_PREVIOUS_indexLine = EDITOR_getIndexLineToHtml_Correctly(cursor.indexLine + 1);
-      if (matched_PREVIOUS_indexLine !== -1) {
+      if (matched_PREVIOUS_indexLine >= 0) {
         let keepingDiv = w.div;
         let removingDiv = EDITOR_baseElement.children[4].children[2].children[matched_PREVIOUS_indexLine];
         let rememberRemovingDivLength = removingDiv.children.length;
@@ -5782,7 +5782,7 @@ function EDITOR_backspaceDo(cursor, event) {
 
       // Visually, immediately merge the lines if both are visible.
       let matched_PREVIOUS_indexLine = EDITOR_getIndexLineToHtml_Correctly(rememberLineIndex - 1);
-      if (matched_PREVIOUS_indexLine !== -1) {
+      if (matched_PREVIOUS_indexLine >= 0) {
         let keepingDiv = EDITOR_baseElement.children[4].children[2].children[matched_PREVIOUS_indexLine];
         let removingDiv = w.div;
         let rememberRemovingDivLength = removingDiv.children.length;
