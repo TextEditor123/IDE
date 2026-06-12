@@ -5968,6 +5968,12 @@ function EDITOR_onScroll() {
             trackedSyntax_I = EDITOR_trackedSyntaxList.count_abstract;
         }
 
+        // I was thinking of myself as some kind of alcoholic this morning.
+        // I notice anytime I'm anxious I try to write code and make progress.
+        // The relief from anxiety is incredible.
+        // Then it doesn't last and I just keep coming back over and over.
+        // I even stopped for the day then compulsively came back to fix that to reduce my anxiety that spiked.
+
         for (var indexLine = lowerBound; indexLine < upperBound; indexLine++) {
 
             let transform = `translateY(${vertical}px)`;
