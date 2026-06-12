@@ -5052,7 +5052,7 @@ function EDITOR_onScroll() {
     let lowerBound;
     let upperBound;
     let loopCounter = 0;
-    let baseIndex;
+    //let baseIndex;
     let vertical;
     let origin;
     let lastIndex; // TODO: lastIndex can probably be origin?
@@ -5063,7 +5063,8 @@ function EDITOR_onScroll() {
       trackedSyntax_I = EDITOR_drawViewPort_FindTrackedSyntax_StartingIndex(prevVli + EDITOR_int_fields[19]);
       lowerBound = prevVli + EDITOR_int_fields[19];
       upperBound = lowerBound + diff;
-      baseIndex = 0;
+      //baseIndex = 0;
+
       vertical = (prevVli + EDITOR_int_fields[9]) * EDITOR_int_fields[2];
       origin = EDITOR_domLineNodesZerothIndex;
       EDITOR_domLineNodesZerothIndex = origin + diff;
@@ -5097,7 +5098,8 @@ function EDITOR_onScroll() {
       lowerBound = EDITOR_int_fields[8];
       upperBound = lowerBound + EDITOR_int_fields[9];
       // case 3 sets baseIndex each loop but this is useful so the variable is initialized.
-      baseIndex = 0;
+      //baseIndex = 0;
+
       vertical = EDITOR_int_fields[8] * EDITOR_int_fields[2];
       origin = EDITOR_domLineNodesZerothIndex;
     }
@@ -5108,39 +5110,14 @@ function EDITOR_onScroll() {
       let transform = `translateY(${vertical}px)`;
       let div;
       let gutter;
-      switch (onePositiveDiff_twoNegativeDiff_orThreeFullScreen) {
-        case 1:
-          vertical += EDITOR_int_fields[2];
-          let aaa1 = origin + loopCounter;
-          if (aaa1 >= EDITOR_baseElement.children[4].children[2].children.length) {
-            aaa1 -= EDITOR_baseElement.children[4].children[2].children.length;
-          }
-          gutter = EDITOR_baseElement.children[3].children[1].children[aaa1];
-          div = EDITOR_baseElement.children[4].children[2].children[aaa1];
-          loopCounter++;
-          break;
-        case 2:
-          vertical += EDITOR_int_fields[2];
-          let aaa2 = origin + loopCounter;
-          if (aaa2 >= EDITOR_baseElement.children[4].children[2].children.length) {
-            aaa2 -= EDITOR_baseElement.children[4].children[2].children.length;
-          }
-          gutter = EDITOR_baseElement.children[3].children[1].children[aaa2];
-          div = EDITOR_baseElement.children[4].children[2].children[aaa2];
-          loopCounter++;
-          break;
-        case 3:
-          vertical += EDITOR_int_fields[2];
-          let aaa3 = origin + loopCounter;
-          if (aaa3 >= EDITOR_baseElement.children[4].children[2].children.length) {
-            aaa3 -= EDITOR_baseElement.children[4].children[2].children.length;
-          }
-          baseIndex = loopCounter;
-          gutter = EDITOR_baseElement.children[3].children[1].children[aaa3];
-          div = EDITOR_baseElement.children[4].children[2].children[aaa3];
-          loopCounter++;
-          break;
+      vertical += EDITOR_int_fields[2];
+      let aaa = origin + loopCounter;
+      if (aaa >= EDITOR_baseElement.children[4].children[2].children.length) {
+        aaa -= EDITOR_baseElement.children[4].children[2].children.length;
       }
+      gutter = EDITOR_baseElement.children[3].children[1].children[aaa];
+      div = EDITOR_baseElement.children[4].children[2].children[aaa];
+      loopCounter++;
       gutter.innerText = indexLine >= EDITOR_lineEndPositionList.count ? '~' : indexLine + 1;
       gutter.style.transform = transform;
       div.style.transform = transform;

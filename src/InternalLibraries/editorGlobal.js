@@ -5905,7 +5905,7 @@ function EDITOR_onScroll() {
         let lowerBound;
         let upperBound;
         let loopCounter = 0;
-        let baseIndex;
+        //let baseIndex;
         let vertical;
         let origin;
         let lastIndex; // TODO: lastIndex can probably be origin?
@@ -5916,7 +5916,7 @@ function EDITOR_onScroll() {
             trackedSyntax_I = EDITOR_drawViewPort_FindTrackedSyntax_StartingIndex(prevVli + get_EDITOR_ONSCROLLvirtualCount());
             lowerBound = prevVli + get_EDITOR_ONSCROLLvirtualCount();
             upperBound = lowerBound + diff;
-            baseIndex = 0;
+            //baseIndex = 0;
 
             vertical = (prevVli + get_EDITOR_virtualCount()) * get_EDITOR_lineHeight();
             origin = EDITOR_domLineNodesZerothIndex;
@@ -5958,7 +5958,7 @@ function EDITOR_onScroll() {
             lowerBound = get_EDITOR_virtualLineIndex();
             upperBound = lowerBound + get_EDITOR_virtualCount();
             // case 3 sets baseIndex each loop but this is useful so the variable is initialized.
-            baseIndex = 0;
+            //baseIndex = 0;
 
             vertical = get_EDITOR_virtualLineIndex() * get_EDITOR_lineHeight();
             origin = EDITOR_domLineNodesZerothIndex;
@@ -5975,45 +5975,16 @@ function EDITOR_onScroll() {
             let div;
             let gutter;
 
-            switch (onePositiveDiff_twoNegativeDiff_orThreeFullScreen) {
-                case 1:
-                    vertical += get_EDITOR_lineHeight();
+            vertical += get_EDITOR_lineHeight();
 
-                    let aaa1 = origin + loopCounter;
-                    if (aaa1 >= get_EDITOR_textElement().children.length) {
-                        aaa1 -= get_EDITOR_textElement().children.length;
-                    }
-
-                    gutter = get_EDITOR_gutter().children[aaa1];
-                    div = get_EDITOR_textElement().children[aaa1];
-                    loopCounter++;
-                    break;
-                case 2:
-                    vertical += get_EDITOR_lineHeight();
-
-                    let aaa2 = origin + loopCounter;
-                    if (aaa2 >= get_EDITOR_textElement().children.length) {
-                        aaa2 -= get_EDITOR_textElement().children.length;
-                    }
-                    
-                    gutter = get_EDITOR_gutter().children[aaa2];
-                    div = get_EDITOR_textElement().children[aaa2];
-                    loopCounter++;
-                    break;
-                case 3:
-                    vertical += get_EDITOR_lineHeight();
-
-                    let aaa3 = origin + loopCounter;
-                    if (aaa3 >= get_EDITOR_textElement().children.length) {
-                        aaa3 -= get_EDITOR_textElement().children.length;
-                    }
-
-                    baseIndex = loopCounter;
-                    gutter = get_EDITOR_gutter().children[aaa3];
-                    div = get_EDITOR_textElement().children[aaa3];
-                    loopCounter++;
-                    break;
+            let aaa = origin + loopCounter;
+            if (aaa >= get_EDITOR_textElement().children.length) {
+                aaa -= get_EDITOR_textElement().children.length;
             }
+
+            gutter = get_EDITOR_gutter().children[aaa];
+            div = get_EDITOR_textElement().children[aaa];
+            loopCounter++;
 
             gutter.innerText = indexLine >= EDITOR_lineEndPositionList.count
                 ? '~'
