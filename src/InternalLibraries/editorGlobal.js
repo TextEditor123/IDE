@@ -4263,7 +4263,7 @@ async function EDITOR_duplicateSelection_drawUi(cursor, small, large, length) {
     // No need to consider '\r\n' and etc... only '\n'
     let linefeedLength = 0;
     let relativeIndexLine = (cursor.indexLine + get_EDITOR_offsetLine()) - get_EDITOR_virtualLineIndex();
-    let lastShownLineIndex = get_EDITOR_virtualLineIndex() + get_EDITOR_virtualCount() - 1;
+    let matched_indexLine_last = EDITOR_getIndexLineToHtml_Correctly(get_EDITOR_virtualLineIndex() + get_EDITOR_virtualCount() - 1);
     let last_valid_indexColumn_currentLine = EDITOR_getLastValidIndexColumn(cursor.indexLine);
 
     // TODO: An optimization to check whether you even need to redraw any lines perhaps is possible but it would add too much complexity at the moment and so it isn't being considered...
@@ -4292,7 +4292,7 @@ async function EDITOR_duplicateSelection_drawUi(cursor, small, large, length) {
                 //
                 if (linefeedLength > 0) writeLinefeed();
                 // TODO: Extremely important next line but it doesn't fully pattern with every case so it is somewhat out of nowhere
-                if (relativeIndexLine > lastShownLineIndex) return;
+                if (relativeIndexLine > matched_indexLine_last) return;
                 //
                 insertionLength++;
                 //
@@ -4340,7 +4340,7 @@ async function EDITOR_duplicateSelection_drawUi(cursor, small, large, length) {
         // TODO: this is a very lazy solution to the problem, likely a more optimal way is available. Also name the variable?
         // I don't think everything fully works but I'm trying to decide if I should go eat something.
         for (let handleLineCounter = 0; handleLineCounter < linefeedLength; handleLineCounter++) {
-            if (relativeIndexLine > lastShownLineIndex) {
+            if (relativeIndexLine > matched_indexLine_last) {
                 // A scroll should take place and handle the rest
                 // Note: any lines indices that don't change between the current scrollTop and what is shown with the new scrollTop...
                 // ...won't redraw so you still need to run this code for some of the lines.
@@ -5040,7 +5040,7 @@ function EDITOR_paste(cursor, content) {
     // Consider '\r\n' and etc...
     let linefeedLength = 0;
     let relativeIndexLine = (cursor.indexLine + get_EDITOR_offsetLine()) - get_EDITOR_virtualLineIndex();
-    let lastShownLineIndex = get_EDITOR_virtualLineIndex() + get_EDITOR_virtualCount() - 1;
+    let matched_indexLine_last = EDITOR_getIndexLineToHtml_Correctly(get_EDITOR_virtualLineIndex() + get_EDITOR_virtualCount() - 1);
     let last_valid_indexColumn_currentLine = EDITOR_getLastValidIndexColumn(cursor.indexLine);
 
     // TODO: An optimization to check whether you even need to redraw any lines perhaps is possible but it would add too much complexity at the moment and so it isn't being considered...
@@ -5083,7 +5083,7 @@ function EDITOR_paste(cursor, content) {
                 if (wordLength > 0) writeWord();
                 else if (linefeedLength > 0) writeLinefeed();
                 // TODO: Extremely important next line but it doesn't fully pattern with every case so it is somewhat out of nowhere
-                if (relativeIndexLine > lastShownLineIndex) return;
+                if (relativeIndexLine > matched_indexLine_last) return;
                 //
                 insertionLength += 4;
                 //
@@ -5094,7 +5094,7 @@ function EDITOR_paste(cursor, content) {
                 if (tabLength > 0) writeTab();
                 else if (linefeedLength > 0) writeLinefeed();
                 // TODO: Extremely important next line but it doesn't fully pattern with every case so it is somewhat out of nowhere
-                if (relativeIndexLine > lastShownLineIndex) return;
+                if (relativeIndexLine > matched_indexLine_last) return;
                 //
                 insertionLength++;
                 //
@@ -5165,8 +5165,7 @@ function EDITOR_paste(cursor, content) {
         // TODO: this is a very lazy solution to the problem, likely a more optimal way is available. Also name the variable?
         // I don't think everything fully works but I'm trying to decide if I should go eat something.
         for (let handleLineCounter = 0; handleLineCounter < linefeedLength; handleLineCounter++) {
-            // ???? relativeIndexLine is for the UI and is related to the DOM divs that are displaying text. 'lastShownLineIndex' is NOT equivalent that relates to the total of all lines in the textual data itself.
-            if (relativeIndexLine > lastShownLineIndex) {
+            if (relativeIndexLine > matched_indexLine_last) {
                 // A scroll should take place and handle the rest
                 // Note: any lines indices that don't change between the current scrollTop and what is shown with the new scrollTop...
                 // ...won't redraw so you still need to run this code for some of the lines.
