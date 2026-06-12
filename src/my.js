@@ -255,6 +255,7 @@ List of combined and unique interests:
 - [/] EDITOR_paste
 - [/] EDITOR_EnterKey
 - [ ] EDITOR_onScroll
+    - [ ] I think scrolling the mouse wheel up (to a smaller scrollTop) isn't working properly.
 - [x] EDITOR_createViewport
 - [/] EDITOR_REMOVE_line_drawGutter
 - [/] EDITOR_removeSelection
