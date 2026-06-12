@@ -2771,8 +2771,9 @@ function EDITOR_finalizeEdit(cursor) {
             if (get_EDITOR_gutter().children.length === get_EDITOR_virtualCount() &&
                 get_EDITOR_textElement().children.length === get_EDITOR_virtualCount()) {
 
-                    if (lineIndex_editOccurredOn >= get_EDITOR_virtualLineIndex() && lineIndex_editOccurredOn < get_EDITOR_virtualLineIndex() + get_EDITOR_virtualCount()) {
-                        let relativeIndex = lineIndex_editOccurredOn - get_EDITOR_virtualLineIndex();
+                    // TODO: Am I missing this 'lineIndex_editOccurredOn < get_EDITOR_virtualLineIndex() + get_EDITOR_virtualCount()' in the 'EDITOR_getIndexLineToHtml_Correctly' function??
+                    let relativeIndex = EDITOR_getIndexLineToHtml_Correctly(lineIndex_editOccurredOn);
+                    if (relativeIndex !== -1) {
                         let gutterLineElement = get_EDITOR_gutter().children[relativeIndex];
                         gutterLineElement.innerHTML = '';
                         let textLineElement = get_EDITOR_textElement().children[relativeIndex];

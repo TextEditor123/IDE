@@ -227,7 +227,7 @@ List of 'get_EDITOR_textElement()' of interest:
 - [x] walkLineUntilColumnIndex
 - [x] EDITOR_appendSimpleLine
 - [x] EDITOR_measureLineHeightAndCharacterWidth
-- [ ] EDITOR_finalizeEdit
+- [x] EDITOR_finalizeEdit
 - [ ] EDITOR_duplicateSelection_drawUi
 - [ ] EDITOR_indentMore
 - [ ] EDITOR_indentLess
