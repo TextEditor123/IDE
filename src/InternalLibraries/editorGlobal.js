@@ -4263,6 +4263,7 @@ async function EDITOR_duplicateSelection_drawUi(cursor, small, large, length) {
     // No need to consider '\r\n' and etc... only '\n'
     let linefeedLength = 0;
     let relativeIndexLine = (cursor.indexLine + get_EDITOR_offsetLine()) - get_EDITOR_virtualLineIndex();
+    let matched_indexLine_first = EDITOR_getIndexLineToHtml_Correctly(get_EDITOR_virtualLineIndex());
     let matched_indexLine_last = EDITOR_getIndexLineToHtml_Correctly(get_EDITOR_virtualLineIndex() + get_EDITOR_virtualCount() - 1);
     let last_valid_indexColumn_currentLine = EDITOR_getLastValidIndexColumn(cursor.indexLine);
 
@@ -4352,19 +4353,19 @@ async function EDITOR_duplicateSelection_drawUi(cursor, small, large, length) {
             let removingVisuallyDiv;
 
             if (cursor.indexColumn === 0 && last_valid_indexColumn_currentLine !== 0) { // start of line
-                if (relativeIndexLine === get_EDITOR_virtualCount() - 1) {
+                if (relativeIndexLine === matched_indexLine_last) {
                     if (relativeIndexLine === 0) {
                         lineDiv = null; // last line at 0 means the visual feedback should be continued vision of the current line because you pushed it down then scrolled.
                         removingVisuallyDiv = null; // No div above you to remove
                     }
                     else {
                         lineDiv = EDITOR_getNewAndEmptyLineElement();
-                        removingVisuallyDiv = get_EDITOR_textElement().children[0];
+                        removingVisuallyDiv = get_EDITOR_textElement().children[matched_indexLine_first];
                     }
                 }
                 else {
                     lineDiv = EDITOR_getNewAndEmptyLineElement();
-                    removingVisuallyDiv = get_EDITOR_textElement().children[get_EDITOR_virtualCount() - 1];
+                    removingVisuallyDiv = get_EDITOR_textElement().children[matched_indexLine_last];
                 }
 
                 if (lineDiv) {
@@ -4386,23 +4387,24 @@ async function EDITOR_duplicateSelection_drawUi(cursor, small, large, length) {
             else {
                 // ensure this conditional branch continues if handled, otherwise it will execute the fallback case erroneously
                 if (last_valid_indexColumn_currentLine === cursor.indexColumn) { // end of line
-                    if (relativeIndexLine === get_EDITOR_virtualCount() - 1) {
+                    if (relativeIndexLine === matched_indexLine_last) {
                         if (relativeIndexLine === 0) {
                             lineDiv = null;
                             removingVisuallyDiv = null; // No div above you to remove
                         }
                         else {
                             lineDiv = EDITOR_getNewAndEmptyLineElement();
-                            removingVisuallyDiv = get_EDITOR_textElement().children[0];
+                            removingVisuallyDiv = get_EDITOR_textElement().children[matched_indexLine_first];
                         }
                     }
                     else {
                         lineDiv = EDITOR_getNewAndEmptyLineElement();
-                        removingVisuallyDiv = get_EDITOR_textElement().children[get_EDITOR_virtualCount() - 1];
+                        removingVisuallyDiv = get_EDITOR_textElement().children[matched_indexLine_last];
                     }
 
                     if (lineDiv) {
                         // TODO: this is wrong you don't need to remove a div, just use that div again instead of making a new one to replace it.
+                        // TODO: wrap around suspect?
                         get_EDITOR_textElement().insertBefore(lineDiv, get_EDITOR_textElement().children[relativeIndexLine + 1]);
                         get_EDITOR_textElement().removeChild(removingVisuallyDiv);
 
@@ -4421,19 +4423,19 @@ async function EDITOR_duplicateSelection_drawUi(cursor, small, large, length) {
                 }
                 else { // among a line
                     // This case can only happen once at the start of the edit
-                    if (relativeIndexLine === get_EDITOR_virtualCount() - 1) {
+                    if (relativeIndexLine === matched_indexLine_last) {
                         if (relativeIndexLine === 0) {
                             lineDiv = null;
                             removingVisuallyDiv = null; // No div above you to remove
                         }
                         else {
                             lineDiv = EDITOR_getNewAndEmptyLineElement();
-                            removingVisuallyDiv = get_EDITOR_textElement().children[0];
+                            removingVisuallyDiv = get_EDITOR_textElement().children[matched_indexLine_first];
                         }
                     }
                     else {
                         lineDiv = EDITOR_getNewAndEmptyLineElement();
-                        removingVisuallyDiv = get_EDITOR_textElement().children[get_EDITOR_virtualCount() - 1];
+                        removingVisuallyDiv = get_EDITOR_textElement().children[matched_indexLine_last];
                     }
 
                     if (lineDiv) {
@@ -4464,6 +4466,7 @@ async function EDITOR_duplicateSelection_drawUi(cursor, small, large, length) {
                                 lineDiv.appendChild(w.div.children[rememberIndex]);
                             }
                         }
+                        // TODO: wrap around suspect?
                         get_EDITOR_textElement().insertBefore(lineDiv, get_EDITOR_textElement().children[relativeIndexLine + 1]);
                         get_EDITOR_textElement().removeChild(removingVisuallyDiv);
 
@@ -5040,6 +5043,7 @@ function EDITOR_paste(cursor, content) {
     // Consider '\r\n' and etc...
     let linefeedLength = 0;
     let relativeIndexLine = (cursor.indexLine + get_EDITOR_offsetLine()) - get_EDITOR_virtualLineIndex();
+    let matched_indexLine_first = EDITOR_getIndexLineToHtml_Correctly(get_EDITOR_virtualLineIndex());
     let matched_indexLine_last = EDITOR_getIndexLineToHtml_Correctly(get_EDITOR_virtualLineIndex() + get_EDITOR_virtualCount() - 1);
     let last_valid_indexColumn_currentLine = EDITOR_getLastValidIndexColumn(cursor.indexLine);
 
@@ -5177,19 +5181,19 @@ function EDITOR_paste(cursor, content) {
             let removingVisuallyDiv;
 
             if (cursor.indexColumn === 0 && last_valid_indexColumn_currentLine !== 0) { // start of line
-                if (relativeIndexLine === get_EDITOR_virtualCount() - 1) {
+                if (relativeIndexLine === matched_indexLine_last) {
                     if (relativeIndexLine === 0) {
                         lineDiv = null; // last line at 0 means the visual feedback should be continued vision of the current line because you pushed it down then scrolled.
                         removingVisuallyDiv = null; // No div above you to remove
                     }
                     else {
                         lineDiv = EDITOR_getNewAndEmptyLineElement();
-                        removingVisuallyDiv = get_EDITOR_textElement().children[0];
+                        removingVisuallyDiv = get_EDITOR_textElement().children[matched_indexLine_first];
                     }
                 }
                 else {
                     lineDiv = EDITOR_getNewAndEmptyLineElement();
-                    removingVisuallyDiv = get_EDITOR_textElement().children[get_EDITOR_virtualCount() - 1];
+                    removingVisuallyDiv = get_EDITOR_textElement().children[matched_indexLine_last];
                 }
 
                 if (lineDiv) {
@@ -5211,23 +5215,24 @@ function EDITOR_paste(cursor, content) {
             else {
                 // ensure this conditional branch continues if handled, otherwise it will execute the fallback case erroneously
                 if (last_valid_indexColumn_currentLine === cursor.indexColumn) { // end of line
-                    if (relativeIndexLine === get_EDITOR_virtualCount() - 1) {
+                    if (relativeIndexLine === matched_indexLine_last) {
                         if (relativeIndexLine === 0) {
                             lineDiv = null;
                             removingVisuallyDiv = null; // No div above you to remove
                         }
                         else {
                             lineDiv = EDITOR_getNewAndEmptyLineElement();
-                            removingVisuallyDiv = get_EDITOR_textElement().children[0];
+                            removingVisuallyDiv = get_EDITOR_textElement().children[matched_indexLine_first];
                         }
                     }
                     else {
                         lineDiv = EDITOR_getNewAndEmptyLineElement();
-                        removingVisuallyDiv = get_EDITOR_textElement().children[get_EDITOR_virtualCount() - 1];
+                        removingVisuallyDiv = get_EDITOR_textElement().children[matched_indexLine_last];
                     }
 
                     if (lineDiv) {
                         // TODO: this is wrong you don't need to remove a div, just use that div again instead of making a new one to replace it.
+                        // TODO: wrap around suspect?
                         get_EDITOR_textElement().insertBefore(lineDiv, get_EDITOR_textElement().children[relativeIndexLine + 1]);
                         get_EDITOR_textElement().removeChild(removingVisuallyDiv);
 
@@ -5246,19 +5251,19 @@ function EDITOR_paste(cursor, content) {
                 }
                 else { // among a line
                     // This case can only happen once at the start of the edit
-                    if (relativeIndexLine === get_EDITOR_virtualCount() - 1) {
+                    if (relativeIndexLine === matched_indexLine_last) {
                         if (relativeIndexLine === 0) {
                             lineDiv = null;
                             removingVisuallyDiv = null; // No div above you to remove
                         }
                         else {
                             lineDiv = EDITOR_getNewAndEmptyLineElement();
-                            removingVisuallyDiv = get_EDITOR_textElement().children[0];
+                            removingVisuallyDiv = get_EDITOR_textElement().children[matched_indexLine_first];
                         }
                     }
                     else {
                         lineDiv = EDITOR_getNewAndEmptyLineElement();
-                        removingVisuallyDiv = get_EDITOR_textElement().children[get_EDITOR_virtualCount() - 1];
+                        removingVisuallyDiv = get_EDITOR_textElement().children[matched_indexLine_last];
                     }
 
                     if (lineDiv) {
@@ -5289,6 +5294,7 @@ function EDITOR_paste(cursor, content) {
                                 lineDiv.appendChild(w.div.children[rememberIndex]);
                             }
                         }
+                        // TODO: wrap around suspect?
                         get_EDITOR_textElement().insertBefore(lineDiv, get_EDITOR_textElement().children[relativeIndexLine + 1]);
                         get_EDITOR_textElement().removeChild(removingVisuallyDiv);
 

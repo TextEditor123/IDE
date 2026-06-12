@@ -249,10 +249,10 @@ List of combined and unique interests:
 - [x] EDITOR_appendSimpleLine
 - [x] EDITOR_measureLineHeightAndCharacterWidth
 - [x] EDITOR_finalizeEdit
-- [ ] EDITOR_duplicateSelection_drawUi
+- [/] EDITOR_duplicateSelection_drawUi
 - [x] EDITOR_indentMore
 - [x] EDITOR_indentLess
-- [ ] EDITOR_paste
+- [/] EDITOR_paste
 - [/] EDITOR_EnterKey
 - [ ] EDITOR_onScroll
 - [x] EDITOR_createViewport
