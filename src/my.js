@@ -256,6 +256,9 @@ List of combined and unique interests:
 - [/] EDITOR_EnterKey
 - [ ] EDITOR_onScroll
     - [ ] I think scrolling the mouse wheel up (to a smaller scrollTop) isn't working properly.
+    - [ ] It is 3:55 I have until 5 maybe even 6 before I'm gonna go for a walk.
+    - [ ] My Mom mentioned it, my adrenaline is spiked, I'm gonna try to fix this.
+    - [ ] All in all I understand that I'm exhausted and I'm gonna just let it be if I get nowhere.
 - [x] EDITOR_createViewport
 - [/] EDITOR_REMOVE_line_drawGutter
 - [/] EDITOR_removeSelection
