@@ -183,15 +183,19 @@ const EDITOR_baseElement = document.getElementById('EDITOR');
 /* TODO: Caching the get_... for the HTML elements is perhaps beneficial in various places of the code and still is preferable to caching a 'document.getElementById'. */
 
 //                                                                (indexLine + get_EDITOR_offsetLine()) - get_EDITOR_virtualLineIndex()
-/** SEE 'EDITOR_getIndexLineToHtml_Correctly' */
+/** SEE 'EDITOR_getIndexLineToHtml_Correctly'; code duplication: this is explicitly inlined in the uncompiled source of editorGlobal.js within 'EDITOR_getIndexLineToHtml_Correctly' */
 const EDITOR_indexLine_VirtualRelative_Unmatched = indexLine => indexLine + EDITOR_int_fields[13] - EDITOR_int_fields[8];
 // 
 /**
  * TODO: It should be >= ?
  * 
  * @example EDITOR_getIndexLineToHtml_Correctly(EDITOR_indexLine_VirtualRelative_Unmatched(cursor.indexLine));
+ * @returns you capture the variable then check it for < 0 i.e. => if (indexLine_VirtualRelative < 0) { return bad_state; } else { return good_state; }
  */
-const EDITOR_getIndexLineToHtml_Correctly = unmatchedIndexLine => unmatchedIndexLine >= EDITOR_lineEndPositionList.count || unmatchedIndexLine >= EDITOR_baseElement.children[4].children[2].children.length || unmatchedIndexLine < 0 ? -1 : (unmatchedIndexLine = unmatchedIndexLine + EDITOR_domLineNodesZerothIndex) > EDITOR_int_fields[9] ? unmatchedIndexLine - EDITOR_int_fields[9] : unmatchedIndexLine;
+function EDITOR_getIndexLineToHtml_Correctly(indexLine) {
+  let unmatchedIndexLine = indexLine + EDITOR_int_fields[13] - EDITOR_int_fields[8];
+  return unmatchedIndexLine >= EDITOR_lineEndPositionList.count || unmatchedIndexLine >= EDITOR_baseElement.children[4].children[2].children.length || unmatchedIndexLine < 0 ? -1 : (unmatchedIndexLine = unmatchedIndexLine + EDITOR_domLineNodesZerothIndex) > EDITOR_int_fields[9] ? unmatchedIndexLine - EDITOR_int_fields[9] : unmatchedIndexLine;
+}
 
 //const EDITOR_isVisible_indexLine = (indexLine) => EDITOR_baseElement.children[4].children[2];
 
@@ -658,7 +662,7 @@ function EDITOR_drawGutter_Width() {
  * @returns
  */
 function walkLineUntilColumnIndex(cursor) {
-  let indexLine_VirtualRelative = EDITOR_getIndexLineToHtml_Correctly(EDITOR_indexLine_VirtualRelative_Unmatched(cursor.indexLine));
+  let indexLine_VirtualRelative = EDITOR_getIndexLineToHtml_Correctly(cursor.indexLine);
   if (indexLine_VirtualRelative < 0) {
     return {
       indexColumn_Goal: -1,
