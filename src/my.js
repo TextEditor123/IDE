@@ -286,4 +286,17 @@ And furthermore if all I do is:
 
 That would be okay.
 
+
+
+Nostalgia, anxiety, memories, "fear of missing out".
+A feeling of "longing".
+
+All of these things get more frequent and more intense
+when I don't make progress on the repo.
+I didn't write any code yesterday.
+
+"I don't know"
+
+
+
 */
