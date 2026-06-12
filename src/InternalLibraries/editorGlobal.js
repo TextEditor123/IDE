@@ -5165,6 +5165,7 @@ function EDITOR_paste(cursor, content) {
         // TODO: this is a very lazy solution to the problem, likely a more optimal way is available. Also name the variable?
         // I don't think everything fully works but I'm trying to decide if I should go eat something.
         for (let handleLineCounter = 0; handleLineCounter < linefeedLength; handleLineCounter++) {
+            // ???? relativeIndexLine is for the UI and is related to the DOM divs that are displaying text. 'lastShownLineIndex' is NOT equivalent that relates to the total of all lines in the textual data itself.
             if (relativeIndexLine > lastShownLineIndex) {
                 // A scroll should take place and handle the rest
                 // Note: any lines indices that don't change between the current scrollTop and what is shown with the new scrollTop...
