@@ -256,7 +256,7 @@ List of combined and unique interests:
 - [/] EDITOR_EnterKey
 - [ ] EDITOR_onScroll
 - [x] EDITOR_createViewport
-- [ ] EDITOR_REMOVE_line_drawGutter
+- [/] EDITOR_REMOVE_line_drawGutter
 - [ ] EDITOR_removeSelection
 - [x] EDITOR_deleteDo
 - [x] EDITOR_backspaceDo

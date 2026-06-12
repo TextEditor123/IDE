@@ -6187,10 +6187,13 @@ function EDITOR_REMOVE_line_drawGutter(linesRemovedCount) {
     // todo remove this confusing and misleading commented dead code that has the or maybe I idk
     // largestDrawnIndexLine + linesRemovedCount ? EDITOR_lineEndPositionList.count
 
-    if (get_EDITOR_gutter().children.length > 0 && get_EDITOR_gutter().children.length === get_EDITOR_virtualCount()) {
-        if (get_EDITOR_gutter().children[get_EDITOR_gutter().children.length - 1].innerText === '~') {
-            let successFoundTildeAtIndex = get_EDITOR_gutter().children.length - 1;
-            for (let i = get_EDITOR_gutter().children.length - 2; i >= 0; i--) {
+    let matched_indexLine_last = EDITOR_getIndexLineToHtml_Correctly(get_EDITOR_virtualLineIndex() + get_EDITOR_virtualCount() - 1);
+
+    if (get_EDITOR_gutter().children.length > 0 && get_EDITOR_gutter().children.length === get_EDITOR_virtualCount() && get_EDITOR_gutter().children.length === get_EDITOR_textElement().children.length) {
+        if (get_EDITOR_gutter().children[matched_indexLine_last].innerText === '~') {
+            let successFoundTildeAtIndex = matched_indexLine_last;
+            // TODO: wrap around suspect?
+            for (let i = matched_indexLine_last - 1; i >= 0; i--) {
                 if (get_EDITOR_gutter().children[i].innerText === '~') {
                     successFoundTildeAtIndex = i;
                 }
