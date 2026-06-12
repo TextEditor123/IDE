@@ -5993,6 +5993,9 @@ function EDITOR_onScroll() {
         // The entire time after just spotting that I'll eventually have to cross paths or whatever.
         // I feel the sustained panic.
 
+        // And people wave at me and I then I have to constantly think how close to them should I be before I start waving
+        // if they haven't waved yet and etc...
+
         for (var indexLine = lowerBound; indexLine < upperBound; indexLine++) {
 
             let transform = `translateY(${vertical}px)`;
