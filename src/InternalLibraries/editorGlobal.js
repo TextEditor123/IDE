@@ -5988,6 +5988,11 @@ function EDITOR_onScroll() {
         // When I go outside it is like complete panic.
         // And my brain just shuts down.
 
+        // I try to go for a walk on the days I don't go in.
+        // When I walk by other people that are out for a walk I feel panic.
+        // The entire time after just spotting that I'll eventually have to cross paths or whatever.
+        // I feel the sustained panic.
+
         for (var indexLine = lowerBound; indexLine < upperBound; indexLine++) {
 
             let transform = `translateY(${vertical}px)`;
