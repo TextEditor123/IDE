@@ -6777,14 +6777,11 @@ function EDITOR_backspaceDo(cursor, event) {
                 EDITOR_stopTrackingIfTrackedSyntaxMadeToSpanSingleLine(cursor);
             }
 
-            if (rememberLineIndex - get_EDITOR_virtualLineIndex() - 1 < get_EDITOR_textElement().children.length &&
-                rememberLineIndex - get_EDITOR_virtualLineIndex() - 1 >= 0 &&
-                rememberLineIndex - get_EDITOR_virtualLineIndex() < get_EDITOR_textElement().children.length &&
-                rememberLineIndex - get_EDITOR_virtualLineIndex() >= 0) {
-
-                // NOT start of file, backspace the line ending and join the lines
-                let keepingDiv = get_EDITOR_textElement().children[rememberLineIndex - get_EDITOR_virtualLineIndex() - 1];
-                let removingDiv = get_EDITOR_textElement().children[rememberLineIndex - get_EDITOR_virtualLineIndex()];
+            // Visually, immediately merge the lines if both are visible.
+            let matched_PREVIOUS_indexLine = EDITOR_getIndexLineToHtml_Correctly(rememberLineIndex - 1);
+            if (matched_PREVIOUS_indexLine !== -1) {
+                let keepingDiv = get_EDITOR_textElement().children[matched_PREVIOUS_indexLine];
+                let removingDiv = w.div;
 
                 let rememberRemovingDivLength = removingDiv.children.length;
                 for (var i = 0; i < rememberRemovingDivLength; i++) {
