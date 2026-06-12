@@ -6564,8 +6564,8 @@ function EDITOR_removeSelection(cursor) {
 
         for (var i = linesRemovedCount - 1; i > 0; i--) {
             let indexLine = cursor.indexLine + i;
-            let relativeLineIndex = indexLine - get_EDITOR_virtualLineIndex();
-            if (relativeLineIndex >= get_EDITOR_textElement().children.length || relativeLineIndex < 0) {
+            let relativeLineIndex = EDITOR_getIndexLineToHtml_Correctly(indexLine);
+            if (relativeLineIndex < 0) {
                 continue;
             }
 
@@ -6598,11 +6598,16 @@ function EDITOR_removeSelection(cursor) {
         //
         // Each case might be the same solution I don't know I just need time to think I'm completely exhausted but ima figure it out by just typing everything out and overtime it will happen
         // 
+
+        let matched_indexLine_last = EDITOR_getIndexLineToHtml_Correctly(get_EDITOR_virtualLineIndex() + get_EDITOR_virtualCount() - 1);
+
         if (get_EDITOR_textElement().children.length === get_EDITOR_gutter().children.length) {
             for (let i = 0; i < visibleLinesRemovedCount; i++) {
-                let gutterLineElement = get_EDITOR_gutter().children[get_EDITOR_textElement().children.length - 1 - i];
+                // TODO: wrap around suspect?
+                let gutterLineElement = get_EDITOR_gutter().children[matched_indexLine_last - i];
                 gutterLineElement.innerHTML = ''; // I don't believe this will have already been cleared.
-                let textLineElement = get_EDITOR_textElement().children[get_EDITOR_textElement().children.length - 1 - i];
+                // TODO: wrap around suspect?
+                let textLineElement = get_EDITOR_textElement().children[matched_indexLine_last - i];
                 textLineElement.innerHTML = ''; // Might already be cleared, furthermore might ALWAYS be cleared.
                 EDITOR_drawLine(largestDrawnIndexLine - i, gutterLineElement, textLineElement);
             }
