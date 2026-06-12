@@ -304,6 +304,11 @@ I need to ease myself back into the habit.
 I'm gonna do:
 - [ ] EDITOR_backspaceDo
 
+Ultimately what I need to do right now is "simple" given that I've already solved one of the cases.
+And the remainder are all the same thing repeated more or less.
+
+I have a massive mental block though at the moment.
+
 
 
 */
