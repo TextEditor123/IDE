@@ -5981,6 +5981,9 @@ function EDITOR_onScroll() {
         // It is that I literally don't know "what to do".
         // I don't know how to figure out what to do.
         // all I hear is complete panic.
+        //
+        // They're like "ask your boss about it".
+        // I can't explain why this I am incapable of doing 99% of things that should be simple.
 
         for (var indexLine = lowerBound; indexLine < upperBound; indexLine++) {
 
