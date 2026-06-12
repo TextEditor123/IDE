@@ -4738,8 +4738,8 @@ function EDITOR_EnterKey(cursor, ctrlKey, shiftKey) {
 
   // There are some cases that I don't feel like thinking about at the moment, this if statement singles them out.
   if (EDITOR_int_fields[9] <= 1 || EDITOR_baseElement.children[4].children[2].children.length !== EDITOR_int_fields[9]) shouldRenderEntireViewport = true;
-  let matched_indexLine_first = EDITOR_getIndexLineToHtml_Correctly(0);
-  let matched_indexLine_last = EDITOR_getIndexLineToHtml_Correctly(EDITOR_int_fields[9] - 1);
+  let matched_indexLine_first = EDITOR_getIndexLineToHtml_Correctly(EDITOR_int_fields[8]);
+  let matched_indexLine_last = EDITOR_getIndexLineToHtml_Correctly(EDITOR_int_fields[8] + EDITOR_int_fields[9] - 1);
 
   // TODO: reminder for when virtualization padding is improved, this function might need to be looked at.
   // TODO: Track the enter keystroke the same as any other insertion edit and have it pending until it needs to be finalized.

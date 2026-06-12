@@ -5524,8 +5524,8 @@ function EDITOR_EnterKey(cursor, ctrlKey, shiftKey) {
     if (get_EDITOR_virtualCount() <= 1 || get_EDITOR_textElement().children.length !== get_EDITOR_virtualCount())
         shouldRenderEntireViewport = true;
 
-    let matched_indexLine_first = EDITOR_getIndexLineToHtml_Correctly(0);
-    let matched_indexLine_last = EDITOR_getIndexLineToHtml_Correctly(get_EDITOR_virtualCount() - 1);
+    let matched_indexLine_first = EDITOR_getIndexLineToHtml_Correctly(get_EDITOR_virtualLineIndex());
+    let matched_indexLine_last = EDITOR_getIndexLineToHtml_Correctly(get_EDITOR_virtualLineIndex() + get_EDITOR_virtualCount() - 1);
 
     // TODO: reminder for when virtualization padding is improved, this function might need to be looked at.
     // TODO: Track the enter keystroke the same as any other insertion edit and have it pending until it needs to be finalized.
