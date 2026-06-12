@@ -5985,6 +5985,9 @@ function EDITOR_onScroll() {
         // They're like "ask your boss about it".
         // I can't explain why this I am incapable of doing 99% of things that should be simple.
 
+        // When I go outside it is like complete panic.
+        // And my brain just shuts down.
+
         for (var indexLine = lowerBound; indexLine < upperBound; indexLine++) {
 
             let transform = `translateY(${vertical}px)`;
