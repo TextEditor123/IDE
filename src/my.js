@@ -234,7 +234,7 @@ List of 'get_EDITOR_textElement()' of interest:
 - [ ] EDITOR_paste
 - [ ] EDITOR_EnterKey
 - [ ] EDITOR_onScroll
-- [ ] EDITOR_createViewport
+- [x] EDITOR_createViewport
 - [ ] EDITOR_removeSelection
 - [ ] EDITOR_deleteDo
 - [ ] EDITOR_backspaceDo
@@ -253,9 +253,9 @@ List of combined and unique interests:
 - [x] EDITOR_indentMore
 - [x] EDITOR_indentLess
 - [ ] EDITOR_paste
-- [ ] EDITOR_EnterKey
+- [/] EDITOR_EnterKey
 - [ ] EDITOR_onScroll
-- [ ] EDITOR_createViewport
+- [x] EDITOR_createViewport
 - [ ] EDITOR_REMOVE_line_drawGutter
 - [ ] EDITOR_removeSelection
 - [x] EDITOR_deleteDo
