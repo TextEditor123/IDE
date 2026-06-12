@@ -5974,6 +5974,14 @@ function EDITOR_onScroll() {
         // Then it doesn't last and I just keep coming back over and over.
         // I even stopped for the day then compulsively came back to fix that to reduce my anxiety that spiked.
 
+        // I actually don't know what to do about the thing btw.
+        // Everytime they mention it I panic.
+        // And I have no idea what to do.
+        // It isn't that I can't do it.
+        // It is that I literally don't know "what to do".
+        // I don't know how to figure out what to do.
+        // all I hear is complete panic.
+
         for (var indexLine = lowerBound; indexLine < upperBound; indexLine++) {
 
             let transform = `translateY(${vertical}px)`;
