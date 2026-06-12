@@ -206,6 +206,19 @@ const get_EDITOR_presentation = () => EDITOR_baseElement.children[4].children[0]
 const get_EDITOR_cursorListElement = () => EDITOR_baseElement.children[4].children[1];
 const get_EDITOR_textElement = () => EDITOR_baseElement.children[4].children[2];
 
+//                                                                (indexLine + get_EDITOR_offsetLine()) - get_EDITOR_virtualLineIndex()
+/** SEE 'EDITOR_getIndexLineToHtml_Correctly' */
+const EDITOR_indexLine_VirtualRelative_Unmatched = (indexLine) => (indexLine + get_EDITOR_offsetLine()) - get_EDITOR_virtualLineIndex();
+// 
+/**
+ * TODO: It should be >= ?
+ * 
+ * @example EDITOR_getIndexLineToHtml_Correctly(EDITOR_indexLine_VirtualRelative_Unmatched(cursor.indexLine));
+ */
+const EDITOR_getIndexLineToHtml_Correctly = (unmatchedIndexLine) => unmatchedIndexLine >= EDITOR_lineEndPositionList.count || unmatchedIndexLine >= get_EDITOR_textElement().children.length || unmatchedIndexLine < 0 ? -1 : ((unmatchedIndexLine = (unmatchedIndexLine + EDITOR_domLineNodesZerothIndex)) > get_EDITOR_virtualCount() ? unmatchedIndexLine - get_EDITOR_virtualCount() : unmatchedIndexLine);
+
+//const EDITOR_isVisible_indexLine = (indexLine) => EDITOR_baseElement.children[4].children[2];
+
 const EDITOR_debug = document.getElementById('EDITOR_debug');
 const EDITOR_findOverlay = document.getElementById('EDITOR_findOverlay');
 EDITOR_findOverlay.style.visibility = 'hidden';
@@ -833,12 +846,8 @@ function EDITOR_drawGutter_Width() {
  * @returns
  */
 function walkLineUntilColumnIndex(cursor) {
-    let indexLine_VirtualRelative = (cursor.indexLine + get_EDITOR_offsetLine()) - get_EDITOR_virtualLineIndex();
-
-    if (cursor.indexLine >= EDITOR_lineEndPositionList.count ||
-        indexLine_VirtualRelative >= get_EDITOR_textElement().children.length ||
-        indexLine_VirtualRelative < 0) {
-
+    let indexLine_VirtualRelative = EDITOR_getIndexLineToHtml_Correctly(EDITOR_indexLine_VirtualRelative_Unmatched(cursor.indexLine));
+    if (indexLine_VirtualRelative < 0) {
         return {
             indexColumn_Goal: -1,
             indexColumn_Sum: -1,
@@ -847,11 +856,6 @@ function walkLineUntilColumnIndex(cursor) {
             span: null,
             div: null,
         };
-    }
-
-    indexLine_VirtualRelative += EDITOR_domLineNodesZerothIndex;
-    if (indexLine_VirtualRelative > get_EDITOR_virtualCount()) {
-        indexLine_VirtualRelative -= get_EDITOR_virtualCount();
     }
     
     let div = get_EDITOR_textElement().children[indexLine_VirtualRelative];
