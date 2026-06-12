@@ -3619,7 +3619,8 @@ async function EDITOR_duplicateSelection_drawUi(cursor, small, large, length) {
   // No need to consider '\r\n' and etc... only '\n'
   let linefeedLength = 0;
   let relativeIndexLine = cursor.indexLine + EDITOR_int_fields[13] - EDITOR_int_fields[8];
-  let lastShownLineIndex = EDITOR_int_fields[8] + EDITOR_int_fields[9] - 1;
+  let matched_indexLine_first = EDITOR_getIndexLineToHtml_Correctly(EDITOR_int_fields[8]);
+  let matched_indexLine_last = EDITOR_getIndexLineToHtml_Correctly(EDITOR_int_fields[8] + EDITOR_int_fields[9] - 1);
   let last_valid_indexColumn_currentLine = EDITOR_getLastValidIndexColumn(cursor.indexLine);
 
   // TODO: An optimization to check whether you even need to redraw any lines perhaps is possible but it would add too much complexity at the moment and so it isn't being considered...
@@ -3647,7 +3648,7 @@ async function EDITOR_duplicateSelection_drawUi(cursor, small, large, length) {
         //
         if (linefeedLength > 0) writeLinefeed();
         // TODO: Extremely important next line but it doesn't fully pattern with every case so it is somewhat out of nowhere
-        if (relativeIndexLine > lastShownLineIndex) return;
+        if (relativeIndexLine > matched_indexLine_last) return;
         //
         insertionLength++;
         //
@@ -3686,7 +3687,7 @@ async function EDITOR_duplicateSelection_drawUi(cursor, small, large, length) {
     // TODO: this is a very lazy solution to the problem, likely a more optimal way is available. Also name the variable?
     // I don't think everything fully works but I'm trying to decide if I should go eat something.
     for (let handleLineCounter = 0; handleLineCounter < linefeedLength; handleLineCounter++) {
-      if (relativeIndexLine > lastShownLineIndex) {
+      if (relativeIndexLine > matched_indexLine_last) {
         // A scroll should take place and handle the rest
         // Note: any lines indices that don't change between the current scrollTop and what is shown with the new scrollTop...
         // ...won't redraw so you still need to run this code for some of the lines.
@@ -3697,17 +3698,17 @@ async function EDITOR_duplicateSelection_drawUi(cursor, small, large, length) {
       let removingVisuallyDiv;
       if (cursor.indexColumn === 0 && last_valid_indexColumn_currentLine !== 0) {
         // start of line
-        if (relativeIndexLine === EDITOR_int_fields[9] - 1) {
+        if (relativeIndexLine === matched_indexLine_last) {
           if (relativeIndexLine === 0) {
             lineDiv = null; // last line at 0 means the visual feedback should be continued vision of the current line because you pushed it down then scrolled.
             removingVisuallyDiv = null; // No div above you to remove
           } else {
             lineDiv = EDITOR_getNewAndEmptyLineElement();
-            removingVisuallyDiv = EDITOR_baseElement.children[4].children[2].children[0];
+            removingVisuallyDiv = EDITOR_baseElement.children[4].children[2].children[matched_indexLine_first];
           }
         } else {
           lineDiv = EDITOR_getNewAndEmptyLineElement();
-          removingVisuallyDiv = EDITOR_baseElement.children[4].children[2].children[EDITOR_int_fields[9] - 1];
+          removingVisuallyDiv = EDITOR_baseElement.children[4].children[2].children[matched_indexLine_last];
         }
         if (lineDiv) {
           EDITOR_baseElement.children[4].children[2].insertBefore(lineDiv, EDITOR_baseElement.children[4].children[2].children[relativeIndexLine]);
@@ -3727,20 +3728,21 @@ async function EDITOR_duplicateSelection_drawUi(cursor, small, large, length) {
         // ensure this conditional branch continues if handled, otherwise it will execute the fallback case erroneously
         if (last_valid_indexColumn_currentLine === cursor.indexColumn) {
           // end of line
-          if (relativeIndexLine === EDITOR_int_fields[9] - 1) {
+          if (relativeIndexLine === matched_indexLine_last) {
             if (relativeIndexLine === 0) {
               lineDiv = null;
               removingVisuallyDiv = null; // No div above you to remove
             } else {
               lineDiv = EDITOR_getNewAndEmptyLineElement();
-              removingVisuallyDiv = EDITOR_baseElement.children[4].children[2].children[0];
+              removingVisuallyDiv = EDITOR_baseElement.children[4].children[2].children[matched_indexLine_first];
             }
           } else {
             lineDiv = EDITOR_getNewAndEmptyLineElement();
-            removingVisuallyDiv = EDITOR_baseElement.children[4].children[2].children[EDITOR_int_fields[9] - 1];
+            removingVisuallyDiv = EDITOR_baseElement.children[4].children[2].children[matched_indexLine_last];
           }
           if (lineDiv) {
             // TODO: this is wrong you don't need to remove a div, just use that div again instead of making a new one to replace it.
+            // TODO: wrap around suspect?
             EDITOR_baseElement.children[4].children[2].insertBefore(lineDiv, EDITOR_baseElement.children[4].children[2].children[relativeIndexLine + 1]);
             EDITOR_baseElement.children[4].children[2].removeChild(removingVisuallyDiv);
             w.div = lineDiv;
@@ -3758,17 +3760,17 @@ async function EDITOR_duplicateSelection_drawUi(cursor, small, large, length) {
         } else {
           // among a line
           // This case can only happen once at the start of the edit
-          if (relativeIndexLine === EDITOR_int_fields[9] - 1) {
+          if (relativeIndexLine === matched_indexLine_last) {
             if (relativeIndexLine === 0) {
               lineDiv = null;
               removingVisuallyDiv = null; // No div above you to remove
             } else {
               lineDiv = EDITOR_getNewAndEmptyLineElement();
-              removingVisuallyDiv = EDITOR_baseElement.children[4].children[2].children[0];
+              removingVisuallyDiv = EDITOR_baseElement.children[4].children[2].children[matched_indexLine_first];
             }
           } else {
             lineDiv = EDITOR_getNewAndEmptyLineElement();
-            removingVisuallyDiv = EDITOR_baseElement.children[4].children[2].children[EDITOR_int_fields[9] - 1];
+            removingVisuallyDiv = EDITOR_baseElement.children[4].children[2].children[matched_indexLine_last];
           }
           if (lineDiv) {
             if (w.indexColumn_Goal > 0) {
@@ -3796,6 +3798,7 @@ async function EDITOR_duplicateSelection_drawUi(cursor, small, large, length) {
                 lineDiv.appendChild(w.div.children[rememberIndex]);
               }
             }
+            // TODO: wrap around suspect?
             EDITOR_baseElement.children[4].children[2].insertBefore(lineDiv, EDITOR_baseElement.children[4].children[2].children[relativeIndexLine + 1]);
             EDITOR_baseElement.children[4].children[2].removeChild(removingVisuallyDiv);
             w.div = lineDiv;
@@ -4326,7 +4329,8 @@ function EDITOR_paste(cursor, content) {
   // Consider '\r\n' and etc...
   let linefeedLength = 0;
   let relativeIndexLine = cursor.indexLine + EDITOR_int_fields[13] - EDITOR_int_fields[8];
-  let lastShownLineIndex = EDITOR_int_fields[8] + EDITOR_int_fields[9] - 1;
+  let matched_indexLine_first = EDITOR_getIndexLineToHtml_Correctly(EDITOR_int_fields[8]);
+  let matched_indexLine_last = EDITOR_getIndexLineToHtml_Correctly(EDITOR_int_fields[8] + EDITOR_int_fields[9] - 1);
   let last_valid_indexColumn_currentLine = EDITOR_getLastValidIndexColumn(cursor.indexLine);
 
   // TODO: An optimization to check whether you even need to redraw any lines perhaps is possible but it would add too much complexity at the moment and so it isn't being considered...
@@ -4364,7 +4368,7 @@ function EDITOR_paste(cursor, content) {
         //
         if (wordLength > 0) writeWord();else if (linefeedLength > 0) writeLinefeed();
         // TODO: Extremely important next line but it doesn't fully pattern with every case so it is somewhat out of nowhere
-        if (relativeIndexLine > lastShownLineIndex) return;
+        if (relativeIndexLine > matched_indexLine_last) return;
         //
         insertionLength += 4;
         //
@@ -4374,7 +4378,7 @@ function EDITOR_paste(cursor, content) {
         //
         if (tabLength > 0) writeTab();else if (linefeedLength > 0) writeLinefeed();
         // TODO: Extremely important next line but it doesn't fully pattern with every case so it is somewhat out of nowhere
-        if (relativeIndexLine > lastShownLineIndex) return;
+        if (relativeIndexLine > matched_indexLine_last) return;
         //
         insertionLength++;
         //
@@ -4429,7 +4433,7 @@ function EDITOR_paste(cursor, content) {
     // TODO: this is a very lazy solution to the problem, likely a more optimal way is available. Also name the variable?
     // I don't think everything fully works but I'm trying to decide if I should go eat something.
     for (let handleLineCounter = 0; handleLineCounter < linefeedLength; handleLineCounter++) {
-      if (relativeIndexLine > lastShownLineIndex) {
+      if (relativeIndexLine > matched_indexLine_last) {
         // A scroll should take place and handle the rest
         // Note: any lines indices that don't change between the current scrollTop and what is shown with the new scrollTop...
         // ...won't redraw so you still need to run this code for some of the lines.
@@ -4440,17 +4444,17 @@ function EDITOR_paste(cursor, content) {
       let removingVisuallyDiv;
       if (cursor.indexColumn === 0 && last_valid_indexColumn_currentLine !== 0) {
         // start of line
-        if (relativeIndexLine === EDITOR_int_fields[9] - 1) {
+        if (relativeIndexLine === matched_indexLine_last) {
           if (relativeIndexLine === 0) {
             lineDiv = null; // last line at 0 means the visual feedback should be continued vision of the current line because you pushed it down then scrolled.
             removingVisuallyDiv = null; // No div above you to remove
           } else {
             lineDiv = EDITOR_getNewAndEmptyLineElement();
-            removingVisuallyDiv = EDITOR_baseElement.children[4].children[2].children[0];
+            removingVisuallyDiv = EDITOR_baseElement.children[4].children[2].children[matched_indexLine_first];
           }
         } else {
           lineDiv = EDITOR_getNewAndEmptyLineElement();
-          removingVisuallyDiv = EDITOR_baseElement.children[4].children[2].children[EDITOR_int_fields[9] - 1];
+          removingVisuallyDiv = EDITOR_baseElement.children[4].children[2].children[matched_indexLine_last];
         }
         if (lineDiv) {
           EDITOR_baseElement.children[4].children[2].insertBefore(lineDiv, EDITOR_baseElement.children[4].children[2].children[relativeIndexLine]);
@@ -4470,20 +4474,21 @@ function EDITOR_paste(cursor, content) {
         // ensure this conditional branch continues if handled, otherwise it will execute the fallback case erroneously
         if (last_valid_indexColumn_currentLine === cursor.indexColumn) {
           // end of line
-          if (relativeIndexLine === EDITOR_int_fields[9] - 1) {
+          if (relativeIndexLine === matched_indexLine_last) {
             if (relativeIndexLine === 0) {
               lineDiv = null;
               removingVisuallyDiv = null; // No div above you to remove
             } else {
               lineDiv = EDITOR_getNewAndEmptyLineElement();
-              removingVisuallyDiv = EDITOR_baseElement.children[4].children[2].children[0];
+              removingVisuallyDiv = EDITOR_baseElement.children[4].children[2].children[matched_indexLine_first];
             }
           } else {
             lineDiv = EDITOR_getNewAndEmptyLineElement();
-            removingVisuallyDiv = EDITOR_baseElement.children[4].children[2].children[EDITOR_int_fields[9] - 1];
+            removingVisuallyDiv = EDITOR_baseElement.children[4].children[2].children[matched_indexLine_last];
           }
           if (lineDiv) {
             // TODO: this is wrong you don't need to remove a div, just use that div again instead of making a new one to replace it.
+            // TODO: wrap around suspect?
             EDITOR_baseElement.children[4].children[2].insertBefore(lineDiv, EDITOR_baseElement.children[4].children[2].children[relativeIndexLine + 1]);
             EDITOR_baseElement.children[4].children[2].removeChild(removingVisuallyDiv);
             w.div = lineDiv;
@@ -4501,17 +4506,17 @@ function EDITOR_paste(cursor, content) {
         } else {
           // among a line
           // This case can only happen once at the start of the edit
-          if (relativeIndexLine === EDITOR_int_fields[9] - 1) {
+          if (relativeIndexLine === matched_indexLine_last) {
             if (relativeIndexLine === 0) {
               lineDiv = null;
               removingVisuallyDiv = null; // No div above you to remove
             } else {
               lineDiv = EDITOR_getNewAndEmptyLineElement();
-              removingVisuallyDiv = EDITOR_baseElement.children[4].children[2].children[0];
+              removingVisuallyDiv = EDITOR_baseElement.children[4].children[2].children[matched_indexLine_first];
             }
           } else {
             lineDiv = EDITOR_getNewAndEmptyLineElement();
-            removingVisuallyDiv = EDITOR_baseElement.children[4].children[2].children[EDITOR_int_fields[9] - 1];
+            removingVisuallyDiv = EDITOR_baseElement.children[4].children[2].children[matched_indexLine_last];
           }
           if (lineDiv) {
             if (w.indexColumn_Goal > 0) {
@@ -4539,6 +4544,7 @@ function EDITOR_paste(cursor, content) {
                 lineDiv.appendChild(w.div.children[rememberIndex]);
               }
             }
+            // TODO: wrap around suspect?
             EDITOR_baseElement.children[4].children[2].insertBefore(lineDiv, EDITOR_baseElement.children[4].children[2].children[relativeIndexLine + 1]);
             EDITOR_baseElement.children[4].children[2].removeChild(removingVisuallyDiv);
             w.div = lineDiv;
@@ -5280,10 +5286,12 @@ function EDITOR_REMOVE_line_drawGutter(linesRemovedCount) {
   // todo remove this confusing and misleading commented dead code that has the or maybe I idk
   // largestDrawnIndexLine + linesRemovedCount ? EDITOR_lineEndPositionList.count
 
-  if (EDITOR_baseElement.children[3].children[1].children.length > 0 && EDITOR_baseElement.children[3].children[1].children.length === EDITOR_int_fields[9]) {
-    if (EDITOR_baseElement.children[3].children[1].children[EDITOR_baseElement.children[3].children[1].children.length - 1].innerText === '~') {
-      let successFoundTildeAtIndex = EDITOR_baseElement.children[3].children[1].children.length - 1;
-      for (let i = EDITOR_baseElement.children[3].children[1].children.length - 2; i >= 0; i--) {
+  let matched_indexLine_last = EDITOR_getIndexLineToHtml_Correctly(EDITOR_int_fields[8] + EDITOR_int_fields[9] - 1);
+  if (EDITOR_baseElement.children[3].children[1].children.length > 0 && EDITOR_baseElement.children[3].children[1].children.length === EDITOR_int_fields[9] && EDITOR_baseElement.children[3].children[1].children.length === EDITOR_baseElement.children[4].children[2].children.length) {
+    if (EDITOR_baseElement.children[3].children[1].children[matched_indexLine_last].innerText === '~') {
+      let successFoundTildeAtIndex = matched_indexLine_last;
+      // TODO: wrap around suspect?
+      for (let i = matched_indexLine_last - 1; i >= 0; i--) {
         if (EDITOR_baseElement.children[3].children[1].children[i].innerText === '~') {
           successFoundTildeAtIndex = i;
         } else {
@@ -5595,8 +5603,8 @@ function EDITOR_removeSelection(cursor) {
 
     for (var i = linesRemovedCount - 1; i > 0; i--) {
       let indexLine = cursor.indexLine + i;
-      let relativeLineIndex = indexLine - EDITOR_int_fields[8];
-      if (relativeLineIndex >= EDITOR_baseElement.children[4].children[2].children.length || relativeLineIndex < 0) {
+      let relativeLineIndex = EDITOR_getIndexLineToHtml_Correctly(indexLine);
+      if (relativeLineIndex < 0) {
         continue;
       }
       visibleLinesRemovedCount++;
@@ -5626,11 +5634,15 @@ function EDITOR_removeSelection(cursor) {
     //
     // Each case might be the same solution I don't know I just need time to think I'm completely exhausted but ima figure it out by just typing everything out and overtime it will happen
     // 
+
+    let matched_indexLine_last = EDITOR_getIndexLineToHtml_Correctly(EDITOR_int_fields[8] + EDITOR_int_fields[9] - 1);
     if (EDITOR_baseElement.children[4].children[2].children.length === EDITOR_baseElement.children[3].children[1].children.length) {
       for (let i = 0; i < visibleLinesRemovedCount; i++) {
-        let gutterLineElement = EDITOR_baseElement.children[3].children[1].children[EDITOR_baseElement.children[4].children[2].children.length - 1 - i];
+        // TODO: wrap around suspect?
+        let gutterLineElement = EDITOR_baseElement.children[3].children[1].children[matched_indexLine_last - i];
         gutterLineElement.innerHTML = ''; // I don't believe this will have already been cleared.
-        let textLineElement = EDITOR_baseElement.children[4].children[2].children[EDITOR_baseElement.children[4].children[2].children.length - 1 - i];
+        // TODO: wrap around suspect?
+        let textLineElement = EDITOR_baseElement.children[4].children[2].children[matched_indexLine_last - i];
         textLineElement.innerHTML = ''; // Might already be cleared, furthermore might ALWAYS be cleared.
         EDITOR_drawLine(largestDrawnIndexLine - i, gutterLineElement, textLineElement);
       }
