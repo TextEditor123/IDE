@@ -5524,6 +5524,9 @@ function EDITOR_EnterKey(cursor, ctrlKey, shiftKey) {
     if (get_EDITOR_virtualCount() <= 1 || get_EDITOR_textElement().children.length !== get_EDITOR_virtualCount())
         shouldRenderEntireViewport = true;
 
+    let matched_indexLine_first = EDITOR_getIndexLineToHtml_Correctly(0);
+    let matched_indexLine_last = EDITOR_getIndexLineToHtml_Correctly(get_EDITOR_virtualCount() - 1);
+
     // TODO: reminder for when virtualization padding is improved, this function might need to be looked at.
     // TODO: Track the enter keystroke the same as any other insertion edit and have it pending until it needs to be finalized.
 
@@ -5542,24 +5545,24 @@ function EDITOR_EnterKey(cursor, ctrlKey, shiftKey) {
         let lineDiv; // TODO: re-use the one you are removing?
         let removingVisuallyDiv;
 
-        if (relativeIndexLine === get_EDITOR_virtualCount() - 1) {
+        if (relativeIndexLine === matched_indexLine_last) {
             if (relativeIndexLine === 0) {
                 lineDiv = null; // last line at 0 means the visual feedback should be continued vision of the current line because you pushed it down then scrolled.
                 removingVisuallyDiv = null; // No div above you to remove
             }
             else {
                 lineDiv = EDITOR_getNewAndEmptyLineElement();
-                removingVisuallyDiv = get_EDITOR_textElement().children[0];
+                removingVisuallyDiv = get_EDITOR_textElement().children[matched_indexLine_first];
             }
         }
         else {
             lineDiv = EDITOR_getNewAndEmptyLineElement();
-            removingVisuallyDiv = get_EDITOR_textElement().children[get_EDITOR_virtualCount() - 1];
+            removingVisuallyDiv = get_EDITOR_textElement().children[matched_indexLine_last];
         }
 
         if (lineDiv) {
-            get_EDITOR_textElement().insertBefore(lineDiv, get_EDITOR_textElement().children[relativeIndexLine]);
             get_EDITOR_textElement().removeChild(removingVisuallyDiv);
+            get_EDITOR_textElement().insertBefore(lineDiv, get_EDITOR_textElement().children[relativeIndexLine]);
         }
 
         if (cursor.cached_indentation_byteList) {
@@ -5592,25 +5595,25 @@ function EDITOR_EnterKey(cursor, ctrlKey, shiftKey) {
                 let lineDiv;
                 let removingVisuallyDiv;
 
-                if (relativeIndexLine === get_EDITOR_virtualCount() - 1) {
+                if (relativeIndexLine === matched_indexLine_last) {
                     if (relativeIndexLine === 0) {
                         lineDiv = null;
                         removingVisuallyDiv = null; // No div above you to remove
                     }
                     else {
                         lineDiv = EDITOR_getNewAndEmptyLineElement();
-                        removingVisuallyDiv = get_EDITOR_textElement().children[0];
+                        removingVisuallyDiv = get_EDITOR_textElement().children[matched_indexLine_first];
                     }
                 }
                 else {
                     lineDiv = EDITOR_getNewAndEmptyLineElement();
-                    removingVisuallyDiv = get_EDITOR_textElement().children[get_EDITOR_virtualCount() - 1];
+                    removingVisuallyDiv = get_EDITOR_textElement().children[matched_indexLine_last];
                 }
 
                 if (lineDiv) {
                     lineDiv.children[0].innerText = cursor.cached_indentation_string;
-                    get_EDITOR_textElement().insertBefore(lineDiv, get_EDITOR_textElement().children[relativeIndexLine + 1]);
                     get_EDITOR_textElement().removeChild(removingVisuallyDiv);
+                    get_EDITOR_textElement().insertBefore(lineDiv, get_EDITOR_textElement().children[relativeIndexLine]);
                 }
                 
                 if (cursor.cached_indentation_byteList) {
@@ -5632,19 +5635,19 @@ function EDITOR_EnterKey(cursor, ctrlKey, shiftKey) {
                 let lineDiv;
                 let removingVisuallyDiv;
 
-                if (relativeIndexLine === get_EDITOR_virtualCount() - 1) {
+                if (relativeIndexLine === matched_indexLine_last) {
                     if (relativeIndexLine === 0) {
                         lineDiv = null;
                         removingVisuallyDiv = null; // No div above you to remove
                     }
                     else {
                         lineDiv = EDITOR_getNewAndEmptyLineElement();
-                        removingVisuallyDiv = get_EDITOR_textElement().children[0];
+                        removingVisuallyDiv = get_EDITOR_textElement().children[matched_indexLine_first];
                     }
                 }
                 else {
                     lineDiv = EDITOR_getNewAndEmptyLineElement();
-                    removingVisuallyDiv = get_EDITOR_textElement().children[get_EDITOR_virtualCount() - 1];
+                    removingVisuallyDiv = get_EDITOR_textElement().children[matched_indexLine_last];
                 }
 
                 if (lineDiv) {
@@ -5710,8 +5713,8 @@ function EDITOR_EnterKey(cursor, ctrlKey, shiftKey) {
                             lineDiv.appendChild(w.div.children[rememberIndex]);
                         }
                     }
-                    get_EDITOR_textElement().insertBefore(lineDiv, get_EDITOR_textElement().children[relativeIndexLine + 1]);
                     get_EDITOR_textElement().removeChild(removingVisuallyDiv);
+                    get_EDITOR_textElement().insertBefore(lineDiv, get_EDITOR_textElement().children[relativeIndexLine]);
                 }
                 
                 if (cursor.cached_indentation_byteList) {
