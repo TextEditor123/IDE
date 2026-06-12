@@ -5075,8 +5075,12 @@ function EDITOR_onScroll() {
       trackedSyntax_I = EDITOR_drawViewPort_FindTrackedSyntax_StartingIndex(currVli);
       lowerBound = currVli;
       upperBound = lowerBound + diff;
-      baseIndex = EDITOR_baseElement.children[3].children[1].children.length - 1;
-      vertical = (currVli + (diff - 1)) * EDITOR_int_fields[2];
+      //baseIndex = get_EDITOR_gutter().children.length - 1;
+      //upperBound = upperBound - 1;
+      //
+
+      //vertical = (currVli + (diff - 1)) * get_EDITOR_lineHeight();
+      vertical = currVli * EDITOR_int_fields[2];
       if (EDITOR_domLineNodesZerothIndex === 0) {
         lastIndex = EDITOR_baseElement.children[4].children[2].children.length - 1;
       } else {
@@ -5086,6 +5090,7 @@ function EDITOR_onScroll() {
       if (EDITOR_domLineNodesZerothIndex < 0) {
         EDITOR_domLineNodesZerothIndex += EDITOR_baseElement.children[4].children[2].children.length;
       }
+      origin = EDITOR_domLineNodesZerothIndex;
     } else {
       onePositiveDiff_twoNegativeDiff_orThreeFullScreen = 3;
       trackedSyntax_I = EDITOR_drawViewPort_FindTrackedSyntax_StartingIndex(EDITOR_int_fields[8]);
@@ -5115,24 +5120,24 @@ function EDITOR_onScroll() {
           loopCounter++;
           break;
         case 2:
-          vertical -= EDITOR_int_fields[2];
-          gutter = EDITOR_baseElement.children[3].children[1].children[lastIndex];
-          div = EDITOR_baseElement.children[4].children[2].children[lastIndex];
-          lastIndex--;
-          if (lastIndex <= -1) {
-            lastIndex = EDITOR_baseElement.children[4].children[2].children.length - 1;
-          }
-          loopCounter++;
-          break;
-        case 3:
           vertical += EDITOR_int_fields[2];
           let aaa2 = origin + loopCounter;
           if (aaa2 >= EDITOR_baseElement.children[4].children[2].children.length) {
             aaa2 -= EDITOR_baseElement.children[4].children[2].children.length;
           }
+          gutter = EDITOR_baseElement.children[3].children[1].children[lastIndex];
+          div = EDITOR_baseElement.children[4].children[2].children[lastIndex];
+          loopCounter++;
+          break;
+        case 3:
+          vertical += EDITOR_int_fields[2];
+          let aaa3 = origin + loopCounter;
+          if (aaa3 >= EDITOR_baseElement.children[4].children[2].children.length) {
+            aaa3 -= EDITOR_baseElement.children[4].children[2].children.length;
+          }
           baseIndex = loopCounter;
-          gutter = EDITOR_baseElement.children[3].children[1].children[aaa2];
-          div = EDITOR_baseElement.children[4].children[2].children[aaa2];
+          gutter = EDITOR_baseElement.children[3].children[1].children[aaa3];
+          div = EDITOR_baseElement.children[4].children[2].children[aaa3];
           loopCounter++;
           break;
       }
