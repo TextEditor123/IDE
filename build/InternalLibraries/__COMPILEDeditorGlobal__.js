@@ -182,6 +182,19 @@ const EDITOR_baseElement = document.getElementById('EDITOR');
 
 /* TODO: Caching the get_... for the HTML elements is perhaps beneficial in various places of the code and still is preferable to caching a 'document.getElementById'. */
 
+//                                                                (indexLine + get_EDITOR_offsetLine()) - get_EDITOR_virtualLineIndex()
+/** SEE 'EDITOR_getIndexLineToHtml_Correctly' */
+const EDITOR_indexLine_VirtualRelative_Unmatched = indexLine => indexLine + EDITOR_int_fields[13] - EDITOR_int_fields[8];
+// 
+/**
+ * TODO: It should be >= ?
+ * 
+ * @example EDITOR_getIndexLineToHtml_Correctly(EDITOR_indexLine_VirtualRelative_Unmatched(cursor.indexLine));
+ */
+const EDITOR_getIndexLineToHtml_Correctly = unmatchedIndexLine => unmatchedIndexLine >= EDITOR_lineEndPositionList.count || unmatchedIndexLine >= EDITOR_baseElement.children[4].children[2].children.length || unmatchedIndexLine < 0 ? -1 : (unmatchedIndexLine = unmatchedIndexLine + EDITOR_domLineNodesZerothIndex) > EDITOR_int_fields[9] ? unmatchedIndexLine - EDITOR_int_fields[9] : unmatchedIndexLine;
+
+//const EDITOR_isVisible_indexLine = (indexLine) => EDITOR_baseElement.children[4].children[2];
+
 const EDITOR_debug = document.getElementById('EDITOR_debug');
 const EDITOR_findOverlay = document.getElementById('EDITOR_findOverlay');
 EDITOR_findOverlay.style.visibility = 'hidden';
@@ -645,8 +658,8 @@ function EDITOR_drawGutter_Width() {
  * @returns
  */
 function walkLineUntilColumnIndex(cursor) {
-  let indexLine_VirtualRelative = cursor.indexLine + EDITOR_int_fields[13] - EDITOR_int_fields[8];
-  if (cursor.indexLine >= EDITOR_lineEndPositionList.count || indexLine_VirtualRelative >= EDITOR_baseElement.children[4].children[2].children.length || indexLine_VirtualRelative < 0) {
+  let indexLine_VirtualRelative = EDITOR_getIndexLineToHtml_Correctly(EDITOR_indexLine_VirtualRelative_Unmatched(cursor.indexLine));
+  if (indexLine_VirtualRelative < 0) {
     return {
       indexColumn_Goal: -1,
       indexColumn_Sum: -1,
@@ -655,10 +668,6 @@ function walkLineUntilColumnIndex(cursor) {
       span: null,
       div: null
     };
-  }
-  indexLine_VirtualRelative += EDITOR_domLineNodesZerothIndex;
-  if (indexLine_VirtualRelative > EDITOR_int_fields[9]) {
-    indexLine_VirtualRelative -= EDITOR_int_fields[9];
   }
   let div = EDITOR_baseElement.children[4].children[2].children[indexLine_VirtualRelative];
   let indexColumn_Goal = cursor.indexColumn + EDITOR_int_fields[15];

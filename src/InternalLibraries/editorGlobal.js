@@ -214,6 +214,7 @@ const EDITOR_indexLine_VirtualRelative_Unmatched = (indexLine) => (indexLine + g
  * TODO: It should be >= ?
  * 
  * @example EDITOR_getIndexLineToHtml_Correctly(EDITOR_indexLine_VirtualRelative_Unmatched(cursor.indexLine));
+ * @returns if (indexLine_VirtualRelative < 0) { return bad_state; } else { return good_state; }
  */
 const EDITOR_getIndexLineToHtml_Correctly = (unmatchedIndexLine) => unmatchedIndexLine >= EDITOR_lineEndPositionList.count || unmatchedIndexLine >= get_EDITOR_textElement().children.length || unmatchedIndexLine < 0 ? -1 : ((unmatchedIndexLine = (unmatchedIndexLine + EDITOR_domLineNodesZerothIndex)) > get_EDITOR_virtualCount() ? unmatchedIndexLine - get_EDITOR_virtualCount() : unmatchedIndexLine);
 
