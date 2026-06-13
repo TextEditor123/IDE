@@ -276,6 +276,8 @@ List of combined and unique interests:
     - You're being given the opportunity to learn the life lessons they might be ignoring.
     - It all in all is a blessing you just have to take it as such
 
+You just gotta stay calm and keep enduring it
+
 
 
 
