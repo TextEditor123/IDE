@@ -253,8 +253,6 @@ class DIALOG_FindAll_TreeViewDirector {
                     this.nodeList.setKey(i, this.nodeList.getKey(i) + results.length);
                 }
 
-                // For some reason the results are descending if I iterate forwards, thus reverse iteration.
-                //for (var i = results.length - 1; i >= 0; i--) {
                 for (let i = 0; i < results.length; i++) {
                     let nodeKind = TreeViewNodeKind.NOTisExpandable_NOTisExpanded;
                     // TODO: Insert range, or at the least 'pre-emptively' resize the list so that it fits each insertion without resizing per insertion.
@@ -273,7 +271,7 @@ class DIALOG_FindAll_TreeViewDirector {
 
             let countChildren = 0;
             for (let i = indexItem + 1; i < this.nodeList.count_abstract; i++) {
-                // If currentDepth < ithElementDepth; // then current is a parent of ithElement.
+                // If currentDepth < ithElementDepth; then current is a parent of ithElement.
                 if (depth < this.nodeList.getDepth(i)) {
                     countChildren++;
                 }
@@ -351,10 +349,10 @@ async function DIALOG_FindAll_Create_async() {
     divOptions.appendChild(spanNotes);
     dialogBody.appendChild(divOptions);
 
+    // TODO: Remove 'searchResultsDiv'? It is pointlessly wrapping.
     let searchResultsDiv = document.createElement('div');
     searchResultsDiv.id = 'DIALOG_FindAll_searchResultsDiv';
     dialogBody.appendChild(searchResultsDiv);
-    //searchResultsDiv.addEventListener('click', DIALOG_FindAll_searchResult_onclick);
 }
 
 async function DIALOG_FindAll_Delete_async() {
@@ -366,11 +364,6 @@ async function DIALOG_FindAll_Delete_async() {
     let checkboxMatchWord = document.getElementById('DIALOG_FindAll_checkboxMatchWord');
     if (checkboxMatchWord) {
     	checkboxMatchWord.removeEventListener('change', DIALOG_FindAll_checkboxMatchWord_onchange);
-    }
-
-    let searchResultsDiv = document.getElementById('DIALOG_FindAll_searchResultsDiv');
-    if (searchResultsDiv) {
-        //searchResultsDiv.removeEventListener('click', DIALOG_FindAll_searchResult_onclick);
     }
 
     DIALOG_FindAll_TreeViewDirector_instance = null;
@@ -388,8 +381,6 @@ async function DIALOG_FindAll_searchTextInput_onkeydown(event) {
 	    if (spanNotes) {
 	        spanNotes.innerText = '';
 	    }
-
-        //searchResultsDiv.innerHTML = '';
 
         let search = searchTextInput.value;
         if (!search) {
@@ -602,8 +593,3 @@ async function DIALOG_Debug_Delete_async() {
     DEBUG_listData = null;
     DEBUG_listComponent = null;
 }
-
-/*
-Cumulative Layout Shift (CLS) is 0.40
-when using the mouse wheel to scroll the list.
-*/
