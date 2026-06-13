@@ -506,14 +506,10 @@ const set_EDITOR_recentBoundingClientRect_left = (int) => EDITOR_int_fields[28] 
 const get_EDITOR_recentBoundingClientRect_top = () => EDITOR_int_fields[29];
 const set_EDITOR_recentBoundingClientRect_top = (int) => EDITOR_int_fields[29] = int;
 
-/** TODO: unfortunately leaks into trackedSyntaxTypes.js so I'm gonna manually keep it up to date for now while I decide things. */
 const get_EDITOR_pooledTrackedSyntax_start = () => EDITOR_int_fields[30];
-/** TODO: unfortunately leaks into trackedSyntaxTypes.js so I'm gonna manually keep it up to date for now while I decide things. */
 const set_EDITOR_pooledTrackedSyntax_start = (int) => EDITOR_int_fields[30] = int;
 
-/** TODO: unfortunately leaks into trackedSyntaxTypes.js so I'm gonna manually keep it up to date for now while I decide things. */
 const get_EDITOR_pooledTrackedSyntax_length = () => EDITOR_int_fields[31];
-/** TODO: unfortunately leaks into trackedSyntaxTypes.js so I'm gonna manually keep it up to date for now while I decide things. */
 const set_EDITOR_pooledTrackedSyntax_length = (int) => EDITOR_int_fields[31] = int;
 
 let EDITOR_pooledTrackedSyntax_trackedSyntaxKind = TrackedSyntaxKind.None;
