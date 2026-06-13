@@ -246,4 +246,10 @@ If you are writing TypeScript and using the native enum keyword, the way it comp
 
 ...
 ############```paraphraseEnd
+
+
+Google AI Overview "html javascript: are script tags dom elements that exist long term":
+############```paraphraseStart
+Yes, <script> tags are DOM elements that exist long term in the document, but their behavior depends on how they are loaded and if they are removed.
+############```paraphraseEnd
 */
