@@ -282,7 +282,7 @@ let EDITOR_lineEndString = null;
 
 let EDITOR_documentSymbolResult;
 /**
- * @type {ListComponent_moveChildNodes}
+ * @type {ListComponent}
  */
 let EDITOR_listComponent = null;
 

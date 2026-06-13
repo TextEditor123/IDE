@@ -10,7 +10,7 @@
  * Now that I think about it... would it be possible / sensible to somehow tell JavaScript this "inherits" an HTML element or something like this?
  * I looked and it seems possible but I'm not sure I want to do this. It kinda gives me the ick (at least at first glance)
  */
-class ListComponent_moveChildNodes {
+class ListComponent {
     /**
      * @param {*} itemHeight invoker provides or does this class calculate it?
      * TODO: itemHeight is never used

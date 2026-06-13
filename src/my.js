@@ -59,7 +59,7 @@ function init() {
     window.myAPI.onMessage(async (data) => {
         EDITOR_documentSymbolResult = data;
         if (!EDITOR_listComponent) {
-            EDITOR_listComponent = new ListComponent_moveChildNodes();
+            EDITOR_listComponent = new ListComponent();
         }
         EDITOR_listComponent.setItems(APP_lineHeight, APP_lineHeight + 'px',
             /*drawItemAction*/ (div, index) => {
