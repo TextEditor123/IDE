@@ -372,17 +372,6 @@ class TreeViewComponent {
         this.boundingClientRect = null;
     }
 
-    /*
-    Google AI Overview "does set timeout and bind this cause overhead on every invocation":
-    ```parphrasedResponse
-    Yes, using .bind(this) inside setTimeout creates a minor, but measurable, overhead on every invocation.
-
-    Best Alternatives for Performance:
-    1. Arrow Functions (Recommended) ... use the lexical scope of their parent, eliminating the need to create new bound function objects on the fly
-    2. Built-in setTimeout Arguments...
-    ```
-    */
-
     async event_scroll_async_WRAPIT() {
         this.event_scroll_async_bool = true;
 	    if (!this.event_scroll_async_timer) {
