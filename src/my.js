@@ -221,7 +221,7 @@ When Boolean() is called without the new keyword, JavaScript treats it as a stan
 
 
 Google AI Overview
-"javascript how do I handle anxiety that const variables in a function will be hoisted to global scope and therefore exist and carry overhead in there existence for the entire duration of an application":
+"javascript how do I handle anxiety that const variables in a function will be hoisted to global scope and therefore exist and carry overhead in their existence for the entire duration of an application":
 ############```paraphraseStart
 In JavaScript, const and let variables are not hoisted to the global scope.
 They are block-scoped to the function and remain in memory only while the function executes.
