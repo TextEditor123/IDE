@@ -266,7 +266,15 @@ List of combined and unique interests:
     - Showing up and trying to make progress.
     - Mood influences your perspective.
     - And every mood can result in extreme amounts of creative bursts when going from one mood to another and enduring.
+    - Some days you show up and feel like garbage the entire time.
+        - maybe you don't go as long and try to just find a non-zero amount of progress and call it a day
+        - maybe you endure a long session despite the mood
+        - all are beneficial in their own way
+        - (but as always everything is give and take. If you force yourself to endure these moods for too long of a session regularly you can burn yourself out. Similarly even in a good mood.)
 - "the wicked shall be a ransom for the righteous"...
+    - You look around and see mistakes of others constantly.
+    - You're being given the opportunity to learn the life lessons they might be ignoring.
+    - It all in all is a blessing you just have to take it as such
 
 
 
