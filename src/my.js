@@ -183,3 +183,29 @@ function init() {
     EXPLORER_init();
     EDITOR_init();
 }
+
+/*
+Google AI Overview "javascript do numbers as a class field carry garbage collection overhead":
+############```paraphraseStart
+...
+
+The only exception: If you box a number by using the Number object constructor (e.g., this.field = new Number(42)),
+it will be stored as an object on the heap and generate garbage collection. Always use the literal form (e.g., this.field = 42).
+
+...
+############```paraphraseEnd
+
+I wanted to see what the AI would say.
+
+It doesn't mention the cost of the marking phase wherein the GC has to confirm that the field indeed is a primitive value.
+
+It doesn't mention the cost of heap defragmentation, wherein the number's primitive value is stored alongside the memory for the class instance.
+And during defragmentation you'd then have to copy that primitive value when moving things around.
+
+Those things I'm used to not being mentioned though it isn't a big deal I wasn't really looking for that
+I figured they wouldn't be mentioned.
+
+I just wanted to see if it said anything interesting.
+
+The new Number(...) is an interesting point to keep in mind.
+*/
