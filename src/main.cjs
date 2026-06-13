@@ -9,7 +9,7 @@ const AppDatabase = require('./Database/database').default;
 const { spawn } = require('node:child_process');
 const { URI } = require('vscode-uri');
 const os = require('os');
-const lspTypes = require('./InternalLibraries/lspTypes');
+const lspTypes = require('./lspTypes');
 
 if (!app.isPackaged) {
 	app.setPath('userData', path.join(app.getPath('appData'), 'my-app-Debug'));

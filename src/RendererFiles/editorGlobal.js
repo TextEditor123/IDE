@@ -1,18 +1,3 @@
-/*
-########################
-########################
-
-IMPORTANT: This file is compiled with babel during a build step and written to the repo's build directory...
-...when modifying a file ensure you are modifying the correct version.
-
-Whether the babel compilation build step I'm doing actually accomplishes anything I have no idea.
-But I like it for the time being and I'll continue thinking about it,
-if I can do something with it, if what I am doing is even meaningful or like etc...
-
-########################
-########################
-*/
-
 let EDITOR_trackedSyntaxList = new TrackedSyntaxList(32);
 
 // What about if there is any overhead relating to const global numbers?
