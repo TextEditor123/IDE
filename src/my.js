@@ -208,4 +208,14 @@ I figured they wouldn't be mentioned.
 I just wanted to see if it said anything interesting.
 
 The new Number(...) is an interesting point to keep in mind.
+
+
+Google AI Overview "javascript does Boolean(1) box or primitive":
+############```paraphraseStart
+Boolean(1) returns a primitive boolean value (true).
+
+When Boolean() is called without the new keyword, JavaScript treats it as a standard type-conversion function rather than a constructor object.
+
+...
+############```paraphraseEnd
 */
