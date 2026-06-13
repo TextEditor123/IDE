@@ -216,4 +216,5 @@ function flushAppendToFile() {
   fs.appendFileSync(outputFile, writeBuilder.join(''), 'utf8');
   // TODO: I hear 'array.length = 0' will clear the references to the entries but I don't feel confident that it is reality. Nevertheless, this isn't a major concern right now.
   writeBuilder.length = 0;
+  writeBuilderTotalLength = 0;
 }
