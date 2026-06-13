@@ -91,5 +91,8 @@ typings/
 # Electron-Forge
 out/
 
+# preprocessor output
+preprocessor/
+
 # build output
 build/
