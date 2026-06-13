@@ -1,3 +1,14 @@
+> npm install
+
+> npm run build
+
+> npm run
+
+==============
+
+
+
+
 
 
 # (Quick start - less performant than making the .exe) Run app from source code:
