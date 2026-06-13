@@ -230,4 +230,20 @@ Once the function finishes, the JavaScript engine's garbage collector safely rem
 
 I've read this multiple times but I just can't get over the anxiety.
 Not even just today but in the past.
+
+
+Google AI Overview "javascript are enum definitions an object allocation":
+############```paraphraseStart
+JavaScript does not have native enum support. When you define an "enum" in JavaScript, you are typically creating a plain JavaScript object. Yes, this definition allocates a new object in memory at runtime.
+
+...
+
+TypeScript Enums (Transpiled to JS)
+
+If you are writing TypeScript and using the native enum keyword, the way it compiles affects memory:
+- Standard enum: Compiles into a bidirectional JavaScript object (allowing both forward and reverse lookups by key and value). This allocates a runtime object.
+- const enum: Compiles away completely. The TypeScript compiler inlines the raw values directly into your code, resulting in zero object allocations at runtime.
+
+...
+############```paraphraseEnd
 */
