@@ -817,8 +817,6 @@ function hasBOM(filePath) {
 		return 'UTF-16BE';
 	}
 	*/
-
-	//return false;
 }
 
 async function chooseDirectory (event) {
