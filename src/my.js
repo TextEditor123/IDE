@@ -227,4 +227,7 @@ In JavaScript, const and let variables are not hoisted to the global scope.
 They are block-scoped to the function and remain in memory only while the function executes.
 Once the function finishes, the JavaScript engine's garbage collector safely removes them, meaning they carry zero long-term overhead.
 ############```paraphraseEnd
+
+I've read this multiple times but I just can't get over the anxiety.
+Not even just today but in the past.
 */
