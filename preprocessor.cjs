@@ -69,7 +69,17 @@ const filePriorityOrder = [
   "applicationRendererRoot.js"
 ];
 
+let writeBuilder = [];
+let writeBuilderTotalLength = 0;
+
 try {
+
+  // 5. Save the output bundle
+  fs.mkdirSync(path.dirname(outputFile), { recursive: true });
+  fs.writeFileSync(outputFile, '');
+
+
+
   // 2. Read the directory and filter for .js files
   let files = fs.readdirSync(inputFolder).filter(file => file.endsWith('.js'));
 
@@ -97,16 +107,113 @@ try {
   }
 
   // 4. Combine the contents using the sorted paths
-  const combinedCode = files.map(fileName => {
-    const filePath = path.join(inputFolder, fileName);
-    return fs.readFileSync(filePath, 'utf-8');
-  }).join('\n\n');
+  const combinedCode = files.map(fileName => aaa(fileName)).join('\n\n');
 
-  // 5. Save the output bundle
-  fs.mkdirSync(path.dirname(outputFile), { recursive: true });
-  fs.writeFileSync(outputFile, combinedCode);
+  flushAppendToFile();
 
   console.log(`Successfully bundled ${files.length} files in prioritized order into ${outputFile}`);
 } catch (err) {
   console.error('Bundling failed:', err.message);
+}
+
+function aaa(fileName) {
+
+  appendToWriteBuilder(`\n\n// ========\n// ========\n// ${fileName}\n// ========\n// ========\n\n`);
+
+  const filePath = path.join(inputFolder, fileName);
+  let text = fs.readFileSync(filePath, 'utf-8');
+  let chunkStart = 0;
+  let pos = 0;
+  while (pos < text.length) {
+    switch (text[pos]) {
+      case '/':
+        if (pos <= text.length - 2) {
+          if (text[pos + 1] === '/') {
+            endChunk();
+            pos += 2;
+            singleLineCommentWhile: while (pos < text.length) {
+              switch (text[pos]) {
+                case '\r':
+                  pos++;
+                  if (pos <= text.length - 2) {
+                    if (text[pos + 1] === '\n') {
+                      pos++;
+                    }
+                  }
+                  break singleLineCommentWhile;
+                case '\n':
+                  pos++;
+                  break singleLineCommentWhile;
+              }
+              pos++;
+            }
+            startChunk();
+            continue;
+          }
+          else if (text[pos + 1] === '*') {
+            endChunk();
+            pos += 2;
+            multiLineCommentWhile: while (pos < text.length) {
+              switch (text[pos]) {
+                case '*':
+                  if (pos <= text.length - 2) {
+                    if (text[pos + 1] === '/') {
+                      pos += 2;
+                      break multiLineCommentWhile;
+                    }
+                  }
+                  break;
+              }
+              pos++;
+            }
+            startChunk();
+            continue;
+          }
+        }
+        break;
+      case '\'':
+      case '"':
+      case '`':
+        let terminator = text[pos];
+        pos++;
+        stringWhile: while (pos < text.length) {
+          if (text[pos] === terminator) {
+            pos++;
+            break stringWhile;
+          }
+          pos++;
+        }
+        continue;
+    }
+    pos++;
+  }
+  endChunk();
+
+  function startChunk() {
+    if (chunkStart !== -1 && chunkStart < pos) {
+      appendToWriteBuilder(text.substring(chunkStart, pos));
+    }
+    chunkStart = pos;
+  }
+  
+  function endChunk() {
+    if (chunkStart < pos) {
+      appendToWriteBuilder(text.substring(chunkStart, pos));
+    }
+    chunkStart = -1;
+  }
+}
+
+function appendToWriteBuilder(substring) {
+  writeBuilder.push(substring);
+  writeBuilderTotalLength += substring.length;
+  if (writeBuilderTotalLength > 1024) {
+    flushAppendToFile();
+  }
+}
+
+function flushAppendToFile() {
+  fs.appendFileSync(outputFile, writeBuilder.join(''), 'utf8');
+  // TODO: I hear 'array.length = 0' will clear the references to the entries but I don't feel confident that it is reality. Nevertheless, this isn't a major concern right now.
+  writeBuilder.length = 0;
 }
