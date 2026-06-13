@@ -2,12 +2,12 @@
 
 > npm run build
 
-> npm run
+> npm run start
 
 ==============
 
 
-
+# OLD README.md COMES AFTER THIS POINT JUST USE THE FIRST 3 COMMANDS AT TOP OF THIS FILE
 
 
 
