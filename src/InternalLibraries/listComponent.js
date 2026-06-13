@@ -16,21 +16,12 @@ class ListComponent {
      * TODO: itemHeight is never used
      */
     constructor(itemHeight) {
-        
-        /**
-         * // height is 100% of container, or is set to a value?
-         * 
-         * TODO: this isn't being used?
-         * */
-        this.containerHeight = 0;
         /**
          * @type {HTMLDivElement}
          */
         this.rootElement = document.createElement('div');
         this.rootElement.className = 'LIST_moveChildNodes';
         this.rootElement.tabIndex = 0;
-        /** TODO: this isn't being used? */
-        this.rootElementHeightNumber = 0;
         this.rootElement.style.height = '100%';
 
         this.virtualizationElement = document.createElement('div');
@@ -50,13 +41,6 @@ class ListComponent {
 
         /** Consider the existence of such methods as 'state_cursor_setIndex' before mutating state directly */
         this.cursorIndex = 0;
-
-        /**
-         * This relates to how many extra items will be rendered beyond what naively would fit at an equal scrollTop down to filling the viewport height.
-         * 
-         * TODO: This isn't being used?
-         */
-        this.virtualPadding = 1;
 
         this._ONSCROLLscrollTop = 0;
         this._ONSCROLLvirtualIndex = 0;
@@ -92,7 +76,6 @@ class ListComponent {
     }
 
     /**
-     * 
      * @param {*} itemHeightNumber '50'; cursorTop = currentIndex * itemHeightNumber;
      * @param {*} itemHeightStyleAttributeValueString '50px'; div.style.height = itemHeightStyleAttributeValueString;
      * @param {*} drawItemAction receives the div that represents the individual item in the list, the index of the item OR -1 to indicate the function should clear the div because there is no entry at that location (need to handle null item due to when viewport isn't filled). This div is empty, and you can do "whatever you want to it" provided the height stays consistent.
@@ -100,7 +83,6 @@ class ListComponent {
      * @param {*} getItemsCountFunc returns the total count of items
      */
     setItems(itemHeightNumber, itemHeightStyleAttributeValueString, drawItemAction, onkeydownAction, getItemsCountFunc) {
-
         this.itemListElement.innerHTML = '';
         this.virtualizationElement.style.height = 1 + 'px';
         this.state_cursor_setIndex(0);
@@ -322,17 +304,12 @@ class ListComponent {
     }
 
     draw_render_fullReset() {
-
         this._ONSCROLLvirtualCount = this.virtualCount;
-
         this.itemListElement.innerHTML = '';
-        
         this.virtualIndex = Math.floor(this.rootElement.scrollTop / this.itemHeightNumber);
-
-        let itemsCount = this.getItemsCountFunc();
-
         this.domLineNodesZerothIndex = 0;
 
+        let itemsCount = this.getItemsCountFunc();
         let vertical = this.virtualIndex * this.itemHeightNumber;
 
         for (let i = 0; i < this.virtualCount; i++) {
@@ -467,71 +444,6 @@ class ListComponent {
 }
 
 /*
-Without changing the content itself,
-while scrolling you need to successfully keep the content in view smoothly as you scroll.
-*/
-
-/*
-Smoothly scrolling and having the correct content show is a cumulation
-of individual goals.
-*/
-
-/*
-So you need to target the individual goals,
-and then start combining them to see what happens and go from there.
-*/
-
-/*
-You want to scroll and have the content change to be correct while always staying in view.
-So one of the goals is:
-- Without changing the content itself, while scrolling you need to successfully keep the content in view smoothly as you scroll.
-*/
-
-/*
-... as you scroll content changes... so another goal is:
-- Keep the lines at the top of the container, and only determine the content they display, and get good performant scores while doing this
-*/
-
-/*
-Part of the complexity involved with showing the correct content as you scroll is that you have to
-"move" the divs around.
-
-Such that the 0th line of text visually is not the 0th HTML element in the container.
-
-So another goal is to support this.
-But you might consider having the content you put as the innerText be extremely simple.
-This way you can isolate the cost of your logic that performs this swapping out without
-having to concern yourself with whether your determining of the content to show is optimized or not.
-*/
-
-/*
-Smaller goals:
-==============
-- Without changing the content itself, while scrolling you need to successfully keep the content in view smoothly as you scroll.
-- Such that the 0th line of text visually is not the 0th HTML element in the container.
-- Keep the lines at the top of the container, and only determine the content they should display, and get good performant scores while doing this.
-*/
-
-/*
-try rewording the goals:
-==============
-- Calculate and update the { top, transform, or both } in order to keep the divs in view.
-    - Such that the 0th line of text visually is not the 0th HTML element in the container.
-    - You cannot remove and add a child, because this triggers events in the browser?
-    - What you can do is track separately which
-    - No matter what are they always in order?
-    - If so you only have to track the "base index" that represents the 0th item being displayed?
-- Keep the lines at the top of the container, and only determine the content they should display, and get good performant scores while doing this.
-
-flame graph
-*/
-
-/*
-CLS is 0.29 currently
-
-I want to avoid changing the innerText and see what happens.
-CLS is 0.19
-
 I'm noticing that as I click and drag the slider it doesn't continually update the UI
 it seems to only update the UI if I let go or something?
 
@@ -539,5 +451,4 @@ I thought that was because of unresponsiveness or something?
 Maybe it is?
 or maybe it literally isn't running the code?
 Have to confirm one way or the other what is going on.
-
 */
