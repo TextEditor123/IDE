@@ -416,7 +416,7 @@ class EXPLORER_TreeViewDirector {
 
             let countChildren = 0;
             for (let i = indexItem + 1; i < this.nodeList.count_abstract; i++) {
-                // If currentDepth < ithElementDepth; // then current is a parent of ithElement.
+                // If currentDepth < ithElementDepth; then current is a parent of ithElement.
                 if (depth < this.nodeList.getDepth(i)) {
                     countChildren++;
                 }
