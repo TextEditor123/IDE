@@ -1,9 +1,7 @@
 const TrackedSyntaxKind = {
     None: 0,
     String: 1,
-    /**
-     * only multi-line-comments that span multiple lines are stored in EDITOR_trackedSyntaxList with the 'TrackedSyntaxKind.Comment'
-    */
+    /** only multi-line-comments that span multiple lines are stored in EDITOR_trackedSyntaxList with the 'TrackedSyntaxKind.Comment' */
     Comment: 2,
 };
 
