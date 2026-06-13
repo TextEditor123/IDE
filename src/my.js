@@ -262,7 +262,13 @@ List of combined and unique interests:
 - [x] EDITOR_backspaceDo
 
 - Conflation of pleasure and progress...
+    - As well feeling as though you have energy on any given day.
+    - Showing up and trying to make progress.
+    - Mood influences your perspective.
+    - And every mood can result in extreme amounts of creative bursts when going from one mood to another and enduring.
 - "the wicked shall be a ransom for the righteous"...
+
+
 
 
 
