@@ -92,9 +92,4 @@ typings/
 out/
 
 # build output
-#build/
-
-## build output...
-#build/*
-## ...BUT do not ignore this specific file
-#!build/InternalLibraries/editorGlobal.js
+build/
