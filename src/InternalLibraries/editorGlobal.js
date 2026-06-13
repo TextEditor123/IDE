@@ -813,7 +813,6 @@ function update_VirtualLineIndex() {
     set_EDITOR_virtualLineIndex(Math.floor(EDITOR_baseElement.scrollTop / get_EDITOR_lineHeight()));
     let top = (get_EDITOR_virtualLineIndex() * get_EDITOR_lineHeight()) + 'px';
     EDITOR_gutterBackgroundColor.style.top = top;
-    //get_EDITOR_textElement().style.top = top;
 }
 
 function update_virtualCount() {
@@ -1022,7 +1021,7 @@ function positiveNumbersOnly_countDigitsLoop(number) {
 
   while (number > 0) {
     number = Math.floor(number / 10); // Remove the last digit
-    count++; // Increment the count
+    count++;
   }
 
   return count;
@@ -2146,9 +2145,6 @@ function EDITOR_NOTcanBatch_insert(cursor, indexCursor) {
  * @returns 
  */
 function EDITOR_NOTcanBatch_backspace(cursor) {
-
-    // TODO: Exception during finalize softlocks the editor because you can't even clear to reset the state: 'Uncaught (in promise) Error: removeAt(...): index > this.count'
-
     return cursor.editKind != get_EditKind_BackspaceRtl() ||
            cursor.indexLine !== cursor.editIndexLine ||
            cursor.indexColumn !== cursor.editIndexColumn ||
@@ -2183,6 +2179,8 @@ async function EDITOR_didChangeTextDocumentNotification(absolutePath, version, s
 }
 
 /**
+ * TODO: Exception during finalize softlocks the editor because you can't even clear to reset the state: 'Uncaught (in promise) Error: removeAt(...): index > this.count'
+ * 
  * @param {EDITOR_Cursor} cursor 
  */
 function EDITOR_finalizeEdit(cursor) {
@@ -2284,12 +2282,7 @@ function EDITOR_finalizeEdit(cursor) {
                 // TODO: A notification needs to sent to the LSP here
                 // TODO: Update the tracked syntax list here... the enter key event actually is invoking 'EDITOR_trackedSyntaxList_inefficientUpdateStartAndLength'...
 
-                // I don't know what to do so I'm starting by making this enum,
-                // then switch over it,
-                // the code already was written as conditional branches and this enum represents each branch.
-                // 
-                // Now I can move the commented out code per branch to this respective switch and see if it gets me anywhere.
-
+                // I don't know what to do so I'm starting by making this enum, then switch over it.
                 switch (cursor.enterKeyEventKind) {
                     case get_EnterKeyEventKind_StartOfLine():
                         if (cursor.cached_indentation_byteList) {
@@ -2567,11 +2560,6 @@ function EDITOR_finalizeEdit(cursor) {
                 // TODO: cursor between '\t\0\0\0' is presumed to be the concern of the editor, duplication logic presumes correctness i.e.: that if the '\t' is selected that the '\0\0\0' that come after is selected too...
                 // ...and that no partial selection over those characters could ever occur.
 
-                // Insert new lineEndPositions
-                // Update the existing lineEndPositions
-
-                //let small_lineAndColumnIndices = EDITOR_getLineAndColumnIndices_raw(small);
-
                 // TODO: You should be able to do this much faster than looping over the selected bytes since you know the line end positions that exist and would know whether the selection will insert line endings.
 
                 for (let offset = 0; offset < length; offset++) {
@@ -2679,10 +2667,9 @@ function EDITOR_finalizeEdit(cursor) {
                     else if (EDITOR_pooledTrackedSyntax_trackedSyntaxKind === TrackedSyntaxKind.Comment &&
                             (get_EDITOR_pooledTrackedSyntax_start() + 1) >= cursor.editPosition && (get_EDITOR_pooledTrackedSyntax_start() + 1) < cursor.editPosition + cursor.editLength) {
                         // TODO: You can invalidate a >1 char long by removing beyond just the first unless a character afterwards falls into place that is valid by chance
-
-                        // only multi-line-comments that span multiple lines are stored in EDITOR_trackedSyntaxList
-                        // with the 'TrackedSyntaxKind.Comment'
-
+                        //
+                        // only multi-line-comments that span multiple lines are stored in EDITOR_trackedSyntaxList with the 'TrackedSyntaxKind.Comment'
+                        //
                         EDITOR_trackedSyntaxList.removeAt(i, 1);
                     }
                     else if (cursor.editPosition > get_EDITOR_pooledTrackedSyntax_start() && cursor.editPosition < get_EDITOR_pooledTrackedSyntax_start() + get_EDITOR_pooledTrackedSyntax_length()) {
@@ -2751,10 +2738,6 @@ function EDITOR_finalizeEdit(cursor) {
                 strings are possibly more complex than the multi-line-comment because the same open as close
 
                 TODO: If the open is > 1 characters long then an insertions among those characters is a break too.
-
-                Nothing word based at the moment to worry about.
-
-                TODO: When you make the syntax span a single line, you need to remove it and let the lex on the fly do it
                 */
 
                 break;
@@ -2770,7 +2753,6 @@ function EDITOR_finalizeEdit(cursor) {
         if (lineIndex_editOccurredOn >= 0 && lineIndex_editOccurredOn < EDITOR_lineEndPositionList.count) {
             if (get_EDITOR_gutter().children.length === get_EDITOR_virtualCount() &&
                 get_EDITOR_textElement().children.length === get_EDITOR_virtualCount()) {
-
                     // TODO: Am I missing this 'lineIndex_editOccurredOn < get_EDITOR_virtualLineIndex() + get_EDITOR_virtualCount()' in the 'EDITOR_getIndexLineToHtml_Correctly' function??
                     let relativeIndex = EDITOR_getIndexLineToHtml_Correctly(lineIndex_editOccurredOn);
                     if (relativeIndex >= 0) {
@@ -2778,7 +2760,6 @@ function EDITOR_finalizeEdit(cursor) {
                         gutterLineElement.innerHTML = '';
                         let textLineElement = get_EDITOR_textElement().children[relativeIndex];
                         textLineElement.innerHTML = '';
-
                         EDITOR_drawLine(lineIndex_editOccurredOn, gutterLineElement, textLineElement);
                     }
                     else {
@@ -2842,7 +2823,6 @@ function EDITOR_createCursorLineBelow(event) {
 }
 
 function EDITOR_createCursorAtNextMatchSelection(event) {
- 
     if (!EDITOR_primaryCursor.hasSelection()) {
         return;
     }
@@ -2894,9 +2874,7 @@ function EDITOR_createCursorAtNextMatchSelection(event) {
         return;
 	}
 
-
     let prePosition = EDITOR_getPositionIndex(EDITOR_primaryCursor);
-
 
     // Avoid two cursors on the same line; wasteful double determination of primaryCursor index is occurring in this function; even a single case is likely not good long term.
     let upcomingPositionIndex = EDITOR_findOverlay_searchResultPositionList.data[upcomingNumber - 1];
@@ -2951,8 +2929,6 @@ function EDITOR_createCursorAtNextMatchSelection(event) {
             }
         }
 
-        //EDITOR_cursorIndex_find_closestLessThanOrEqualToExistingCursorIndex(postPosition);
-
         EDITOR_cursorList.splice(indexOfPrimaryCursor, 0, clone);
         get_EDITOR_cursorListElement().appendChild(clone.caretRow);
         EDITOR_drawCursor(clone);
@@ -2978,7 +2954,6 @@ function EDITOR_createCursorAtNextMatchSelection(event) {
 }
 
 function EDITOR_cursorIndex_find_closestLessThanOrEqualToExistingCursorIndex(positionIndex) {
-
     let left = 0;
     let right = EDITOR_cursorList.length - 1;
 
@@ -3312,7 +3287,6 @@ function EDITOR_editEvent(editKind, event, clipboardContent) {
 
 function EDITOR_registerHandlers() {
     EDITOR_baseElement.addEventListener('keydown', async event => {
-
         // Explicitly inlining 'clearMulticursorState()' because it currently is and I just don't want to make a decision about this right now.
         // So what I can do is mark the code paragraph for later decision making.
         set_EDITOR_indexCursor(0);
@@ -3713,7 +3687,6 @@ function EDITOR_registerHandlers() {
     });
 
     EDITOR_baseElement.addEventListener('mousedown', event => {
-
         EDITOR_movementBasedCacheInvalidation(EDITOR_primaryCursor);
         
         if (EDITOR_cursorList.length > 1) {
@@ -4247,18 +4220,12 @@ async function EDITOR_duplicateSelection_drawUi(cursor, small, large, length) {
         return;
     }
 
-    ////////////////////////// Everything after paste's walk until paste's switch copy and pasting then modifying | start
-
-    // no need for this tab logic when it comes to duplication p1
-
     let linesInsertedCount = 0;
     let insertionLength = 0;
 
     /** is a 0 based index, inclusive */
     let wordStart = 0;
     let wordLength = 0;
-
-    // no need for this tab logic when it comes to duplication p2
 
     // No need to consider '\r\n' and etc... only '\n'
     let linefeedLength = 0;
@@ -4276,7 +4243,6 @@ async function EDITOR_duplicateSelection_drawUi(cursor, small, large, length) {
     let original_indexColumn_SpanTextContentRelative = w.indexColumn_SpanTextContentRelative;
     let original_span_textContent_length = w.span.textContent.length;
     let original_tracked_syntax_start = positionIndex - cursor.indexColumn + w.indexColumn_Sum;
-    ////////////////////////// Everything after paste's walk until paste's switch copy and pasting then modifying | end
 
     for (var offset = 0; offset < length; offset++) {
         switch (EDITOR_textByteList.bytes[small + offset]) {
@@ -4312,8 +4278,7 @@ async function EDITOR_duplicateSelection_drawUi(cursor, small, large, length) {
 
     if (linesInsertedCount > 0) {
         update_verticalVirtualizationBoundary(EDITOR_lineEndPositionList.count + linesInsertedCount);
-        // I uncommented this, it isn't doing what I want it to.
-        // I'm just gonna be done for now.
+        // I uncommented this, it isn't doing what I want it to. I'm just gonna be done for now.
         //EDITOR_drawGutter_Width();
     }
 
@@ -5916,7 +5881,6 @@ function EDITOR_onScroll() {
             trackedSyntax_I = EDITOR_drawViewPort_FindTrackedSyntax_StartingIndex(prevVli + get_EDITOR_ONSCROLLvirtualCount());
             lowerBound = prevVli + get_EDITOR_ONSCROLLvirtualCount();
             upperBound = lowerBound + diff;
-            //baseIndex = 0;
 
             vertical = (prevVli + get_EDITOR_virtualCount()) * get_EDITOR_lineHeight();
             origin = EDITOR_domLineNodesZerothIndex;
@@ -5931,11 +5895,7 @@ function EDITOR_onScroll() {
             trackedSyntax_I = EDITOR_drawViewPort_FindTrackedSyntax_StartingIndex(currVli);
             lowerBound = currVli;
             upperBound = lowerBound + diff;
-            //baseIndex = get_EDITOR_gutter().children.length - 1;
-            //upperBound = upperBound - 1;
-            //
 
-            //vertical = (currVli + (diff - 1)) * get_EDITOR_lineHeight();
             vertical = currVli * get_EDITOR_lineHeight();
             
             if (EDITOR_domLineNodesZerothIndex === 0) {
@@ -5957,8 +5917,6 @@ function EDITOR_onScroll() {
             trackedSyntax_I = EDITOR_drawViewPort_FindTrackedSyntax_StartingIndex(get_EDITOR_virtualLineIndex());
             lowerBound = get_EDITOR_virtualLineIndex();
             upperBound = lowerBound + get_EDITOR_virtualCount();
-            // case 3 sets baseIndex each loop but this is useful so the variable is initialized.
-            //baseIndex = 0;
 
             vertical = get_EDITOR_virtualLineIndex() * get_EDITOR_lineHeight();
             origin = EDITOR_domLineNodesZerothIndex;
@@ -5968,36 +5926,7 @@ function EDITOR_onScroll() {
             trackedSyntax_I = EDITOR_trackedSyntaxList.count_abstract;
         }
 
-        // I was thinking of myself as some kind of alcoholic this morning.
-        // I notice anytime I'm anxious I try to write code and make progress.
-        // The relief from anxiety is incredible.
-        // Then it doesn't last and I just keep coming back over and over.
-        // I even stopped for the day then compulsively came back to fix that to reduce my anxiety that spiked.
-
-        // I actually don't know what to do about the thing btw.
-        // Everytime they mention it I panic.
-        // And I have no idea what to do.
-        // It isn't that I can't do it.
-        // It is that I literally don't know "what to do".
-        // I don't know how to figure out what to do.
-        // all I hear is complete panic.
-        //
-        // They're like "ask your boss about it".
-        // I can't explain why this I am incapable of doing 99% of things that should be simple.
-
-        // When I go outside it is like complete panic.
-        // And my brain just shuts down.
-
-        // I try to go for a walk on the days I don't go in.
-        // When I walk by other people that are out for a walk I feel panic.
-        // The entire time after just spotting that I'll eventually have to cross paths or whatever.
-        // I feel the sustained panic.
-
-        // And people wave at me and I then I have to constantly think how close to them should I be before I start waving
-        // if they haven't waved yet and etc...
-
         for (var indexLine = lowerBound; indexLine < upperBound; indexLine++) {
-
             let transform = `translateY(${vertical}px)`;
 
             let div;
@@ -6062,7 +5991,6 @@ function EDITOR_createViewport() {
     let top = get_EDITOR_virtualLineIndex();
 
     for (var i = 0; i < get_EDITOR_virtualCount(); i++) {
-
         let transform = `translateY(${top}px)`;
 
         let indexLine = i + get_EDITOR_virtualLineIndex();
@@ -6466,8 +6394,6 @@ function EDITOR_removeSelection(cursor) {
     }
 
     // The line of text that comes into view depends on the cumulative lines removed by multicursors that came before or on that line
-    // 
-
 
     // TODO: There's a presumption that you have the HTML, this isn't always the case so I'll have to revisit this
 
