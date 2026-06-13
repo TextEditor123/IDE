@@ -278,6 +278,31 @@ List of combined and unique interests:
 
 You just gotta stay calm and keep enduring it
 
+- Alcohol is poison.
+You easily can achieve the "perception of being intellegent".
+Just stop pissing away nights of your life inebriated.
+Consider someone who wanted to accumalate all the knowledge in the world.
+What kind of efficiency would exist in their schedule to reach that goal?
+How many hours a day would they need to dedicate to doing so?
+
+I think you don't have to do much of anything.
+You just always try to observe and reason about the world as you experience it.
+I suppose the only actual thing that would be deliberate on their end to achieve
+such a goal is to continually seek out salient experiences.
+Alcohol is exactly contrary to such a thing.
+You want to be better at coding?
+You don't need even need to code.
+Just get better at thinking in general.
+It's all connected.
+Every movie you've ever watched.
+Every conversation you've had.
+There's immense depth to explore when looking back on them.
+You might just be ignoring it all.
+You then just become a better thinker over time.
+You are just better at everything in general.
+And people confuse this with innate intellect.
+When it's something you've fostered over the years.
+
 
 
 
