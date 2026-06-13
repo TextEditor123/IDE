@@ -261,4 +261,9 @@ List of combined and unique interests:
 - [x] EDITOR_deleteDo
 - [x] EDITOR_backspaceDo
 
+- Conflation of pleasure and progress...
+- "the wicked shall be a ransom for the righteous"...
+
+
+
 */
