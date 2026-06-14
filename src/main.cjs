@@ -1661,6 +1661,19 @@ async function copyClipboardAbsolutePathToDirectory(event, directory, menuOption
 	}
 }
 
+/*
+I had this idea.
+I don't think it is overly great.
+But it is an interesting idea I guess slightly.
+
+"monkey-patch tree-shaking of the user agent by settings unused user agent API to null
+ in an effort to have the unused information garbage collected or something."
+
+I wonder if it could do anything meaningful.
+Maybe not a great idea to do it if ever the code were used a library or something but I mean
+if it was just my app I wonder?
+*/
+
 /* sec0
 //========
 /*
