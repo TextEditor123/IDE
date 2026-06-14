@@ -1684,6 +1684,11 @@ I am going to bed in 10 minutes.
 I'm gonna have to lay there trying to fall asleep while playing in my head what I just said over and over.
 
 "When you write a song what comes first the riff or the lyrics?"
+
+Did I start this comment off with that as the punchline? or did I actually mention monkey-patch tree-shaking
+unrelated to the punchline and then add the little quip at the end?
+
+I'm a very mysterious person.
 */
 
 /* sec0
