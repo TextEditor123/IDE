@@ -1672,6 +1672,8 @@ But it is an interesting idea I guess slightly.
 I wonder if it could do anything meaningful.
 Maybe not a great idea to do it if ever the code were used a library or something but I mean
 if it was just my app I wonder?
+
+Idk I just figured I'd put it on a saucer and see if the cat licks it up.
 */
 
 /* sec0
