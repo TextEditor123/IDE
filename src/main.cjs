@@ -1682,6 +1682,8 @@ I'm a very socially anxious person.
 I am going to bed in 10 minutes.
 
 I'm gonna have to lay there trying to fall asleep while playing in my head what I just said over and over.
+
+"When you write a song what comes first the riff or the lyrics?"
 */
 
 /* sec0
