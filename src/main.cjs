@@ -1673,7 +1673,9 @@ I wonder if it could do anything meaningful.
 Maybe not a great idea to do it if ever the code were used a library or something but I mean
 if it was just my app I wonder?
 
-Idk I just figured I'd put it on a saucer and see if the cat licks it up.
+Idk I just figured I'd put it in a saucer and see if the cat licks it up.
+
+So anyways I just finished watching 12 angry men...
 */
 
 /* sec0
