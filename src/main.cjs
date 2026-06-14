@@ -1676,6 +1676,12 @@ if it was just my app I wonder?
 Idk I just figured I'd put it in a saucer and see if the cat licks it up.
 
 So anyways I just finished watching 12 angry men...
+
+I'm a very socially anxious person.
+
+I am going to bed in 10 minutes.
+
+I'm gonna have to lay there trying to fall asleep while playing over what I just said over and over.
 */
 
 /* sec0
